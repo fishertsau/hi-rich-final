@@ -1,0 +1,15 @@
+{
+    "/js/system/product/productCreate.js": "/js/system/product/productCreate.js",
+    "/js/system/service/serviceCreate.js": "/js/system/service/serviceCreate.js",
+    "/js/system/sample/sampleIndex.js": "/js/system/sample/sampleIndex.js",
+    "/js/system/product/productIndex.js": "/js/system/product/productIndex.js",
+    "/js/system/inquiry/inquiryShow.js": "/js/system/inquiry/inquiryShow.js",
+    "/js/system/category/categoryIndex.js": "/js/system/category/categoryIndex.js",
+    "/js/system/category/categoryCreate.js": "/js/system/category/categoryCreate.js",
+    "/js/system/service/serviceIndex.js": "/js/system/service/serviceIndex.js",
+    "/js/system/sample/sampleEdit.js": "/js/system/sample/sampleEdit.js",
+    "/js/system/news/newsIndex.js": "/js/system/news/newsIndex.js",
+    "/js/system/contact/contactShow.js": "/js/system/contact/contactShow.js",
+    "/js/system/banner/banner.js": "/js/system/banner/banner.js",
+    "/js/system/about/about.js": "/js/system/about/about.js"
+}

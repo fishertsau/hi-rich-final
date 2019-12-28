@@ -1,0 +1,284 @@
+.home-info
+    background-color: #e7e6e5
+    padding: 0
+    overflow: hidden
+    @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+        padding: 15px 0
+    @media screen and (min-width: map-get($grid-breakpoints, "md"))
+        padding: 20px 35px
+    .col-12:nth-child(2n)
+        .info-item
+            background-color: #e7e6e5
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                background-color: #fff
+    .info-item
+        display: flex
+        justify-content: start
+        align-items: center
+        background-color: #fff
+        padding: 18px 20px
+        @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+            height: 260px
+            padding: 18px 20px
+            margin: 15px 0
+        @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+            height: 240px
+            padding: 18px 20px
+            margin: 15px 0
+        @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+            padding: 30px 30px
+            height: 330px
+            margin: 15px 0
+        @media screen and (min-width: map-get($grid-breakpoints, "xl"))
+            padding: 30px 30px
+            height: 300px
+            margin: 15px 0
+        .info-symbol
+            display: inline-flex
+            align-items: center
+            justify-content: center
+            flex-shrink: 0
+            border-radius: 50%
+            background-color: #f3d8ca
+            width: 60px
+            height: 60px
+            margin-right: 15px
+            @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                width: 60px
+                height: 60px
+                margin-right: 10px
+            @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                width: 70px
+                height: 70px
+                margin-right: 17px
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                width: 120px
+                height: 120px
+                margin-right: 30px
+            @media screen and (min-width: map-get($grid-breakpoints, "xl"))
+                width: 130px
+                height: 130px
+                margin-right: 30px
+            .symbol-text
+                font-size: 36px
+                font-weight: bold
+                color: #ffffff
+                @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                    font-size: 36px
+                @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                    font-size: 35px
+                @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                    font-size: 65px                    
+                @media screen and (min-width: map-get($grid-breakpoints, "xl"))
+                    font-size: 80px
+    .info-content
+        display: flex
+        flex-direction: column
+        width: 100%
+        .info-title
+            font-size: 22px
+            margin-bottom: 10px
+            font-weight: bold
+            color: #69241d
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                font-size: 20px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                font-size: 20px
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                font-size: 24px
+                margin-bottom: 20px
+            @media screen and (min-width: map-get($grid-breakpoints, "xl"))
+                font-size: 30px
+        .info-text
+            font-size: 18px
+            text-align: left
+            color: #580c10
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                font-size: 16px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                font-size: 16px
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                font-size: 18px
+            @media screen and (min-width: map-get($grid-breakpoints, "xl"))
+                font-size: 18px
+            span
+                display: block
+        .more-box
+            display: flex
+            justify-content: flex-start
+            .text-more
+                display: inline-flex
+                color: #e88f13
+                margin-top: 5px
+                font-size: 12px
+
+.banner-box
+    position: relative
+    line-height: 0
+    .my-slider
+        position: relative
+        .banner-img
+            img
+                width: 100%
+                height: auto
+    .tns-outer
+        .tns-nav
+            position: absolute
+            bottom: 10px
+            width: 100%
+            text-align: center
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                bottom: 15px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                bottom: 35px
+        .tns-nav > [aria-controls]
+            width: 12px
+            height: 12px
+            padding: 0
+            margin: 0 5px
+            border-radius: 50%
+            background: #e7e6e5
+            border: 0
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                width: 8px
+                height: 8px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                width: 20px
+                height: 20px
+        .tns-nav > .tns-nav-active
+            background: #be2120
+    .customize-controls
+        display: none
+        @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+            position: absolute
+            display: flex
+            align-items: center
+            justify-content: space-between
+            z-index: 999
+            top: 50%
+            width: 100%
+        .btn-controls
+            .img-arrow-right,.img-arrow-left
+                position: absolute
+                display: inline-block
+                width: 20px
+                height: 36px
+                background-size: contain
+                background-repeat: no-repeat
+                @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                    width: 26px
+                    height: 47px
+            .img-arrow-right
+                background-image: url('../../images/arr-right.png')
+                right: 30px
+            .img-arrow-left
+                background-image: url('../../images/arr-left.png')
+                left: 30px
+
+.home-product
+    position: relative
+    .product-imgbox
+        display: block
+        position: relative
+        &::before
+            content: " "
+            display: block
+            padding-bottom: 100%
+            @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                padding-bottom: 117.71%
+            @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                padding-bottom: 126%
+        .img-home-product
+            position: absolute
+            left: 0
+            right: 0
+            top: 0
+            bottom: 0
+            background-position: center
+            background-repeat: no-repeat
+            background-size: cover
+    .home-slogan
+        display: flex
+        align-items: center
+        flex-direction: column
+        position: absolute
+        top: 43%
+        z-index: 1
+        width: 100%
+        text-align: center
+        @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+            top: 0
+        .bg-slogan
+            width: 100%
+            height: 60px
+            background-color: rgba(0, 0, 0, 0.5)
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                height: 88px
+        .slogan-content
+            position: absolute
+            top: 0
+            bottom: 0
+            display: inline-flex
+            flex-direction: column
+            justify-content: center
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                border-radius: 6px
+                background-color: #e7e6e5
+                top: 30px
+                width: 280px
+                min-height: 130px
+                padding: 20px 25px
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                top: 40px
+                width: 440px
+                min-height: 170px
+                padding: 38px 58px
+            .title-slogan
+                font-size: 27px
+                font-weight: bold
+                color: #e7e6e5
+                @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                    color: #580c10
+                    font-size: 28px
+                    margin-bottom: 10px
+                @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                    font-size: 30px
+            .text-slogan
+                display: none
+                @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                    color: #580c10
+                    display: block
+                    font-size: 18px
+                @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                    font-size: 22px
+
+
+.home-contact
+    background-color: #f4d9ca
+    .img-store
+        background-position: top center
+        min-height: 300px
+        background-size: cover
+    .contact-form
+        padding: 30px 45px
+        @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+            padding: 20px 25px
+        @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+            padding: 65px 90px
+        .input-box
+            input,textarea
+                width: 100%
+                font-size: 18px
+                margin-bottom: 25px
+                border: none
+                padding: 6px 10px
+        .text-need
+            color: #be2120
+            font-size: 16px
+        .btn-submit
+            padding: 8px 30px
+            color: #fff
+            font-size: 16px
+            background-color: #590c10
+            &:hover
+                background-color: #e88f13

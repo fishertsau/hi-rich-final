@@ -1,0 +1,196 @@
+@charset "utf-8";
+input{padding: 0.3%;}
+img, img a {border:0}
+a:link, a:visited {	color: #000; text-decoration: none;}
+a:hover {color: #F00;}
+
+/* 登錄頁 */
+#login{
+	background-image: url(../images/bg-login.png);
+	background-repeat: repeat;
+	width: 100%;
+	text-align: center;
+	font-family:"microsoft yahei";
+	font-size: x-large;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+/* 內頁 */
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "微軟正黑體";
+	font-size: medium;
+	color: #000;
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat;
+   }
+#header{
+	width: 98%;
+	padding-right: 1%;
+	padding-bottom: 28px;
+	padding-left: 1%;
+	background-image: url(../images/line.png);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+ /*左側選單開始*/
+
+#leftmenu{
+	width: 200px;
+	padding-left: 1%;
+	float: left;
+}
+#nav {
+ width:200px;
+ line-height: 24px; 
+ list-style-type: none;
+ text-align:left;
+ margin: 0;
+ padding: 0;
+   
+}
+#nav a {
+ width: 200px; 
+ display: block;
+ padding-left:10px;
+}
+#nav li {
+	background: #d2d2d2;
+	border-bottom: #FFF 1px solid;
+	float: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#nav li a:hover{
+ background:#CC0000;
+}
+#nav a:link  {
+ color:#000; text-decoration:none;
+}
+#nav a:visited  {
+ color:#000;text-decoration:none;
+}
+#nav a:hover  {
+ color:#FFF;text-decoration:none;font-weight:bold;
+}
+#nav li ul {
+ list-style:none;
+ text-align:left;
+ margin: 0;
+ padding: 0;
+}
+#nav li ul li{ 
+ background: #fff;
+ border-bottom:#d7d7d7 1px dashed; 
+ padding-top: 5px;
+ padding-bottom: 5px;
+}
+#nav li ul a{
+ padding-left:10px;
+ width:200px;
+}
+#nav li ul a:link  {
+ color:#666; text-decoration:none;
+}
+#nav li ul a:visited  {
+ color:#666;text-decoration:none;
+}
+#nav li ul a:hover {
+ color:#F3F3F3;
+ text-decoration:none;
+ font-weight:normal;
+}
+#nav li:hover ul {
+ left: auto;
+}
+#nav li.sfhover ul {
+ left: auto;
+}
+#content {
+ clear: left; 
+}
+#nav ul.collapsed {
+ display: none;
+}
+/*左側選單結束*/
+
+#footer{
+	width: 98%;
+	text-align: center;
+	padding: 1%;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+	clear: both;
+}
+#site{
+	width: 100%;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #CCC;
+	color: #666;
+	font-size: 14px;
+}
+
+
+
+
+ /*文字樣式設定*/
+.textblue-xlarge{
+	font-size: x-large;
+	color: #06F;
+}
+.textblue-medium{
+	font-size: medium;
+	color: #666;
+}
+.textblue-medium a {
+	color: #666;
+	text-decoration: none;
+}
+.textblue-medium a:hover {
+	color: #0000FF;
+}
+.textblue-small{
+	font-size: small;
+	color: #666;
+}
+.textblue-small a {
+	color: #666;
+	text-decoration: none;
+}
+.textblue-small a:hover {
+	color: #0000FF;
+}
+.textblue-smallblack{
+	font-size: small;
+	color: #000;
+}
+.border{
+	border: 1px solid #BBB;
+}
+.border-right{
+	border-right: 1px solid #BBB;
+}
+.border-downright{
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #BBB;
+	border-bottom-color: #BBB;
+}
+.border-down{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #BBB;
+}
+.border-sdown{
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #C0C0C0;
+}

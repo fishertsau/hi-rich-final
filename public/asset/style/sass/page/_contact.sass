@@ -1,0 +1,93 @@
+//sample
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'md'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, "xl"))
+
+.contact-box
+    background-color: #e7e6e5
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+        padding-bottom: 30px
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+        padding-bottom: 98px
+    .section-title
+        margin: 30px 0
+        padding: 0 15px
+        @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+            padding: 0
+    .map-box
+        .my-map
+            width: 100%
+            height: 480px
+            border: 0
+            @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                height: 436px
+            @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                height: 710px
+            
+
+    .home-contact
+        background-color: #d3d3d3
+        margin: 0 -15px
+        @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+            margin: 0
+        .contact-form
+            padding: 20px 45px
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                padding: 20px 60px
+            @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+                padding: 35px 120px
+        .btn-submit
+            background-color: #be2121
+            &:hover
+                background-color: #590c10
+        /*webkit瀏覽器專用*/
+        ::-webkit-input-placeholder
+            color: #d3d3d4 
+        /*Firefox 4-18瀏覽器專用*/
+        input::-moz-placeholder 
+            color: #d3d3d4  
+        /*Firefox 19+瀏覽器專用*/
+        input::-moz-placeholder
+            color:#fd3d3d4
+        /*IE10瀏覽器專用*/
+        input:-ms-input-placeholder
+            color: #d3d3d4 
+    .contact-info-box
+        padding: 0 15px
+        @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+            padding: 0        
+        .company-title
+            font-size: 18px
+            color: #560b0f
+            @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                font-size: 20px
+            @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                font-size: 22px
+
+        .company-box
+            line-height: 20px
+            margin-bottom: 30px
+            @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                margin-bottom: 45px
+                line-height: 24px
+            &:last-child
+                margin-bottom: 0
+            .company-item 
+                color: #560b0f
+                font-size: 18px
+                .text-map
+                    color: #be2120
+                    font-size: 15px
+                    @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                        font-size: 16px
+                &.is-active
+                    color: #e88f13
+                    .text-map
+                        color: #e88f13
+            .text-address,.text-phone,.text-fax,.text-mail
+                font-size: 15px
+                color: #560b0f
+                @media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+                    font-size: 16px
+            

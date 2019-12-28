@@ -1,0 +1,63 @@
+//sample
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'md'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, "xl"))
+
+.product-box
+    // .section-title
+    //     margin-bottom: 15px
+    //     @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+    //         margin-bottom: 22px
+    .links-list
+        .col-xs-12
+            text-align: center
+        .links-item
+            display: inline-flex
+            flex-direction: column
+            align-items: center
+            margin-bottom: 10px
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                margin-bottom: 26px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                margin-bottom: 33px
+            img 
+                width: 100%
+                height: auto
+            .text-links-name
+                color: #580c10
+                font-size: 16px
+                margin-top: 10px
+    .product-content
+        .img-product
+            img
+                width: 100%
+                max-width: 100%
+                height: auto
+                @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                    max-width: 877px
+        .product-form
+            color: #be2120
+            font-size: 18px
+            margin: 15px 0
+            @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+                font-size: 18px
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                margin: 20px 0
+                font-size: 22px
+            .form-item
+                display: inline-block
+                &:first-child
+                    margin-right: 10px
+                    @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                        margin-right: 20px
+        .set-height
+            @media screen and (min-width: map-get($grid-breakpoints, "md"))
+                min-height: 220px
+                        
+.mobile-product-detail
+    background-color: #fff
+    padding: 30px 15px
+    @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+        background-color: transparent
+        padding: 0 15px

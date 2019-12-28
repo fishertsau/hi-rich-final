@@ -1,0 +1,88 @@
+//sample
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'md'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, 'lg'))
+// 	@media screen and (min-width: map-get($grid-breakpoints, "xl"))
+
+.page-bg
+    background-color: #e7e6e5
+    position: relative
+    padding: 25px 0
+    margin-top: 83px
+    @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+        padding: 36px 0
+    @media screen and (min-width: map-get($grid-breakpoints, "lg"))
+        padding: 36px 0 68px 0
+    &::before,&::after
+        display: none
+        @media screen and (min-width: map-get($grid-breakpoints, "sm"))
+            position: absolute
+            z-index: 1
+            width: 100%
+            height: 329px
+            background-size: contain
+            background-repeat: no-repeat
+            display: inline-block
+            content: ''
+    &::before
+        background-image: url('../../images/bg_up.png')
+        background-position: top
+        top: 0
+    &::after
+        background-image: url('../../images/bg_down.png')
+        background-position: bottom
+        bottom: 0
+    section
+        position: relative
+        z-index: 2
+
+.about-box
+    .about-side-bar
+        display: none
+        @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+            display: flex
+            flex-direction: column
+        .item
+            font-size: 18px
+            margin-bottom: 18px
+            color: #580c10
+            padding-left: 10px
+            @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                font-size: 22px
+                margin-bottom: 44px
+            &.is-active
+                color: #be2120
+            span
+                color: #e88f13
+                margin-right: 3px
+                @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                    margin-right: 7px
+    .about-content
+        .img-company
+            margin-bottom: 7px
+            @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                margin-bottom: 40px
+        .about-img
+            width: 100%
+            height: auto
+            margin: 17px 0
+            @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                margin: 40px 0
+        .about-title
+            font-size: 22px
+            color: #be2120
+            margin-bottom: 5px
+            @media screen and (min-width: map-get($grid-breakpoints, 'sm'))
+                margin-bottom: 8px
+            @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                margin-bottom: 18px
+
+        .about-text
+            color: #707070
+            p
+                font-size: 18px
+                line-height: 20px
+                margin: 0
+                @media screen and (min-width: map-get($grid-breakpoints, 'md'))
+                    font-size: 18px
+                    line-height: 22px
