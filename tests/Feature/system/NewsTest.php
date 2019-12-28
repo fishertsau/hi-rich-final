@@ -18,7 +18,6 @@ class NewsTest extends TestCase
         $this->actingAs(factory(User::class)->make());
     }
 
-
     /** @test */
     public function can_visit_list_page()
     {

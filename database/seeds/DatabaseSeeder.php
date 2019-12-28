@@ -19,22 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(SystemUserSeeder::class);
         $this->call(AdminSeeder::class);
-
-        if (config('app.admin.about_list')) {
-            $this->call(AboutSeeder::class);
-        }
-
-        if (config('app.admin.services')) {
-            $this->call(ServiceSeeder::class);
-        }
-
-        if (config('app.admin.news')) {
-            $this->call(NewsSeeder::class);
-        }
-
-        if (config('app.admin.samples')) {
-            $this->call(SampleSeeder::class);
-        }
+        $this->call(NewsSeeder::class);
     }
 
     private function clearTestPhotoFiles()

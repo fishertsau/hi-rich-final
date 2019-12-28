@@ -20,59 +20,19 @@
                         </div>
 
                         <div class="news-list scroll-bar">
-                            {{-- todo: generate with the data from db --}}
-                            <!-- 尺寸576以下時 點擊連到news-detail頁面-->
-                            <a class="item active" href="/news/1">
-                                {{--todo: num的流水號為何? --}}
-                                <span class="text-num">01</span>
-                                <span class="text-title">2019台北國際食品展</span>
-                                <span class="text-news">高豐海產誠摯邀請您高豐海產誠摯邀請您高豐海產誠摯邀請您</span>
-                                <span class="text-date">2019/06/15</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">02</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">03</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">04</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">05</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">06</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">07</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
-                            <a class="item">
-                                <span class="text-num">08</span>
-                                <span class="text-title">夏季新品上市</span>
-                                <span class="text-news">半殼扇貝 產地：中國，規格：</span>
-                                <span class="text-date">2019/06/06</span>
-                            </a>
+                        <!-- 尺寸576以下時 點擊連到news-detail頁面-->
+                            {{--todo: 實作此功能--}}
+                            @foreach($newss as $news)
+                                <a class="item {{ $loop->index === 1 ? 'active' : '' }}" href="/news/{{$news->id}}">
+                                    <span class="text-num">{{$loop->index + 1}}</span>
+                                    <span class="text-title">{{$news->title}}</span>
+                                    <span class="text-news">{!! $news->body !!}</span>
+                                    <span class="text-date">{{$news->published_since->toFormattedDateString()}}2019/06/15</span>
+                                </a>
+                            @endforeach
                         </div>
 
+                        {{-- todo: 這段沒有作用??? --}}
                         <ul class="pagination">
                             <li><a href="#" aria-label="Previous"><span aria-hidden="true">&larr;</span></a></li>
                             <li class="active"><a href="#">1</a>
@@ -89,6 +49,7 @@
                         </ul>
                     </div>
 
+                    {{--todo: change this --}}
                     <div class="col-lg-8 col-md-7 col-sm-7 col-12 hidden-xs">
                         <div class="news-content">
                             <div class="artical-title">

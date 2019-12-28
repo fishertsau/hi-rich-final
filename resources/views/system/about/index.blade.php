@@ -43,7 +43,6 @@
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/abouts/{{$about->id}}/edit">
                             {{$about->title}}
-                            @ifEngEnabled() | {{$about->title_en}} @endifEngEnabled
                         </a>
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">

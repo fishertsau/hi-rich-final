@@ -56,7 +56,7 @@ class NewsController extends Controller
         $news->title .= '(複製)';
         $copyNews = true;
 
-        if(config('app.english_enabled')){
+        if (config('app.english_enabled')) {
             $news->title_en .= '(複製)';
         }
 

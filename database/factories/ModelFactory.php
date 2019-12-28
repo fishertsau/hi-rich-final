@@ -84,7 +84,7 @@ $factory->define(Photo::class, function () {
     ];
 });
 
-
+// todo: remove this
 $factory->define(Inquiry::class, function () {
     return [
         'subject' => 'ANewSubject',
@@ -116,7 +116,7 @@ $factory->define(Contact::class, function () {
     ];
 });
 
-
+// todo: remove this
 $factory->define(Sample::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
@@ -130,7 +130,9 @@ $factory->define(Sample::class, function (Faker\Generator $faker) {
 $factory->define(News::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
-        'body' => "<p>{$faker->paragraph}</p>"
+        'body' => "<p>{$faker->paragraph}</p>",
+        'published_until' => $faker->dateTime(),
+        'published_since' => $faker->dateTime()
     ];
 });
 

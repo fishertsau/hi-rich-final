@@ -43,9 +43,6 @@
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown"><a
                                 href="/admin/news/{{$news->id}}/edit"> {{$news->title}}
-                            @if(config('app.english_enabled'))
-                                | {{$news->title_en}}
-                            @endif
                         </a>
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
@@ -103,7 +100,6 @@
             <tr>
                 <td align="center">
                         <span class="border-right">
-                          {{--<input type="submit" value="確定修改" @click="updateRanking"/>--}}
                           <img src="/system/images/empty.gif" width="50" height="10"/>
                             @include('system.partials.gobackBtn')
                         </span>

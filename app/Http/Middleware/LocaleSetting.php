@@ -16,6 +16,7 @@ class LocaleSetting
      */
     public function handle($request, Closure $next)
     {
+        // todo: remove this
         if (session()->has('locale')) {
             App::setLocale(session('locale'));
         }
