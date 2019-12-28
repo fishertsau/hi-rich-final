@@ -22,6 +22,7 @@ return [
     'email' => 'q25673210@yahoo.com.tw',
     'english_enabled' => false,
     '3tier_category_enabled' => true,
+    'category_photo_enabled' => true,
     'env' => env('APP_ENV', 'production'),
     /*
    |--------------------------------------------------------------------------

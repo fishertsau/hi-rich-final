@@ -3,10 +3,10 @@
         <td width="150" align="right" bgcolor="#ECECEC" class="border-down">啟用：</td>
         <td class="border-down">
             <input type="radio" name="activated" value="1"
-                   v-model="formInput.activated"/>
+                   v-model="formInput.activated" />
             啟用
             <input type="radio" name="activated" value="0"
-                   v-model="formInput.activated"/>
+                   v-model="formInput.activated" />
             關閉
         </td>
     </tr>
@@ -45,7 +45,7 @@
         </td>
         <td class="border-down">
             <input name="title" type="text" size="100%"
-                   v-model="formInput.title"/>
+                   v-model="formInput.title" />
             <p style="color:red" v-show="!formInput.title.length" v-cloak>請輸入名稱</p>
         </td>
     </tr>
@@ -57,34 +57,8 @@
                       cols="100%" rows="5"
                       v-model="formInput.description">
             </textarea>
-            <br/>
-            <br/>
+            <br />
+            <br />
         </td>
     </tr>
-
-    @if(config('app.english_enabled'))
-        <tr>
-            <td align="left" bgcolor="#ECECEC" class="border-down" colspan="2">英文內容</td>
-        </tr>
-        <tr>
-            <td align="right" bgcolor="#ECECEC" class="border-down">英文名稱：</td>
-            <td class="border-down">
-                <input name="title_en" type="text" size="100%"
-                       v-model="formInput.title_en"/>
-                <p style="color:red" v-show="!formInput.title_en.length" v-cloak>請輸入英文名稱</p>
-            </td>
-        </tr>
-
-        <tr>
-            <td align="right" valign="top" bgcolor="#ECECEC">英文描述：</td>
-            <td>
-            <textarea name="description_en"
-                      cols="100%" rows="5"
-                      v-model="formInput.description_en">
-            </textarea>
-                <br/>
-                <br/>
-            </td>
-        </tr>
-    @endif
 </table>

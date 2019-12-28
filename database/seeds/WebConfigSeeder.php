@@ -23,7 +23,8 @@ class WebConfigSeeder extends Seeder
             // todo: move to config/app.php
             'contact_ok' => '感謝您,我們會盡快與您聯絡',
             'inquiry_info' => '感謝您,我們會盡快與您聯絡',
-            'category_description' => 'MainCategoryDescriptionMainCategoryDescriptionMainCategoryDescription',
+            'category_photo_enabled' => config('app.category_photo_enabled'),
+//            'category_description' => 'MainCategoryDescriptionMainCategoryDescriptionMainCategoryDescription',
             'declare' => config('app.declare'),
             'fb_url'=>'https://www.facebook.com/yungmin28627460',
         ];
