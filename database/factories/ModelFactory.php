@@ -4,12 +4,9 @@
 
 use App\Models\About;
 use App\Models\Contact;
-use App\Models\Service;
 use App\User;
 use App\Models\News;
 use App\Models\Photo;
-use App\Models\Sample;
-use App\Models\Inquiry;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\WebConfig;
@@ -26,6 +23,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 });
 
 
+// todo: remove this
 $factory->define(About::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence(3),
@@ -49,16 +47,12 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
 $factory->define(Product::class, function (Faker\Generator $faker) {
     return [
         'title' => "pro_$faker->name",
-        'title_en' => 'English Name',
         'published' => true,
         'published_in_home' => true,
         'cat_id' => function () {
             return create(Category::class)->id;
         },
         'body' => $faker->paragraph(2),
-        'body_en' => $faker->paragraph(2),
-        'briefing' => $faker->paragraph(2),
-        'briefing_en' => $faker->paragraph(2)
     ];
 });
 
@@ -84,26 +78,6 @@ $factory->define(Photo::class, function () {
     ];
 });
 
-// todo: remove this
-$factory->define(Inquiry::class, function () {
-    return [
-        'subject' => 'ANewSubject',
-        'email' => 'john@example.com',
-        'tel' => '22226666',
-        'message' => 'AMessage',
-        'company_name' => 'company_name',
-        'material' => 'material',
-        'purpose' => 'purpose',
-        'spec' => 'spec',
-        'estimated_qty' => 'estimated_qty',
-        'viscosity' => 'viscosity',
-        'surface_treatment' => 'surface_treatment',
-        'packing' => 'packing',
-        'print_out' => 'print_out'
-    ];
-});
-
-
 $factory->define(Contact::class, function () {
     return [
         'title' => 'title',
@@ -115,17 +89,6 @@ $factory->define(Contact::class, function () {
         'company_name' => 'company_name',
     ];
 });
-
-// todo: remove this
-$factory->define(Sample::class, function (Faker\Generator $faker) {
-    return [
-        'title' => $faker->name,
-        'published' => true,
-        'body' => $faker->paragraph(30),
-        'description' => $faker->sentence(10)
-    ];
-});
-
 
 $factory->define(News::class, function (Faker\Generator $faker) {
     return [
@@ -141,11 +104,3 @@ $factory->define(WebConfig::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Service::class, function (Faker\Generator $faker) {
-    return [
-        'title' => $faker->title,
-        'body' => $faker->text(),
-        'published' => false,
-        'published_in_home' => false,
-    ];
-});

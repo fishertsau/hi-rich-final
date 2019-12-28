@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder

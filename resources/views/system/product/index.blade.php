@@ -117,7 +117,6 @@
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">
                             {{$product->title}}
-                            @ifEngEnabled() | {{$product->title_en}} @endifEngEnabled
                         </a>
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">

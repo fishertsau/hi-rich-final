@@ -9,8 +9,10 @@
                    
                     {{-- todo: get content from db --}}
                     <div class="col-md-9 col-sm-8 col-12 mobile-product-detail">
+                        {{--todo: change this--}}
                         <div class="btn-box">
-                            <a href="/news.html" class="link-back">回上頁<span class="img-back"></span></a>
+                            {{--todo: implement this--}}
+                            <a href="/products" class="link-back">回上頁<span class="img-back"></span></a>
                         </div>
                         <div class="product-content">
                             <div class="artical-title">
@@ -21,6 +23,7 @@
                                 <img src="/asset/images/products/product05.jpg">
                             </div>
                             <div class="product-form">
+                                {{--每個產品都要有這些嗎?--}}
                                 <div class="form-item">
                                     <span class="item-title">產地:</span>
                                     <span class="item-text">加拿大</span>
@@ -33,18 +36,7 @@
 
                             <!-- 編輯器開始 -->
                             <div class="editor-box set-height">
-                                <p style="font-size:16px;color:#707070;">
-                                    內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文
-                                </p>
-                                <p style="font-size:16px;color:#707070;">
-                                    內文內文內文內文內文內文內文內文內文內文內文內文
-                                </p>
-                                <p style="font-size:16px;color:#707070;">
-                                    內文內文內文內文內文內文內文內文內文內文內文內文內文內文
-                                </p>
-                                <p style="font-size:16px;color:#707070;">
-                                    內文內文內文內文內文內文內文內文內文內文內文內文內文
-                                </p>
+                                {!! $product->body !!}
                             </div>
                             <!-- 編輯器結束 -->
                         </div>

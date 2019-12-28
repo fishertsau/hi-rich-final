@@ -67,16 +67,16 @@
                         <div class="home-contact">
                             <div class="contact-form">
                                 <div class="input-box">
-                                    <input type="text" name="email" placeholder="*您的姓名或公司行號" required="">
+                                    <input type="text" name="contact" placeholder="*您的姓名或公司行號" required>
                                 </div>
                                 <div class="input-box">
-                                    <input type="text" name="phone" placeholder="您的聯絡電話" required="">
+                                    <input type="text" name="tel" placeholder="您的聯絡電話">
                                 </div>
                                 <div class="input-box">
-                                    <input type="text" name="name" placeholder="*您的EMAIL" required="">
+                                    <input type="text" name="email" placeholder="*您的EMAIL" required>
                                 </div>
                                 <div class="input-box">
-                                    <textarea rows="6" placeholder="*請留言" required
+                                    <textarea rows="6" placeholder="*請留言" name="message" required
                                               class="form-style form-textarea"></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between">

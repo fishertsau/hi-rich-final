@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">
-            {{$localePresenter->ChinesePrefix()}}品名
+            品名
         </td>
         <td bgcolor="#FFFFFF" class="border-sdown">
             <input name="title" type="text" size="100%"
@@ -59,7 +59,7 @@
         </td>
     </tr>
 
-    <tr style="display:none;">
+    <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">產品主圖：</td>
         <td bgcolor="#FFFFFF" class="border-sdown">
 
@@ -164,7 +164,7 @@
         </td>
     </tr>
     <tr style="display: none">
-        <td align="right" bgcolor="#ECECEC" class="border-sdown">{{$localePresenter->ChinesePrefix()}}簡介</td>
+        <td align="right" bgcolor="#ECECEC" class="border-sdown">簡介</td>
         <td bgcolor="#FFFFFF" class="border-sdown">
             <textarea name="briefing" cols="105" rows="3">@if(isset($product)){{$product->briefing}}
                 @endif @if(isset($copyProduct)){{$copyProduct->briefing}}@endif
@@ -175,7 +175,7 @@
     </tr>
     <tr style="display: none">
         <td width="130" align="right" bgcolor="#ECECEC" class="border-sdown"
-            valign="top">{{$localePresenter->ChinesePrefix()}}內文
+            valign="top">內文
         </td>
         <td bgcolor="#FFFFFF" class="border-sdown">
                 <textarea name="body"
@@ -195,57 +195,6 @@
             <br/>
         </td>
     </tr>
-    <tr></tr>
-    <tr></tr>
-
-    @ifEngEnabled()
-    {{--英文內容--}}
-    <tr>
-        <td align="right" bgcolor="#ECECEC" class="border-sdown" valign="top">英文品名</td>
-        <td bgcolor="#FFFFFF" class="border-sdown">
-            <input name="title_en" type="text" size="100%"
-                   @if(isset($product))
-                   value="{{$product->title_en}}"
-                   @endif
-
-                   @if(isset($copyProduct))
-                   value="{{$copyProduct->title_en}}"
-                    @endif
-            />
-        </td>
-    </tr>
-    <tr>
-        <td align="right" bgcolor="#ECECEC" class="border-sdown">英文簡介</td>
-        <td bgcolor="#FFFFFF" class="border-sdown">
-            <textarea name="briefing_en" cols="105" rows="3">@if(isset($product)){{$product->briefing_en}}
-                @endif @if(isset($copyProduct)){{$copyProduct->briefing_en}}@endif
-            </textarea>
-            <br>
-            <strong>商品簡述區，只限文字，約390字，含符號、空白鍵，可斷行</strong>
-        </td>
-    </tr>
-    <tr>
-        <td width="130" align="right" bgcolor="#ECECEC" class="border-sdown" valign="top">英文內文</td>
-        <td bgcolor="#FFFFFF" class="border-sdown">
-                <textarea name="body_en"
-                          cols="105"
-                          rows="10"
-                          class="textarea"
-                          ckeditor="true">
-                    @if(isset($product))
-                        {{$product->body_en}}
-                    @endif
-
-                    @if(isset($copyProduct))
-                        {{$copyProduct->body_en}}
-                    @endif
-                </textarea>
-            <br/>
-            <br/>
-        </td>
-    </tr>
-    @endifEngEnabled()
-
 </table>
 <img src="/system/images/empty.gif" width="10" height="30"/><br/>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">

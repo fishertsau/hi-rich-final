@@ -23,16 +23,6 @@
                       ckeditor="true"
             >{{$webConfig->contact_ok}}</textarea>
 
-            @ifEngEnabled()
-            送出頁(英文)：<br/>
-            <textarea name="contact_ok_en" cols="30" rows="10"
-                      class="textarea"
-                      ckeditor="true"
-            >{{$webConfig->contact_ok_en}}</textarea>
-
-            @endifEngEnabled
-
-
             <img src="/system/images/empty.gif" width="10" height="30"/><br/>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>

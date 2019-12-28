@@ -34,26 +34,13 @@ class ProductsController extends Controller
 
     public function index()
     {
-//        if (WebConfig::firstOrCreate()->category_photo_enabled) {
-//            return redirect('/categories');
-//        }
+        $products =
+            Product::published()
+                ->where('title', '<>', '')
+                ->orderByRanking()
+                ->paginate(WebConfig::firstOrCreate()->product_show_per_page);
 
-        //TODO: Implement this
-//        if (App::getLocale() == 'en') {
-//            $products =
-//                Product::published()
-//                    ->where('title_en', '<>', '')
-//                    ->orderByRanking()
-//                    ->paginate(WebConfig::firstOrCreate()->product_show_per_page);
-//        } else {
-//            $products =
-//                Product::published()
-//                    ->where('title', '<>', '')
-//                    ->orderByRanking()
-//                    ->paginate(WebConfig::firstOrCreate()->product_show_per_page);
-//        }
-
-        return view('app.products.index');
+        return view('app.products.index', compact('products'));
     }
 
     public function indexByCategory($catId)

@@ -17,19 +17,18 @@ class ContactController extends Controller
 
     public function store()
     {
-        
+
 // TODO: Implement this
-//        $validInput = request()->validate([
-//            'title' => '',
-//            'contact' => 'required',
-//            'email' => 'required',
-//            'tel' => 'required',
-//            'address' => '',
-//            'fax' => '',
-//            'message' => 'required',
-//        ]);
-//
-//        $contact = Contact::create($validInput);
+        $validInput = request()->validate([
+            'contact' => 'required',
+            'tel' => '',
+            'email' => 'required',
+            'message' => 'required'
+        ]);
+
+
+        // todo: change this
+        $contact = Contact::create($validInput);
 
 //        $this->sendNotificationEmail($contact);
 
