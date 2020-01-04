@@ -33,6 +33,7 @@
                         <div class="about-content">
 
                             <!-- 公司簡介 -->
+                            {{--todo: implement this--}}
                             <img src="./asset/images/about/c01.jpg" class="img-full img-company">
                             <div class="about-title" id="c-introduction">公司簡介</div>
                             <div class="about-text">
@@ -48,6 +49,7 @@
                             </div>
 
                             <!-- 公司理念 -->
+                            {{--todo: implement this--}}
                             <img src="./asset/images/about/c02.jpg" class="about-img">
                             <div class="about-title" id="c-idea">公司理念</div>
                             <div class="about-text">
@@ -59,6 +61,7 @@
                             </div>
 
                             <!-- 公司沿革 -->
+                            {{--todo: implement this--}}
                             <img src="./asset/images/about/c03.jpg" class="about-img">
                             <div class="about-title" id="c-history">公司沿革</div>
                             <div class="about-text">
@@ -74,6 +77,7 @@
                             </div>
 
                             <!-- 未來展望 -->
+                            {{--todo: implement this--}}
                             <img src="./asset/images/about/c04.jpg" class="about-img">
                             <div class="about-title" id="c-future">未來展望</div>
                             <div class="about-text">

@@ -1,1 +1,1 @@
-<button onclick="goBack()">回上一頁</button>
+<button onclick="history.back()">回上一頁</button>

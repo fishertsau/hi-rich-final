@@ -47,7 +47,6 @@ class CreateWebConfigTable extends Migration
             $table->string('meta')->nullable();
             $table->string('meta_en')->nullable();
 
-
             //mail setting
             $table->string('mail_service_provider')->nullable();
             $table->string('mail_receivers')->nullable();
@@ -73,8 +72,6 @@ class CreateWebConfigTable extends Migration
             $table->mediumText('contact_ok_en')->nullable();
             $table->mediumText('declare')->nullable();
             $table->mediumText('declare_en')->nullable();
-
-
 
             $table->timestamps();
         });

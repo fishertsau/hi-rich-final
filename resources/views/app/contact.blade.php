@@ -13,6 +13,7 @@
                 <div class="col-md-4 col-sm-4 col-12">
                     <div class="section-title">-聯絡資訊-</div>
                     <div class="contact-info-box">
+                        {{-- todo: get contact info from backend --}}
                         <div class="company-title">高豐海產股份有限公司</div>
 
                         <div class="company-box">

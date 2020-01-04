@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-5 col-sm-5 col-12">
-                        <div class="section-title">-最新動態-</div>
+                        <div class="section-title">-最新消息-</div>
 
                         {{--todo: 這一段的目的/功能 --}}
                         <div class="mobile-select">
@@ -32,7 +32,7 @@
                             @endforeach
                         </div>
 
-                        {{-- todo: 這段沒有作用??? --}}
+                        {{-- todo: mobile device 會秀出來 --}}
                         <ul class="pagination">
                             <li><a href="#" aria-label="Previous"><span aria-hidden="true">&larr;</span></a></li>
                             <li class="active"><a href="#">1</a>

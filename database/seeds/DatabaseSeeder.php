@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SystemUserSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(NewsSeeder::class);
+        $this->call(SiteSeeder::class);
     }
 
     private function clearTestPhotoFiles()

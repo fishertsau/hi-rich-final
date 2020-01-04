@@ -10,6 +10,7 @@
                tabindex="-1"><span class="img-arrow-right"></span></a>
         </div>
         <div class="my-slider">
+            {{-- todo: get photos from backend --}}
             <div class="banner-img"><img src="./asset/images/banner/banner01.jpg"></div>
             <div class="banner-img"><img src="./asset/images/banner/banner02.jpg"></div>
             <div class="banner-img"><img src="./asset/images/banner/banner03.jpg"></div>
@@ -18,6 +19,7 @@
     </div>
 
     <!-- 產品圖可連結到產品頁 -->
+    {{-- todo: get photos from backend --}}
     <section class="home-product">
         <div class="container-fluid">
             <div class="row no-gutters">
@@ -36,6 +38,7 @@
             </div>
         </div>
         <div class="home-slogan">
+            {{--todo: get content from backend --}}
             <div class="bg-slogan"></div>
             <div class="slogan-content">
                 <span class="title-slogan">職人海鮮盡在高豐</span>
@@ -49,6 +52,7 @@
 
     <!-- 資訊 -->
     <section class="home-info">
+        {{--todo: implement this--}}
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-12">
@@ -120,6 +124,7 @@
 
     <!-- 聯絡我們 -->
     <section class="home-contact">
+        {{--todo: implment this --}}
         <div class="container-fluid">
             <div class="row no-gutters">
                 <div class="col-sm-6 col-12 img-store"></div>

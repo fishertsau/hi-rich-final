@@ -23,6 +23,7 @@ Route::get('/contact-ok', 'app\ContactController@contactOk');
 Route::get('/products', 'app\ProductsController@index');
 Route::get('/products/{id}', 'app\ProductsController@show');
 
+// TODO: Implement this
 //Route::get('/categories/{catId}', 'app\CategoriesController@show');
 //Route::get('/categories', 'app\CategoriesController@index');
 
@@ -30,6 +31,7 @@ Route::get('/products/{id}', 'app\ProductsController@show');
 Route::get('/links', 'app\LinksController@index');
 
 /** 系統後台*/
+// TODO: Implement this
 Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' => 'admin'], function () {
 
     Route::get('/', function () {
@@ -45,12 +47,6 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     /** 公司簡介-靜態畫面*/
     Route::get('/intro', 'IntroController@edit');
     Route::patch('/intro', 'IntroController@update');
-
-    /** 服務項目*/
-    Route::patch('services/ranking', 'ServicesController@ranking');
-    Route::patch('services/action', 'ServicesController@action');
-    Route::get('services/{service}/copy', 'ServicesController@copy');
-    Route::resource('services', 'ServicesController');
 
     /** Banner 管理*/
     Route::get('banner', 'BannersController@edit');
@@ -76,15 +72,20 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('news/{news}/copy', 'NewsController@copy');
     Route::resource('news', 'NewsController');
 
+    /** 據點管理*/
+    Route::patch('sites/ranking', 'SitesController@ranking');
+//    Route::patch('news/action', 'NewsController@action');
+    Route::resource('sites', 'SitesController');
+    
     /** 圖檔管理*/
     Route::delete('photos/{filename}', 'PhotosController@destroy');
     Route::patch('photos/{filename}', 'PhotosController@update');
 
     /** 聯絡我們管理*/
-    Route::get('contacts/template', 'ContactsController@template');
-    Route::patch('contacts/template', 'ContactsController@updateTemplate');
-    Route::post('contacts/{id}/processed', 'ContactsController@processed');
-    Route::resource('contacts', 'ContactsController');
+//    Route::get('contacts/template', 'ContactsController@template');
+//    Route::patch('contacts/template', 'ContactsController@updateTemplate');
+//    Route::post('contacts/{id}/processed', 'ContactsController@processed');
+//    Route::resource('contacts', 'ContactsController');
 
     /**設定管理*/
     Route::group(['prefix' => 'settings'], function () {

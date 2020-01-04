@@ -4,6 +4,7 @@
 
 use App\Models\About;
 use App\Models\Contact;
+use App\Models\Site;
 use App\User;
 use App\Models\News;
 use App\Models\Photo;
@@ -101,6 +102,17 @@ $factory->define(News::class, function (Faker\Generator $faker) {
 
 $factory->define(WebConfig::class, function (Faker\Generator $faker) {
     return [
+    ];
+});
+
+$factory->define(Site::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'address' => $faker->address,
+        'tel' => $faker->phoneNumber,
+        'fax' => $faker->phoneNumber,
+        'ranking' => count(Site::all()) + 1,
+        'published' => true 
     ];
 });
 

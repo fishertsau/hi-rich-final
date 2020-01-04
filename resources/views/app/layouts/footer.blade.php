@@ -10,6 +10,7 @@
         </div>
         <hr />
         <div class="footer-info">
+            {{--todo: get content from backend--}}
             <a href="/" class="logo"><img src="/asset/images/logo-black.png" alt="高豐海產股份有限公司"></a>
             <div class="footer-info-content">
                 <span class="text-address">台北總公司248新北市五股區五工一路131號5樓</span>

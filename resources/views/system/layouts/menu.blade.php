@@ -7,6 +7,7 @@
         {{--公司簡介管理--}}
         <li><a href="/admin/abouts">公司簡介</a></li>
 
+         {{--產品管理--}}
         <li><a href="#Menu=ChildMenu1" onclick="DoMenu('ChildMenu1')">產品管理 <img src="/system/images/arrow-down.png"
                                                                                 width="11" height="6"/></a>
             <ul id="ChildMenu1" class="collapsed">
@@ -19,10 +20,16 @@
                 </li>
             </ul>
         </li>
+        
+        {{--據點清單--}}
+        <li>
+            <a href="/admin/sites">據點清單</a>
+        </li>
 
         <li>
             <a href="/admin/news">最新消息</a>
         </li>
+        
         <li>
             <a href="/admin/links">相關連結</a>
         </li>
