@@ -5,6 +5,7 @@ namespace App\Http\Controllers\app;
 use App\Mail\UserContactEmail;
 use App\Models\Contact;
 use App\Http\Controllers\Controller;
+use App\Models\Site;
 use App\Models\WebConfig;
 use Mail;
 
@@ -12,7 +13,11 @@ class ContactController extends Controller
 {
     public function create()
     {
-        return view('app.contact');
+        $sites = Site::published()
+            ->orderByRanking()
+            ->get();
+
+        return view('app.contact', compact('sites'));
     }
 
     public function store()

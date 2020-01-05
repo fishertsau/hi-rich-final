@@ -43,7 +43,7 @@
             <div class="slogan-content">
                 <span class="title-slogan">職人海鮮盡在高豐</span>
                 <span class="text-slogan">
-          集世界海洋風味之菁華，<br/>
+          集世界海洋風味之菁華，<br />
           溶烹飪鮮美食材於一體！
         </span>
             </div>
@@ -151,4 +151,9 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('pageJS')
+    <script src="/asset/js/tiny-slider.js" type="text/javascript"></script>
+    <script> initTns(); </script>
 @endsection

@@ -8,6 +8,7 @@
     <title>高豐海產</title>
     <link href="/system/css/systemcss.css" rel="stylesheet" type="text/css"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{--todo: remove this --}}
     <script>
         function goBack() {
             window.history.back();

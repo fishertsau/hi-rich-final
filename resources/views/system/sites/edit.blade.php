@@ -17,7 +17,7 @@
 
 
     <div id="container">
-        <div id="site"><a href="/admin">首頁</a>>據點清單&gt;
+        <div id="site"><a href="/admin">首頁</a>> <a href="/admin/sites">據點清單&gt;</a>
             @if(isset($site))
                 修改據點
             @else

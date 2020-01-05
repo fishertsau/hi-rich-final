@@ -3,6 +3,8 @@
     "/js/system/product/productIndex.js": "/js/system/product/productIndex.js",
     "/js/system/category/categoryIndex.js": "/js/system/category/categoryIndex.js",
     "/js/system/category/categoryCreate.js": "/js/system/category/categoryCreate.js",
+    "/js/system/sites/sitesIndex.js": "/js/system/sites/sitesIndex.js",
+    "/js/app/contact/index.js": "/js/app/contact/index.js",
     "/js/system/news/newsIndex.js": "/js/system/news/newsIndex.js",
     "/js/system/contact/contactShow.js": "/js/system/contact/contactShow.js",
     "/js/system/banner/banner.js": "/js/system/banner/banner.js",

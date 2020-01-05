@@ -7,11 +7,9 @@ use App\Http\Controllers\Controller;
 
 class SitesController extends Controller
 {
-
     public function index()
     {
-        // todo: by ranking
-        $sites = Site::all();
+        $sites = Site::orderByRanking()->get();
         return view('system.sites.index', compact('sites'));
     }
 
@@ -67,7 +65,8 @@ class SitesController extends Controller
             'address' => '',
             'tel' => '',
             'fax' => '',
-            'email' => ''
+            'email' => '',
+            'google_map' => ''
         ]);
     }
 }

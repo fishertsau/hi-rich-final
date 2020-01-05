@@ -17,9 +17,10 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-
 Route::get('/categories/main', 'api\CategoriesController@main');
 Route::get('/categories/{id}', 'api\CategoriesController@category');
 Route::get('/categories/child/{id}', 'api\CategoriesController@child');
 Route::get('/categories/parent/{id}', 'api\CategoriesController@parent');
 
+Route::get('/sites/list', 'api\SitesController@index');
+Route::get('/sites/list/published', 'api\SitesController@publishedIndex');

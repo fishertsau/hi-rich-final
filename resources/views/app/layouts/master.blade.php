@@ -16,6 +16,12 @@
 <link rel="stylesheet" type="text/css" href="/asset/style/css/tiny-slider.css">
 <link rel="stylesheet" type="text/css" href="/asset/style/css/style.css">
 
+<!-- vue使用 -->
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
 <body>
 
 @include('app.layouts.header')
@@ -28,13 +34,10 @@
 <!-- 置頂按鈕 -->
 <button class="btn-go-bottom" onclick="goBottom()"><span class="iconfont icon-arrow-down"></span></button>
 
-<script src="/asset/js/tiny-slider.js" type="text/javascript"></script>
 <script src="/asset/js/header.js" type="text/javascript"></script>
 <script src="/asset/js/scrollAnimation.js" type="text/javascript"></script>
 <script src="/asset/js/function.js" type="text/javascript"></script>
-<script>
-  initTns();
-</script>
-</body>
 
+@yield('pageJS')
+</body>
 </html>

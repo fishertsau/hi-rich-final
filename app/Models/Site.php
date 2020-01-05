@@ -16,4 +16,14 @@ class Site extends Model
     {
         return count(self::all());
     }
+
+    public function scopeOrderByRanking($query)
+    {
+        return $query->orderBy('ranking', 'asc');
+    }
+    
+    public function scopePublished($query)
+    {
+        return $query->where('published', true);
+    }
 }

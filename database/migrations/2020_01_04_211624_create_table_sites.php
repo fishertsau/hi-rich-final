@@ -18,6 +18,7 @@ class CreateTableSites extends Migration
             $table->string('tel')->nullable();
             $table->string('fax')->nullable();
             $table->string('address')->nullable();
+            $table->string('google_map')->nullable();
             $table->string('email')->nullable();
             $table->boolean('published')->defalut(true);
             $table->tinyInteger('ranking');

@@ -74,18 +74,17 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
 
     /** 據點管理*/
     Route::patch('sites/ranking', 'SitesController@ranking');
-//    Route::patch('news/action', 'NewsController@action');
     Route::resource('sites', 'SitesController');
-    
+
     /** 圖檔管理*/
     Route::delete('photos/{filename}', 'PhotosController@destroy');
     Route::patch('photos/{filename}', 'PhotosController@update');
 
     /** 聯絡我們管理*/
-//    Route::get('contacts/template', 'ContactsController@template');
-//    Route::patch('contacts/template', 'ContactsController@updateTemplate');
-//    Route::post('contacts/{id}/processed', 'ContactsController@processed');
-//    Route::resource('contacts', 'ContactsController');
+    Route::get('contacts/template', 'ContactsController@template');
+    Route::patch('contacts/template', 'ContactsController@updateTemplate');
+    Route::post('contacts/{id}/processed', 'ContactsController@processed');
+    Route::resource('contacts', 'ContactsController');
 
     /**設定管理*/
     Route::group(['prefix' => 'settings'], function () {

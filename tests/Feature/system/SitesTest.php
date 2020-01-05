@@ -20,12 +20,9 @@ class SitesTest extends TestCase
     /** @test */
     public function can_visit_list_page()
     {
-        $site = factory(Site::class)->create();
-
         $response = $this->get('/admin/sites');
 
-        $response->assertSuccessful()
-            ->assertSee($site->name);
+        $response->assertSuccessful();
     }
 
     /** @test */
@@ -59,6 +56,7 @@ class SitesTest extends TestCase
             'fax' => '02-fax',
             'email' => 'a@b.com',
             'published' => true,
+            'google_map' => 'google map'
         ];
 
         $response = $this->post('admin/sites', $newSiteInfo);
@@ -71,7 +69,7 @@ class SitesTest extends TestCase
         $this->assertEquals('02-fax', $site->fax);
         $this->assertEquals('a@b.com', $site->email);
         $this->assertTrue((boolean)$site->published);
-        $this->assertNotNull($site->ranking);
+        $this->assertEquals('google map', $site->google_map);
         $this->assertSame(1, (int)$site->ranking);
     }
 
