@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Events\ProductDeleting;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category\ProductCategory;
+use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
 {
@@ -21,7 +22,7 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'cat_id');
+        return $this->belongsTo(ProductCategory::class, 'cat_id');
     }
 
 

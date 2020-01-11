@@ -8,5 +8,6 @@
 ])
 
 @section('pageJS')
+    {{--todo: change for news--}}
     <script type="text/javascript" src="{{ asset('/js/system/category/categoryIndex.js') }}"></script>
 @endsection

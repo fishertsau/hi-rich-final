@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Category\ProductCategory ;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class ProductCategorySeeder extends Seeder
 {
     private $photoList = [
         'product01.jpg',
@@ -30,12 +29,12 @@ class CategorySeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
-        Category::truncate();
+        ProductCategory::where('for', ProductCategory::getCatIndex())->delete();
 
         $mainCats = $this->createMainCats();
 
-        if (!(config('app.3tier_category_enabled')
-            || config('app.2tier_category_enabled'))) {
+        if (!(config('app.product_category_tier3_enabled')
+            || config('app.product_category_tier2_enabled'))) {
             return;
         }
 
@@ -43,11 +42,14 @@ class CategorySeeder extends Seeder
             $subNum = random_int(0, 3);
 
             for ($i = 0; $i < $subNum; $i++) {
-                $subCat = $this->createChildCategory($cat, $faker);
-                if (config('app.3tier_category_enabled')) {
-                    $subSubNum = random_int(0, 3);
-                    for ($j = 0; $j < $subSubNum; $j++) {
-                        $this->createChildCategory($subCat, $faker);
+                if ((config('app.product_category_tier3_enabled')
+                    || config('app.product_category_tier2_enabled'))) {
+                    $subCat = $this->createChildCategory($cat, $faker);
+                    if (config('app.product_category_tier3_enabled')) {
+                        $subSubNum = random_int(0, 3);
+                        for ($j = 0; $j < $subSubNum; $j++) {
+                            $this->createChildCategory($subCat, $faker);
+                        }
                     }
                 }
             }
@@ -93,7 +95,7 @@ class CategorySeeder extends Seeder
             return $this->createMainCatWithTitles();
         }
 
-        return factory(Category::class, 3)
+        return factory(ProductCategory::class, 3)
             ->create(['photoPath' => $this->copyPhoto()]);
     }
 
@@ -108,7 +110,7 @@ class CategorySeeder extends Seeder
     private function createMainCatWithTitles()
     {
         return collect($this->mainCatTitles)->map(function ($title) {
-            return factory(Category::class)->create([
+            return factory(ProductCategory::class)->create([
                 'title' => $title,
                 'photoPath' => $this->copyPhoto()
             ]);

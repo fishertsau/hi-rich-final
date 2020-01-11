@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\WebConfig;
+use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 // TODO: Implement this
 
@@ -63,7 +64,7 @@ class AppProductTest extends TestCase
     /** @test */
     public function can_see_product_list_by_category()
     {
-        $category = create(Category::class);
+        $category = create(ProductCategory::class);
         $productA = create(Product::class, ['published' => true, 'cat_id' => $category->id]);
         $productB = create(Product::class, ['published' => true, 'cat_id' => $category->id]);
         $productC = create(Product::class, ['published' => false, 'cat_id' => $category->id]);

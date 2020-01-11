@@ -2,19 +2,20 @@
 
 namespace Tests\Unit;
 
-use App\Models\Category;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use App\Models\Category\NewsCategory;
+use App\Models\Category\ProductCategory;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CategoryTest extends TestCase
+class ProductCategoryTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
     public function all_subCategories_parentCategory_becomes_null_when_a_category_is_deleted()
     {
-        $category = factory(Category::class)->create(['title' => 'categoryTitle']);
+        $category = factory(ProductCategory::class)->create(['title' => 'categoryTitle']);
         $subCategory = $category->childCategories()->create([
             'activated' => true,
             'title' => 'subCategoryTitle',
@@ -46,7 +47,7 @@ class CategoryTest extends TestCase
     /** @test */
     public function can_know_the_category_level()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
         $subCategory = $category->childCategories()->create([
             'activated' => true,
             'title' => 'subCategoryTitle',
@@ -70,9 +71,9 @@ class CategoryTest extends TestCase
     public function can_get_full_series_categories_title_string()
     {
 
-        $category = factory(Category::class)->create(['title' => 'MainCategory']);
-        $subCategory = factory(Category::class)->create(['title' => 'SubCategory', 'parent_id' => $category->id]);
-        $subSubCategory = factory(Category::class)->create(['title' => 'SubSubCategory', 'parent_id' => $subCategory->id]);
+        $category = factory(ProductCategory::class)->create(['title' => 'MainCategory']);
+        $subCategory = factory(ProductCategory::class)->create(['title' => 'SubCategory', 'parent_id' => $category->id]);
+        $subSubCategory = factory(ProductCategory::class)->create(['title' => 'SubSubCategory', 'parent_id' => $subCategory->id]);
 
         $this->assertEquals('MainCategory/SubCategory/SubSubCategory', $subSubCategory->seriesTitles);
     }
@@ -80,10 +81,10 @@ class CategoryTest extends TestCase
     /** @test */
     public function can_know_if_has_descendants_or_not()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
         $this->assertFalse($category->fresh()->hasDescendants);
 
-        factory(Category::class)->create(['parent_id' => $category->id]);
+        factory(ProductCategory::class)->create(['parent_id' => $category->id]);
         $this->assertTrue($category->fresh()->hasDescendants);
     }
 
@@ -92,7 +93,7 @@ class CategoryTest extends TestCase
     public function cover_photo_is_deleted_when_category_is_deleted()
     {
         $category =
-            factory(Category::class)
+            factory(ProductCategory::class)
                 ->create([
                     'photoPath' => UploadedFile::fake()->create('photo.jpg')->store('images', 'public'),
                 ]);
@@ -109,12 +110,14 @@ class CategoryTest extends TestCase
     /** @test */
     public function can_get_the_main_category()
     {
-        $catA = create(Category::class);
-        $catB = create(Category::class);
-        $catC = create(Category::class, ['level' => 2]);
+        $catA = create(ProductCategory::class);
+        $catB = create(ProductCategory::class);
+        $catC = create(ProductCategory::class, ['level' => 2]);
+        create(NewsCategory::class);
 
-        $catIds = Category::main()->get()->pluck('id');
+        $catIds = ProductCategory::main()->get()->pluck('id');
 
+        $this->assertCount(2, $catIds);
         $this->assertContains($catA->id, $catIds);
         $this->assertContains($catB->id, $catIds);
         $this->assertNotContains($catC->id, $catIds);

@@ -2,8 +2,8 @@
 
 use App\Models\Photo;
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Database\Seeder;
+use App\Models\Category\ProductCategory;
 
 class ProductSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         Product::truncate();
         Photo::truncate();
 
-        $categories = Category::all();
+        $categories = ProductCategory::all();
 
         $categories->each(function ($category) {
             if (!$category->hasDescendants) {

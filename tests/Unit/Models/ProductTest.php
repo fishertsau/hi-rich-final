@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\UploadedFile;
+use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductTest extends TestCase
@@ -37,9 +37,9 @@ class ProductTest extends TestCase
     /** @test */
     public function can_see_all_it_category_and_descendant_string()
     {
-        $category = factory(Category::class)->create(['title' => 'MainCategory']);
-        $subCategory = factory(Category::class)->create(['title' => 'SubCategory', 'parent_id' => $category->id]);
-        $subSubCategory = factory(Category::class)->create(['title' => 'SubSubCategory', 'parent_id' => $subCategory->id]);
+        $category = factory(ProductCategory::class)->create(['title' => 'MainCategory']);
+        $subCategory = factory(ProductCategory::class)->create(['title' => 'SubCategory', 'parent_id' => $category->id]);
+        $subSubCategory = factory(ProductCategory::class)->create(['title' => 'SubSubCategory', 'parent_id' => $subCategory->id]);
 
         $product = factory(Product::class)->create(['title' => 'A Super Product', 'cat_id' => $subSubCategory->id]);
 
@@ -50,7 +50,7 @@ class ProductTest extends TestCase
     /** @test */
     public function can_get_the_category_it_belongs_to()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
         $product = factory(Product::class)->create(['cat_id' => $category->id]);
 
         $this->assertEquals($category->id, $product->category->id);

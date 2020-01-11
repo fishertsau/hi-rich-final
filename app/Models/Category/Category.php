@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
+use App\Events\CategoryCreating;
 use App\Events\CategoryDeleting;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+Abstract class Category extends Model
 {
     const FIRST_LEVEL = 1;
     const SECOND_LEVEL = 2;
     const THIRD_LEVEL = 3;
+    
+    const CatIndexList = [
+        '產品類別' => 'p',
+        '消息類別' => 'n'
+    ];
 
     protected $guarded = [];
 
@@ -19,7 +25,10 @@ class Category extends Model
 
     protected $dispatchesEvents = [
         'deleting' => CategoryDeleting::class,
+        'creating' => CategoryCreating::class,
     ];
+
+    abstract public static function getCatIndex();
 
     public function parentCategory()
     {
@@ -71,13 +80,19 @@ class Category extends Model
 
     public function scopeMain($query)
     {
-        return $query->where('level', 1);
+        return $query
+            ->where('for', $this->getCatIndex()) 
+            ->where('level', 1);
     }
-
+    
+    public function scopeForApplyModel($query)
+    {
+        return $query->where('for', $this->getCatIndex());
+    }
 
     //TODO: Implement this : cover this with test
     public function scopeOrderByRanking($query)
     {
-        return $query->orderBy('ranking','asc');
+        return $query->orderBy('ranking', 'asc');
     }
 }

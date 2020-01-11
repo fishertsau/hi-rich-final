@@ -4,9 +4,9 @@ namespace Tests\Feature\system;
 
 use App\User;
 use Tests\TestCase;
-use App\Models\Category;
 use App\Models\WebConfig;
 use Illuminate\Http\UploadedFile;
+use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductCategoryTest extends TestCase
@@ -40,7 +40,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_visit_category_create_page_when_mainCat_is_given()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
 
         $response = $this->get('/admin/product/categories/create?parentId=' . $category->id);
 
@@ -51,7 +51,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_visit_category_create_page_when_subCat_is_given()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
         $subCategory = $category->childCategories()->create([
             'activated' => true,
             'title' => 'subCategoryTitle',
@@ -82,10 +82,11 @@ class ProductCategoryTest extends TestCase
 
         $response = $this->post('/admin/product/categories', $input);
 
-        $category = Category::first();
         $response->assertRedirect('/admin/product/categories');
 
+        $category = ProductCategory::first();
         $this->assertTrue($category->activated);
+        $this->assertEquals('p', $category->for);
         $this->assertEquals('CategoryTitle', $category->title);
         $this->assertEquals('EnglishCategoryTitle', $category->title_en);
         $this->assertEquals('CategoryDescription', $category->description);
@@ -113,7 +114,7 @@ class ProductCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/product/categories', $input);
-        $category = Category::first();
+        $category = ProductCategory::first();
         $response->assertRedirect('/admin/product/categories');
         $this->assertNull($category->photoPath);
     }
@@ -121,7 +122,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_create_2ndTier_category_from_admin()
     {
-        $category = factory(Category::class)->create(['title' => 'categoryTitle', 'level' => 1]);
+        $category = factory(ProductCategory::class)->create(['title' => 'categoryTitle', 'level' => 1]);
         $input = [
             'parent_id' => $category->id,
             'activated' => true,
@@ -134,7 +135,7 @@ class ProductCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/product/categories', $input);
-        $subCategory = Category::where('title', 'subCategoryTitle')->first();
+        $subCategory = ProductCategory::where('title', 'subCategoryTitle')->first();
 
         $response->assertRedirect('/admin/product/categories');
         $this->assertTrue($subCategory->activated);
@@ -159,7 +160,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_create_3rdTier_category_from_admin()
     {
-        $category = factory(Category::class)->create(['title' => 'categoryTitle', 'level' => 1]);
+        $category = factory(ProductCategory::class)->create(['title' => 'categoryTitle', 'level' => 1]);
         $subCategory = $category->childCategories()->create([
             'activated' => true,
             'title' => 'subCategoryTitle',
@@ -179,7 +180,7 @@ class ProductCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/product/categories', $newInput);
-        $subSubCategory = Category::where('title', 'subSubCategoryTitle')->first();
+        $subSubCategory = ProductCategory::where('title', 'subSubCategoryTitle')->first();
 
         $response->assertRedirect('/admin/product/categories');
         $this->assertTrue($subSubCategory->activated);
@@ -200,7 +201,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function when_creating_subTier_category_no_photo_is_created_if_no_newFile_command_is_given()
     {
-        $category = factory(Category::class)->create(['title' => 'categoryTitle']);
+        $category = factory(ProductCategory::class)->create(['title' => 'categoryTitle']);
         $input = [
             'parent_id' => $category->id,
             'activated' => true,
@@ -211,7 +212,7 @@ class ProductCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/product/categories', $input);
-        $subCategory = Category::where('title', 'subCategoryTitle')->first();
+        $subCategory = ProductCategory::where('title', 'subCategoryTitle')->first();
 
         $response->assertRedirect('/admin/product/categories');
         $this->assertNull($subCategory->photoPath);
@@ -220,7 +221,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_visit_category_edit_page()
     {
-        $category = factory(Category::class)->create(['title' => 'ASuperCategoryTitle']);
+        $category = factory(ProductCategory::class)->create(['title' => 'ASuperCategoryTitle']);
 
         $response = $this->get('/admin/product/categories/' . $category->id . '/edit');
 
@@ -236,7 +237,6 @@ class ProductCategoryTest extends TestCase
             'level' => $category->level + 1
         ]);
 
-
         $response = $this->get('/admin/product/categories/' . $subCategory->id . '/edit');
         $response->assertSuccessful()
             ->assertSee('修改分類')
@@ -248,7 +248,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function the_photo_upload_selection_is_shown_when_category_photo_enabled_is_on()
     {
-        $category = factory(Category::class)->create(['title' => 'ASuperCategoryTitle']);
+        $category = factory(ProductCategory::class)->create(['title' => 'ASuperCategoryTitle']);
 
         WebConfig::create(['category_photo_enabled' => true]);
 
@@ -266,7 +266,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_update_category()
     {
-        $category = factory(Category::class)->create(['activated' => true, 'title' => 'CategoryTitle']);
+        $category = factory(ProductCategory::class)->create(['activated' => true, 'title' => 'CategoryTitle']);
 
         $firstUpdatedInput = [
             'activated' => false,
@@ -329,7 +329,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function a_sub_cat_can_update_its_parent_id()
     {
-        $subCategory = factory(Category::class)->create(['parent_id' => 1, 'activated' => true, 'title' => 'CategoryTitle']);
+        $subCategory = factory(ProductCategory::class)->create(['parent_id' => 1, 'activated' => true, 'title' => 'CategoryTitle']);
 
         $firstUpdatedInput = [
             'activated' => false,
@@ -362,7 +362,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_delete_a_category()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
 
         $response = $this->delete('/admin/product/categories/' . $category->id);
 
@@ -373,7 +373,7 @@ class ProductCategoryTest extends TestCase
     /** @test */
     public function can_update_ranking()
     {
-        $categories = factory(Category::class, 3)->create();
+        $categories = factory(ProductCategory::class, 3)->create();
         $rankingInput = [
             'id' => [$categories[0]->id, $categories[1]->id, $categories[2]->id],
             'ranking' => [5, 4, 3]

@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(WebConfigSeeder::class);
         $this->call(BannerSeeder::class);
-        $this->call(CategorySeeder::class);
+        $this->call(ProductCategorySeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(SystemUserSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(NewsCategorySeeder::class);
         $this->call(NewsSeeder::class);
         $this->call(SiteSeeder::class);
     }

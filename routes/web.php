@@ -66,6 +66,10 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('products/{product}/copy', 'ProductsController@copy');
     Route::resource('products', 'ProductsController');
 
+    /***** 產品類別管理 ******/
+    Route::patch('news/categories/ranking', 'NewsCategoriesController@ranking');
+    Route::resource('news/categories', 'NewsCategoriesController');
+    
     /** 最新消息管理*/
     Route::patch('news/ranking', 'NewsController@ranking');
     Route::patch('news/action', 'NewsController@action');

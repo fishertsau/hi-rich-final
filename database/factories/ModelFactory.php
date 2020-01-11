@@ -2,15 +2,16 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\About;
-use App\Models\Contact;
-use App\Models\Site;
 use App\User;
+use App\Models\Site;
 use App\Models\News;
 use App\Models\Photo;
+use App\Models\About;
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\Contact;
 use App\Models\WebConfig;
+use App\Models\Category\NewsCategory;
+use App\Models\Category\ProductCategory;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
@@ -34,7 +35,7 @@ $factory->define(About::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(Category::class, function (Faker\Generator $faker) {
+$factory->define(ProductCategory::class, function (Faker\Generator $faker) {
     return [
         'activated' => true,
         'title' => $faker->name,
@@ -51,7 +52,7 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
         'published' => true,
         'published_in_home' => true,
         'cat_id' => function () {
-            return create(Category::class)->id;
+            return create(ProductCategory::class)->id;
         },
         'body' => $faker->paragraph(2),
     ];
@@ -91,6 +92,16 @@ $factory->define(Contact::class, function () {
     ];
 });
 
+$factory->define(NewsCategory::class, function (Faker\Generator $faker) {
+    return [
+        'activated' => true,
+        'title' => $faker->name,
+        'description' => 'CategoryDescription',
+        'description_en' => 'EnglishCategoryDescription',
+        'level' => 1
+    ];
+});
+
 $factory->define(News::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
@@ -112,7 +123,7 @@ $factory->define(Site::class, function (Faker\Generator $faker) {
         'tel' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
         'ranking' => count(Site::all()) + 1,
-        'published' => true 
+        'published' => true
     ];
 });
 
