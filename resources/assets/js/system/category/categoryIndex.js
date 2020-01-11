@@ -1,7 +1,8 @@
 require('../../bootstrap');
 
 window.Vue = require('vue');
-Vue.component('cat-selector', require('../../components/categorySelector.vue'));
+// todo: remove this
+// Vue.component('cat-selector', require('../../components/categorySelector.vue'));
 
 const app = new Vue({
     el: '#container',

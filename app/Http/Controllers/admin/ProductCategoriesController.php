@@ -25,7 +25,7 @@ class ProductCategoriesController extends Controller
         $nullParentSubCategories = Category::whereLevel(Category::SECOND_LEVEL)->where('parent_id', null)->get();
         $nullParentSubSubCategories = Category::whereLevel(Category::THIRD_LEVEL)->where('parent_id', null)->get();
 
-        return view('system.product.category.index.index',
+        return view('system.product.category.index',
             compact('cats', 'nullParentSubCategories', 'nullParentSubSubCategories'));
     }
 

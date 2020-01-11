@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-5 col-sm-5 col-12">
-                        <div class="section-title">-最新消息-</div>
+                        <div class="section-title">-最新動態-</div>
 
                         {{--todo: 這一段的目的/功能 --}}
                         <div class="mobile-select">

@@ -19,7 +19,6 @@ class ProductCategoryTest extends TestCase
         $this->actingAs(factory(User::class)->make());
     }
 
-
     /** @test */
     public function can_visit_category_list_page_from_admin()
     {
@@ -28,7 +27,6 @@ class ProductCategoryTest extends TestCase
         $response->assertSuccessful()
             ->assertSee('產品分類管理');
     }
-
 
     /** @test */
     public function can_visit_category_create_page()
@@ -68,7 +66,6 @@ class ProductCategoryTest extends TestCase
             ->assertSee('次次分類');
     }
 
-
     /** @test */
     public function can_create_1stTier_category_from_admin()
     {
@@ -103,7 +100,6 @@ class ProductCategoryTest extends TestCase
         $this->assertNull($category->parentCategory);
         $this->assertCount(0, $category->childCategories);
     }
-
 
     /** @test */
     public function when_creating_firstTier_category_no_photo_is_created_if_no_newFile_command_is_given()
@@ -201,7 +197,6 @@ class ProductCategoryTest extends TestCase
         $this->assertEquals($subCategory->id, $subSubCategory->parentCategory->id);
     }
 
-
     /** @test */
     public function when_creating_subTier_category_no_photo_is_created_if_no_newFile_command_is_given()
     {
@@ -249,7 +244,6 @@ class ProductCategoryTest extends TestCase
             ->assertSee($subCategory->title)
             ->assertSee($subCategory->description);
     }
-
 
     /** @test */
     public function the_photo_upload_selection_is_shown_when_category_photo_enabled_is_on()
@@ -332,7 +326,6 @@ class ProductCategoryTest extends TestCase
         $this->assertFileNotExists(public_path('storage\\' . $secondPhotoPath));
     }
 
-
     /** @test */
     public function a_sub_cat_can_update_its_parent_id()
     {
@@ -377,7 +370,6 @@ class ProductCategoryTest extends TestCase
         $this->assertNull($category->fresh());
     }
 
-
     /** @test */
     public function can_update_ranking()
     {
@@ -394,7 +386,6 @@ class ProductCategoryTest extends TestCase
         $this->assertEquals(4, $categories[1]->fresh()->ranking);
         $this->assertEquals(3, $categories[2]->fresh()->ranking);
     }
-
 
     private function clearTestPhotoFiles()
     {

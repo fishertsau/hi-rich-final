@@ -12,8 +12,8 @@
     @foreach($cats->sortBy('ranking') as $cat)
         <tr>
             <td align="left" class="border-downright">
-                @include('system.product.category.index._deleteBtn',['itemId'=>$cat->id])
-                @include('system.product.category.index._rankingInput',['itemId'=>$cat->id,'itemRanking'=>$cat->ranking])
+                @include('system.shared.category.index._deleteBtn',['itemId'=>$cat->id])
+                @include('system.shared.category.index._rankingInput',['itemId'=>$cat->id,'itemRanking'=>$cat->ranking])
                 <a href="/admin/product/categories/{{$cat->id}}/edit">{{$cat->title}}
                     @if(config('app.english_enabled'))
                         | {{$cat->title_en}}

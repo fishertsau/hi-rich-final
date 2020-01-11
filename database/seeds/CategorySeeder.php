@@ -34,7 +34,8 @@ class CategorySeeder extends Seeder
 
         $mainCats = $this->createMainCats();
 
-        if (!config('app.3tier_category_enabled')) {
+        if (!(config('app.3tier_category_enabled')
+            || config('app.2tier_category_enabled'))) {
             return;
         }
 
@@ -43,10 +44,11 @@ class CategorySeeder extends Seeder
 
             for ($i = 0; $i < $subNum; $i++) {
                 $subCat = $this->createChildCategory($cat, $faker);
-
-                $subSubNum = random_int(0, 3);
-                for ($j = 0; $j < $subSubNum; $j++) {
-                    $this->createChildCategory($subCat, $faker);
+                if (config('app.3tier_category_enabled')) {
+                    $subSubNum = random_int(0, 3);
+                    for ($j = 0; $j < $subSubNum; $j++) {
+                        $this->createChildCategory($subCat, $faker);
+                    }
                 }
             }
         });

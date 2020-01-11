@@ -15,7 +15,7 @@
         @if(count($cat->childCategories)===0)
             <tr>
                 <td align="left" class="border-downright">
-                    @include('system.product.category.index._mainCat')
+                    @include('system.shared.category.index._mainCat')
                 </td>
                 <td align="left" class="border-downright"></td>
                 <td align="left" class="border-downright"></td>
@@ -25,15 +25,15 @@
         @if(count($cat->childCategories)===1)
             <tr>
                 <td align="left" class="border-downright">
-                    @include('system.product.category.index._mainCat')
+                    @include('system.shared.category.index._mainCat')
                 </td>
                 @foreach($cat->childCategories->sortBy('ranking') as $subCat)
                     <td align="left" class="border-downright">
-                        @include('system.product.category.index._subCat')
+                        @include('system.shared.category.index._subCat')
                     </td>
                     <td align="left" class="border-downright">
                         @foreach($subCat->childCategories->sortBy('ranking') as $subSubCat)
-                            @include('system.product.category.index._subSubCat')
+                            @include('system.shared.category.index._subSubCat')
                         @endforeach
                     </td>
                 @endforeach
@@ -43,17 +43,17 @@
         @if(count($cat->childCategories)>1)
             <tr>
                 <td align="left" class="border-downright" rowspan="{{count($cat->childCategories)+1}}">
-                    @include('system.product.category.index._mainCat')
+                    @include('system.shared.category.index._mainCat')
                 </td>
             </tr>
             @foreach($cat->childCategories->sortBy('ranking') as $subCat)
                 <tr>
                     <td align="left" class="border-downright">
-                        @include('system.product.category.index._subCat')
+                        @include('system.shared.category.index._subCat')
                     </td>
                     <td align="left" class="border-downright">
                         @foreach($subCat->childCategories->sortBy('ranking') as $subSubCat)
-                            @include('system.product.category.index._subSubCat')
+                            @include('system.shared.category.index._subSubCat')
                         @endforeach
                     </td>
                 </tr>
@@ -67,11 +67,11 @@
             <tr>
                 <td align="center" class="border-downright"><p style="color:red">無大分類</p></td>
                 <td align="left" class="border-downright">
-                    @include('system.product.category.index._subCat')
+                    @include('system.shared.category.index._subCat')
                 </td>
                 <td align="left" class="border-downright">
                     @foreach($subCat->childCategories as $subSubCat)
-                        @include('system.product.category.index._subSubCat')
+                        @include('system.shared.category.index._subSubCat')
                     @endforeach
                 </td>
             </tr>
@@ -89,10 +89,9 @@
                     <p style="color:red">無次分類</p>
                 </td>
                 <td align="left" class="border-downright">
-                    @include('system.product.category.index._subSubCat')
+                    @include('system.shared.category.index._subSubCat')
                 </td>
             </tr>
         @endforeach
     @endif
-
 </table>
