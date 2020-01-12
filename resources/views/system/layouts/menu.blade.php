@@ -45,8 +45,21 @@
             </ul>
         </li>
 
+        {{--相關連結--}}
         <li>
-            <a href="/admin/links">相關連結</a>
+            <a href="#Menu=ChildMenu5"
+               onclick="DoMenu('ChildMenu5')">相關連結 <img src="/system/images/arrow-down.png"></a>
+            <ul id="ChildMenu5" class="collapsed">
+                <li>
+                    <a href="/admin/links/categories">
+                        <img src="/system/images/arrow.png" width="10" height="10" />
+                        分類設定
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/links"><img src="/system/images/arrow.png" width="10" height="10" /> 消息清單</a>
+                </li>
+            </ul>
         </li>
 
         <li><a href="#Menu=ChildMenu3"

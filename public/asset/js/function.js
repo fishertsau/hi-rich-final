@@ -13,6 +13,7 @@ function initTns(){
 }
 var wEl = document.body;
 
+// todo: remove this
 function initTabEvent(){
   const list = document.querySelectorAll('a[tab-title]');
   if(list){

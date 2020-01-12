@@ -14,33 +14,34 @@ const vm = new Vue({
     activeNews: {}
   },
   computed: {},
-  beforeCreate: async () => {
-    const result = await getNewsCategory();
-    vm.cats = [...result.data];
-    vm.activeCat = vm.cats[0] || {};
+  beforeCreate: async function () {
 
-    const result2 = await getPublishedNews();
-    vm.newsList = [...result2.data];
-    vm.activeNewsList = [...vm.newsList];
-    vm.activeNews = vm.newsList[0] || {};
+    const [catResult, newsResult] = await Promise.all([getNewsCategory(), getPublishedNews()]);
+
+    this.cats = [...catResult.data];
+    this.activeCat = vm.cats[0] || {};
+
+    this.newsList = [...newsResult.data];
+    this.activeNewsList = [...vm.newsList];
+    this.activeNews = vm.newsList[0] || {};
   },
   methods: {
-    toggleShowCat: () => {
-      vm.showCat = !vm.showCat;
+    toggleShowCat: function () {
+      this.showCat = !this.showCat;
     },
     isShowCat: (show) => {
       return {
         'is-open': show
       }
     },
-    setActiveCat: (cat) => {
-      vm.activeCat = cat;
-      vm.showCat = false;
+    setActiveCat: function (cat) {
+      this.activeCat = cat;
+      this.showCat = false;
 
-      const localActiveNewsList = vm.newsList
+      const localActiveNewsList = this.newsList
         .filter(n => n.cat_id === cat.id);
 
-      vm.activeNewsList = [...localActiveNewsList];
+      this.activeNewsList = [...localActiveNewsList];
     }
   }
 });

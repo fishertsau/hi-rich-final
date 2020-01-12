@@ -9,7 +9,6 @@
                         <div class="col-lg-4 col-md-5 col-sm-5 col-12">
                             <div class="section-title">-最新動態-</div>
 
-                            {{--todo: 這一段的目的/功能 --}}
                             <div class="mobile-select">
                                 <a class="item-active" @click.prevent="toggleShowCat()">全部連結</a>
                                 <div class="item-list" :class="isShowCat(showCat)">
@@ -21,7 +20,7 @@
                             <div class="news-list scroll-bar">
                                 <!-- 尺寸576以下時 點擊連到news-detail頁面-->
                                 {{--todo: 實作此功能--}}
-                                <a class="item" href="#" v-for="(news,index) in activeNewsList">
+                                <a class="item active" href="#" v-for="(news,index) in activeNewsList">
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
                                     <span class="text-news"></span>

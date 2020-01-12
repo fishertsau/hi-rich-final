@@ -66,7 +66,7 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('products/{product}/copy', 'ProductsController@copy');
     Route::resource('products', 'ProductsController');
 
-    /***** 產品類別管理 ******/
+    /***** 消息類別 ******/
     Route::patch('news/categories/ranking', 'NewsCategoriesController@ranking');
     Route::resource('news/categories', 'NewsCategoriesController');
     
@@ -76,6 +76,15 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('news/{news}/copy', 'NewsController@copy');
     Route::resource('news', 'NewsController');
 
+    /***** 相關連結類別 ******/
+    Route::patch('links/categories/ranking', 'LinksCategoriesController@ranking');
+    Route::resource('links/categories', 'LinksCategoriesController');
+
+    /** 相關連結管理*/
+    Route::patch('links/ranking', 'LinksController@ranking');
+    Route::patch('links/action', 'LinksController@action');
+    Route::resource('links', 'LinksController');
+    
     /** 據點管理*/
     Route::patch('sites/ranking', 'SitesController@ranking');
     Route::resource('sites', 'SitesController');

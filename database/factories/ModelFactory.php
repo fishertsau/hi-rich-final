@@ -2,6 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Models\Category\LinkCategory;
+use App\Models\Link;
 use App\User;
 use App\Models\Site;
 use App\Models\News;
@@ -128,3 +130,20 @@ $factory->define(Site::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(LinkCategory::class, function (Faker\Generator $faker) {
+    return [
+        'activated' => true,
+        'title' => $faker->name,
+        'description' => 'CategoryDescription',
+        'description_en' => 'EnglishCategoryDescription',
+        'level' => 1
+    ];
+});
+
+$factory->define(Link::class, function (Faker\Generator $faker) {
+    return [
+        'cat_id' => $faker->numberBetween(1, 10),
+        'title' => $faker->name,
+        'url' => $faker->domainName
+    ];
+});

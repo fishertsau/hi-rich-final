@@ -16,7 +16,8 @@ class Category extends Model
 
     const CatIndexList = [
         '產品類別' => 'p',
-        '消息類別' => 'n'
+        '消息類別' => 'n',
+        '連結類別' => 'l',
     ];
 
     protected $guarded = [];
