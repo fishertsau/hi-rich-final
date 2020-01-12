@@ -1,5 +1,4 @@
 @inject('carbonPresenter', 'App\Presenter\CarbonPresenter')
-@inject('localePresenter', 'App\Presenter\LocalePresenter')
 
 @extends('system.layouts.master')
 

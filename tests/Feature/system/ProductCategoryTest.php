@@ -84,7 +84,7 @@ class ProductCategoryTest extends TestCase
 
         $response->assertRedirect('/admin/product/categories');
 
-        $category = ProductCategory::first();
+        $category = ProductCategory::firstCat();
         $this->assertTrue($category->activated);
         $this->assertEquals('p', $category->for);
         $this->assertEquals('CategoryTitle', $category->title);
@@ -114,7 +114,7 @@ class ProductCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/product/categories', $input);
-        $category = ProductCategory::first();
+        $category = ProductCategory::firstCat();
         $response->assertRedirect('/admin/product/categories');
         $this->assertNull($category->photoPath);
     }

@@ -25,7 +25,7 @@ class NewsCategoryTest extends TestCase
         $response = $this->get('/admin/news/categories');
 
         $response->assertSuccessful()
-            ->assertSee('產品分類管理');
+            ->assertSee('消息分類');
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class NewsCategoryTest extends TestCase
 
         $response->assertRedirect('/admin/news/categories');
         
-        $category = NewsCategory::first();
+        $category = NewsCategory::firstCat();
         $this->assertTrue($category->activated);
         $this->assertEquals('n', $category->for);
         $this->assertEquals('CategoryTitle', $category->title);
@@ -85,7 +85,7 @@ class NewsCategoryTest extends TestCase
         ];
 
         $response = $this->post('/admin/news/categories', $input);
-        $category = NewsCategory::first();
+        $category = NewsCategory::firstCat();
         $response->assertRedirect('/admin/news/categories');
         $this->assertNull($category->photoPath);
     }

@@ -29,6 +29,7 @@
             <input type="text" v-model="formInput.parent_id" name="parent_id" hidden>
             @if($selectionLevel>0)
                 <cat-selector
+                        applied_model = "{{$appliedModel}}"
                         given_cat_id="{{$givenCatId}}"
                         selection_depth="{{$selectionLevel}}"
                         @catid-changed="handleCatIdChanged">
@@ -40,9 +41,7 @@
     </tr>
 
     <tr>
-        <td align="right" bgcolor="#ECECEC" class="border-down">
-            {{$localePresenter->ChinesePrefix()}}名稱：
-        </td>
+        <td align="right" bgcolor="#ECECEC" class="border-down"> 名稱： </td>
         <td class="border-down">
             <input name="title" type="text" size="100%"
                    v-model="formInput.title" />
@@ -51,7 +50,7 @@
     </tr>
 
     <tr>
-        <td align="right" valign="top" bgcolor="#ECECEC">{{$localePresenter->ChinesePrefix()}}描述：</td>
+        <td align="right" valign="top" bgcolor="#ECECEC">描述：</td>
         <td>
             <textarea name="description"
                       cols="100%" rows="5"

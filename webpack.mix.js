@@ -18,3 +18,4 @@ mix.js('resources/assets/js/system/about/about.js', 'public/js/system/about');
 
 // 前台 
 mix.js('resources/assets/js/app/contact/index.js', 'public/js/app/contact');
+mix.js('resources/assets/js/app/news/index.js', 'public/js/app/news');

@@ -23,6 +23,9 @@ input/props:
      - the calling element should have a variable "clearSetting"
      - send the "clear_setting=true" from the calling party, it can work
 
+  - applied_model
+     - 指定類別的所屬model
+     
 events
   - catid-changed
        . payload: (int) selected cat id
@@ -61,7 +64,11 @@ events
 <script>
     export default {
         props: {
-            given_cat_id: {
+          applied_model: {
+            type: [String],
+            required: true 
+          },
+          given_cat_id: {
                 type: [String, Number],
                 required: false
             },
@@ -164,7 +171,7 @@ events
                             this.selectedMain = this.givenMainCat = this.givenCat;
                         }
                         if ((this.givenCat.level === 2) || (this.givenCat.level === '2')) {
-                            let tempMainCat = axios.get('/api/categories/parent/' + this.givenCatId)
+                            let tempMainCat = axios.get(`/api/categories/${this.givenCatId}/parent`)
                                 .then(response => {
                                     return response.data;
                                 });
@@ -177,14 +184,14 @@ events
 
                         if ((this.givenCat.level === 3) || (this.givenCat.level === '3')) {
                             let tempSubCat =
-                                axios.get('/api/categories/parent/' + this.givenCatId)
+                                axios.get(`/api/categories/${this.givenCatId}/parent`)
                                     .then(response => {
                                         return response.data;
                                     });
 
                             tempSubCat.then(subCat => {
                                 let tempMainCat =
-                                    axios.get('/api/categories/parent/' + subCat.id)
+                                    axios.get(`/api/categories/${subCat.id}/parent`)
                                         .then(response => {
                                             return response.data;
                                         });
@@ -209,7 +216,7 @@ events
             initialize() {
                 this.givenCatId = this.given_cat_id;
                 this.selectionDepth = this.selection_depth;
-                axios.get('/api/categories/main')
+                axios.get(`/api/categories/main/${this.applied_model}`)
                     .then(response => {
                         this.mainCat = response.data;
                     })
@@ -232,7 +239,7 @@ events
                 if (this.selectionDepth > 1
                     || this.selectionDepth === 'any'
                     || this.selectionDepth === 'leafNode') {
-                    axios.get('/api/categories/child/' + this.selectedMain.id)
+                    axios.get(`/api/categories/${this.selectedMain.id}/children`)
                         .then(response => {
                             this.subCat = response.data;
 
@@ -254,7 +261,7 @@ events
                 if (this.selectionDepth > 2
                     || this.selectionDepth === 'any'
                     || this.selectionDepth === 'leafNode') {
-                    axios.get('/api/categories/child/' + this.selectedSub.id)
+                    axios.get(`/api/categories/${this.selectedSub.id}/children`)
                         .then(response => {
                             this.subSubCat = response.data;
                             if (this.givenSubSubCat) {

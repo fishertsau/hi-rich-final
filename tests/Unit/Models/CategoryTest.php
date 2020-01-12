@@ -8,7 +8,7 @@ use App\Models\Category\NewsCategory;
 use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ProductCategoryTest extends TestCase
+class CategoryTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -121,5 +121,27 @@ class ProductCategoryTest extends TestCase
         $this->assertContains($catA->id, $catIds);
         $this->assertContains($catB->id, $catIds);
         $this->assertNotContains($catC->id, $catIds);
+    }
+
+    /** @test */
+    public function 可以抓到應用項目的第一個類別()
+    {
+        create(NewsCategory::class);
+        create(ProductCategory::class);
+
+        $cat = ProductCategory::firstCat();
+
+        $this->assertEquals(2, $cat->id);
+        $this->assertEquals('p', $cat->getCatIndex());
+
+        $cat = ProductCategory::first();
+        $this->assertNull($cat);
+    }
+
+    /** @test */
+    public function 使用原本_first_方法會抓到空值()
+    {
+        $cat = ProductCategory::first();
+        $this->assertNull($cat);
     }
 }

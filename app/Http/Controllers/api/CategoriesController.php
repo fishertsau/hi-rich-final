@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App;
+use Exception;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
@@ -19,9 +20,13 @@ class CategoriesController extends Controller
         $this->catRepo = App::make(CategoryRepository::class);
     }
 
-    public function main()
+    public function main($appliedModel)
     {
-        return $this->catRepo->main();
+        try {
+            return $this->catRepo->main($appliedModel);
+        } catch (Exception $e) {
+            return response('No correct applied model for category specified.', 404);
+        }
     }
 
     public function child($id)

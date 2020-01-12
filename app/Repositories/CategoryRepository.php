@@ -4,12 +4,22 @@ namespace App\Repositories;
 
 use App;
 use App\Models\Category;
+use RuntimeException;
 
 class CategoryRepository
 {
-    public function main()
+    private $categoryList = [
+        'product' => Category\ProductCategory::class,
+        'news' => Category\NewsCategory::class
+    ];
+
+    public function main($appliedModel)
     {
-        return Category::whereLevel(1)->where('parent_id', null)->get();
+        if (!isset($this->categoryList[$appliedModel])) {
+            throw new RuntimeException('error');
+        }
+
+        return $this->categoryList[$appliedModel]::main()->get();
     }
 
     public function child($id)
@@ -38,14 +48,12 @@ class CategoryRepository
     }
 
     //TODO: Implement this : cover  this with test
-    public function hasCategory() : bool
+    public function hasCategory(): bool
     {
-        if (App::getLocale()=='en'){
-            return Category::where('title_en','<>','')->exists();
+        if (App::getLocale() == 'en') {
+            return Category::where('title_en', '<>', '')->exists();
         }
 
-        return Category::where('title','<>','')->exists();
+        return Category::where('title', '<>', '')->exists();
     }
-
-
 }

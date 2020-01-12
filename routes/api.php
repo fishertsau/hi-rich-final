@@ -17,10 +17,14 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::get('/categories/main', 'api\CategoriesController@main');
+Route::get('/categories/main/{appliedModel}', 'api\CategoriesController@main');
 Route::get('/categories/{id}', 'api\CategoriesController@category');
-Route::get('/categories/child/{id}', 'api\CategoriesController@child');
-Route::get('/categories/parent/{id}', 'api\CategoriesController@parent');
+Route::get('/categories/{id}/children', 'api\CategoriesController@child');
+Route::get('/categories/{id}/parent', 'api\CategoriesController@parent');
 
+// 公司清單
 Route::get('/sites/list', 'api\SitesController@index');
 Route::get('/sites/list/published', 'api\SitesController@publishedIndex');
+
+// 最新消息清單
+Route::get('/news/list', 'api\NewsController@index');

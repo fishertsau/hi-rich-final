@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category\NewsCategory;
 use App\User;
 use Carbon\Carbon;
 use Tests\TestCase;
@@ -32,29 +33,34 @@ class NewsTest extends TestCase
     /** @test */
     public function can_visit_create_page()
     {
+        factory(NewsCategory::class)->create(['title' => 'newsCatTitle']);
         $response = $this->get('/admin/news/create');
 
         $response->assertSuccessful()
-            ->assertSee('新增消息');
+            ->assertSee('新增消息')
+            ->assertSee('newsCatTitle');
     }
-
 
     /** @test */
     public function can_visit_edit_page()
     {
+        factory(NewsCategory::class)->create(['title' => 'newsCatTitle']);
         $news = factory(News::class)->create();
+
+
         $response = $this->get('/admin/news/' . $news->id . '/edit');
 
         $response->assertSuccessful()
             ->assertSee('修改消息')
-            ->assertSee($news->title);
+            ->assertSee($news->title)
+            ->assertSee('newsCatTitle');
     }
-
 
     /** @test */
     public function can_create_a_new_news()
     {
         $newNewsInfo = [
+            'cat_id' => 1,
             'title' => 'ANewNews',
             'title_en' => 'ANewNewsEnglish',
             'published' => true,
@@ -68,6 +74,7 @@ class NewsTest extends TestCase
 
         $news = News::first();
         $response->assertRedirect('admin/news');
+        $this->assertEquals(1, $news->cat_id);
         $this->assertEquals('ANewNews', $news->title);
         $this->assertEquals('ANewNewsEnglish', $news->title_en);
         $this->assertEquals('SomeContent Body', $news->body);
@@ -85,6 +92,7 @@ class NewsTest extends TestCase
     {
         $news = factory(News::class)->create();
         $newNewsInput = [
+            'cat_id' => 500,
             'title' => 'NewTitle',
             'title_en' => 'ANewNewsEnglish',
             'published' => false,
@@ -98,6 +106,7 @@ class NewsTest extends TestCase
 
         $news = $news->fresh();
         $response->assertRedirect('admin/news');
+        $this->assertEquals(500, $news->cat_id);
         $this->assertEquals('NewTitle', $news->title);
         $this->assertEquals('ANewNewsEnglish', $news->title_en);
         $this->assertEquals('NewBody', $news->body);
@@ -118,7 +127,7 @@ class NewsTest extends TestCase
 
         $response->assertSuccessful()
             ->assertSee('複製消息')
-            ->assertSee($news->title.'(複製)');
+            ->assertSee($news->title . '(複製)');
     }
 
     /** @test */
@@ -220,8 +229,6 @@ class NewsTest extends TestCase
     }
 
 
-
-
     /** @test */
     public function published_is_required_to_create_an_new_news()
     {
@@ -251,7 +258,6 @@ class NewsTest extends TestCase
 
         $this->assertValidationError($response, 'published');
     }
-
 
 
     /** @test */

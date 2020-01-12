@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\News;
 use App\Http\Controllers\Controller;
+use App\Models\Category\NewsCategory;
 
 class NewsController extends Controller
 {
@@ -16,12 +17,14 @@ class NewsController extends Controller
     public function edit($id)
     {
         $news = News::findOrFail($id);
-        return view('system.news.edit', compact('news'));
+        $cats = NewsCategory::main()->get();
+        return view('system.news.edit', compact('news', 'cats'));
     }
 
     public function create()
     {
-        return view('system.news.edit');
+        $cats = NewsCategory::main()->get();
+        return view('system.news.edit', compact('cats'));
     }
 
     public function store()
@@ -38,31 +41,15 @@ class NewsController extends Controller
         return redirect('admin/news');
     }
 
-    private function validateInput()
-    {
-        return request()->validate([
-            'title' => '',
-            'title_en' => '',
-            'body' => '',
-            'body_en' => '',
-            'published' => 'required|boolean',
-            'published_since' => '',
-            'published_until' => '',
-        ]);
-    }
-
     public function copy(News $news)
     {
         $news->title .= '(複製)';
         $copyNews = true;
 
-        if (config('app.english_enabled')) {
-            $news->title_en .= '(複製)';
-        }
-
-        return view('system.news.edit', compact('news', 'copyNews'));
+        $cats = NewsCategory::main()->get();
+        
+        return view('system.news.edit', compact('news', 'copyNews','cats'));
     }
-
 
     public function ranking()
     {
@@ -107,4 +94,19 @@ class NewsController extends Controller
 
         return response(200);
     }
+    
+    private function validateInput()
+    {
+        return request()->validate([
+            'cat_id' =>  'required',
+            'title' => 'required',
+            'title_en' => '',
+            'body' => '',
+            'body_en' => '',
+            'published' => 'required|boolean',
+            'published_since' => '',
+            'published_until' => '',
+        ]);
+    }
+
 }

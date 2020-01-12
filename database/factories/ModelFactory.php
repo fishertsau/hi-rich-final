@@ -104,6 +104,7 @@ $factory->define(NewsCategory::class, function (Faker\Generator $faker) {
 
 $factory->define(News::class, function (Faker\Generator $faker) {
     return [
+        'cat_id' => $faker->numberBetween(1, count(NewsCategory::main()->get())),
         'title' => $faker->name,
         'body' => "<p>{$faker->paragraph}</p>",
         'published_until' => $faker->dateTime(),

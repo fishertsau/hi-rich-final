@@ -8,5 +8,8 @@
 ])
 
 @section('pageJS')
+    <script>
+      const appliedModel = 'product';
+    </script>
     <script type="text/javascript" src="{{ asset('/js/system/category/categoryIndex.js') }}"></script>
 @endsection

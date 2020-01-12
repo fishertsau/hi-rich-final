@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\Product;
-use App\Models\Category;
 use App\Filterable\ProductFilter;
+use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProductFilterTest extends TestCase
@@ -57,7 +57,7 @@ class ProductFilterTest extends TestCase
     /** @test */
     public function products_could_be_queried_with_cat_id()
     {
-        $category = factory(Category::class)->create();
+        $category = factory(ProductCategory::class)->create();
         $subCategoryA = $category->childCategories()->create(['activated' => true, 'title' => 'subCategoryTitle',
             'description' => 'subCategoryDescription', 'level' => $category->level + 1
         ]);

@@ -49,6 +49,14 @@ export const deleteItem = (api) => {
   return axios.post(api, {_method: 'DELETE'});
 }
 
+export const getNewsCategory = () => {
+ return getData('/api/categories/main/news')    
+}
+
+export const getPublishedNews = () => {
+  return getData('/api/news/list')
+}
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -6,7 +6,7 @@
         <td width="150" align="right" bgcolor="#DEDEDE">顯示：</td>
         <td>
             <input type="radio" name="published" value="1"
-            @if(!isset($news))
+                   @if(!isset($news))
                    checked
             @else
                 {{$news->published?'checked':''}}
@@ -56,17 +56,29 @@
         </td>
     </tr>
     <tr>
-        <td align="right" bgcolor="#DEDEDE">標題{{$localePresenter->ChinesePostfix()}}：</td>
-        <td><input name="title"
+        <td align="right" bgcolor="#DEDEDE">類別：</td>
+        <td>
+            <select name="cat_id">
+                @foreach($cats as $cat)
+                    <option value="{{$cat->id}}"
+                            {{(isset($news) && $news->cat_id === $cat->id)?'selected':''}}>
+                        {{$cat->title}}</option>
+                @endforeach
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" bgcolor="#DEDEDE">標題：</td>
+        <td>
+            <input name="title"
                    type="text" size="50"
                    @if(isset($news->title))
                    value="{{$news->title}}"
-                    @endif
-
-            /></td>
+                    @endif/>
+        </td>
     </tr>
     <tr>
-        <td align="right" valign="top" bgcolor="#DEDEDE">內文{{$localePresenter->ChinesePostfix()}}：</td>
+        <td align="right" valign="top" bgcolor="#DEDEDE">內文：</td>
         <td>
             <textarea name="body"
                       rows="4" cols="50"
@@ -105,16 +117,15 @@
         </tr>
     @endif
 </table>
-<br/>
+<br />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">
             <span class="border-right">
-              <input type="submit" name="選擇檔案4" id="選擇檔案4" value="確定修改"/>
-              <img src="/system/images/empty.gif" width="50" height="10"/>
+              <input type="submit" name="選擇檔案4" id="選擇檔案4" value="確定修改" />
+              <img src="/system/images/empty.gif" width="50" height="10" />
                 @include('system.partials.gobackBtn')
             </span>
         </td>
     </tr>
 </table>
-

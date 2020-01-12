@@ -6,12 +6,14 @@ use App\Events\CategoryCreating;
 use App\Events\CategoryDeleting;
 use Illuminate\Database\Eloquent\Model;
 
-Abstract class Category extends Model
+// todo: should become abstract or not???
+
+class Category extends Model
 {
     const FIRST_LEVEL = 1;
     const SECOND_LEVEL = 2;
     const THIRD_LEVEL = 3;
-    
+
     const CatIndexList = [
         '產品類別' => 'p',
         '消息類別' => 'n'
@@ -28,7 +30,9 @@ Abstract class Category extends Model
         'creating' => CategoryCreating::class,
     ];
 
-    abstract public static function getCatIndex();
+    // todo: restore or remove ???
+//    abstract public static function getCatIndex();
+    public static function getCatIndex(){}
 
     public function parentCategory()
     {
@@ -39,7 +43,6 @@ Abstract class Category extends Model
     {
         return $this->hasMany($this, 'parent_id');
     }
-
 
     public function getDescendantsAttribute()
     {
@@ -78,13 +81,28 @@ Abstract class Category extends Model
         return $title;
     }
 
+    public function scopeFirstCat($query)
+    {
+        return $query
+            ->where('for', $this->getCatIndex())
+            ->first();
+    }
+
+    /**
+     * 讓Category::first()失效 
+     */
+    public static function first()
+    {
+        return null;
+    }
+
     public function scopeMain($query)
     {
         return $query
-            ->where('for', $this->getCatIndex()) 
+            ->where('for', $this->getCatIndex())
             ->where('level', 1);
     }
-    
+
     public function scopeForApplyModel($query)
     {
         return $query->where('for', $this->getCatIndex());
