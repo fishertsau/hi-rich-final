@@ -49,12 +49,22 @@ export const deleteItem = (api) => {
   return axios.post(api, {_method: 'DELETE'});
 }
 
+// 最新消息
 export const getNewsCategory = () => {
  return getData('/api/categories/main/news')    
 }
 
 export const getPublishedNews = () => {
   return getData('/api/news/list')
+}
+
+// 相關連結
+export const getLinkCategory = () => {
+  return getData('/api/categories/main/link')
+}
+
+export const getPublishedLinks = () => {
+  return getData('/api/links/list')
 }
 
 /**

@@ -10,7 +10,7 @@ class LinksController extends Controller
 {
     public function index()
     {
-        $links = Link::latest()->paginate(20);
+        $links = Link::latest()->with('category')->paginate(15);
         return view('system.links.index', compact('links'));
     }
 

@@ -2,8 +2,7 @@
 
 @section('content')
     <div id="container">
-        <div id="site"><a href="/admin">首頁</a>>相關連結管理</div>
-        <img src="/system/images/icon_arrowdown.gif" width="15" height="19" />
+        <div id="site"><a href="/admin">首頁</a>>相關連結清單</div>
         <a href="/admin/links/create"><img src="/system/images/new.gif" width="75" height="19" /></a><br />
         <img src="/system/images/empty.gif" width="10" height="10" />
 
@@ -11,6 +10,7 @@
             <tr>
                 <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">顯示</td>
+                <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">標題</td>
                 <td align="center" bgcolor="#DEDEDE">連結</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
@@ -29,12 +29,15 @@
                                  height="11" />
                         @endif
                     </td>
+                    <td align="center" bgcolor="#ECECEC" class="border-sdown">
+                        {{$link->category->title}}
+                    </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown"><a
                                 href="/admin/links/{{$link->id}}/edit"> {{$link->title}}
                         </a>
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
-                        {{$link->title}}
+                        {{$link->url}}
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         {{$link->created_at}}
@@ -47,7 +50,7 @@
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         <button type='submit'
                                 style="border:none;background:transparent;cursor: pointer"
-                                @click="deleteNews({{$link->id}})">
+                                @click="deleteLink({{$link->id}})">
                             <img src="/system/images/bt-delete.png"
                                  width="23" height="23" />
                         </button>
@@ -59,14 +62,7 @@
         <img src="/system/images/empty.gif" width="10" height="10" /><br />
         <table width="99%" border="0" cellpadding="0" cellspacing="0">
             <tr>
-                <td align="left">功能：
-                    <select id="action">
-                        <option value="noAction" selected="selected">請選擇</option>
-                        <option value="setToShow">顯示</option>
-                        <option value="setToNoShow">取消顯示</option>
-                        <option value="delete">刪除資料</option>
-                    </select>
-                    <input type="submit" @click="doAction" value="確定" />
+                <td align="left">
                 </td>
                 <td align="right">
                     {{ $links->links('vendor.pagination.system') }}
@@ -91,6 +87,5 @@
 
 
 @section('pageJS')
-    {{--todo: create this --}}
     <script type="text/javascript" src="{{ asset('/js/system/links/index.js') }}"></script>
 @endsection

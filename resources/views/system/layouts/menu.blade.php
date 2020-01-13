@@ -57,7 +57,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/links"><img src="/system/images/arrow.png" width="10" height="10" /> 消息清單</a>
+                    <a href="/admin/links"><img src="/system/images/arrow.png" width="10" height="10" />
+                       連結清單 
+                    </a>
                 </li>
             </ul>
         </li>

@@ -28,3 +28,6 @@ Route::get('/sites/list/published', 'api\SitesController@publishedIndex');
 
 // 最新消息清單
 Route::get('/news/list', 'api\NewsController@index');
+
+// 最新消息清單
+Route::get('/links/list', 'api\LinksController@index');

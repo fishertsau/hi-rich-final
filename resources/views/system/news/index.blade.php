@@ -112,5 +112,5 @@
 
 
 @section('pageJS')
-    <script type="text/javascript" src="{{ asset('/js/system/news/newsIndex.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/system/news/index.js') }}"></script>
 @endsection

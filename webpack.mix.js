@@ -12,6 +12,8 @@ mix.js('resources/assets/js/system/news/newsIndex.js', 'public/js/system/news');
 
 mix.js('resources/assets/js/system/sites/sitesIndex.js', 'public/js/system/sites');
 
+mix.js('resources/assets/js/system/links/index.js', 'public/js/system/links');
+
 mix.js('resources/assets/js/system/banner/banner.js', 'public/js/system/banner');
 mix.js('resources/assets/js/system/about/about.js', 'public/js/system/about');
 
@@ -19,3 +21,4 @@ mix.js('resources/assets/js/system/about/about.js', 'public/js/system/about');
 // 前台 
 mix.js('resources/assets/js/app/contact/index.js', 'public/js/app/contact');
 mix.js('resources/assets/js/app/news/index.js', 'public/js/app/news');
+mix.js('resources/assets/js/app/links/index.js', 'public/js/app/links');

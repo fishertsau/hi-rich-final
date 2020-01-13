@@ -10,7 +10,8 @@ class CategoryRepository
 {
     private $categoryList = [
         'product' => Category\ProductCategory::class,
-        'news' => Category\NewsCategory::class
+        'news' => Category\NewsCategory::class,
+        'link' => Category\LinkCategory::class
     ];
 
     public function main($appliedModel)
