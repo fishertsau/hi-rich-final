@@ -2,7 +2,6 @@
 
 @section('content')
     <div id="vueContainer">
-
         <div class="page-bg">
             <section class="links-box">
                 <div class="container">
@@ -41,7 +40,7 @@
                                 <div class="row">
                                     <div v-for="link in activeLinkList"
                                          class="col-md-4 col-sm-6 col-xs-12">
-                                        <a href="https://www.1111.com.tw/" class="links-item" target="_blank">
+                                        <a :href="link.url" class="links-item" target="_blank">
                                             <img src="/asset/images/links/1111.jpg">
                                             <span class="text-links-name">@{{ link.title }}</span>
                                         </a>

@@ -22,14 +22,6 @@
         </td>
     </tr>
     <tr>
-        <td align="right" bgcolor="#DEDEDE">建檔日期：</td>
-        <td>
-            @if(isset($link->created_at))
-                {{$link->created_at}}
-            @endif
-        </td>
-    </tr>
-    <tr>
         <td align="right" bgcolor="#DEDEDE">類別：</td>
         <td>
             <select name="cat_id">
@@ -51,7 +43,28 @@
                     @endif/>
         </td>
     </tr>
+    <tr>
+        <td align="right" bgcolor="#DEDEDE">連結網址：</td>
+        <td>
+            <input name="url"
+                   type="text" size="100"
+                   @if(isset($link->url))
+                   value="{{$link->url}}"
+                    @endif/>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" bgcolor="#DEDEDE">建檔日期：</td>
+        <td>
+            @if(isset($link->created_at))
+                {{$link->created_at}}
+            @endif
+        </td>
+    </tr>
 </table>
+
+{{--todo: 圖片存檔--}}
+
 <br />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>

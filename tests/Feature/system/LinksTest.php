@@ -84,6 +84,7 @@ class LinksTest extends TestCase
             'cat_id' => 500,
             'title' => 'NewTitle',
             'published' => false,
+            'url' => 'http://a.b.com'
         ];
 
         $response = $this->patch('/admin/links/' . $link->id, $newLinkInput);
@@ -93,7 +94,7 @@ class LinksTest extends TestCase
         $this->assertEquals(500, $links->cat_id);
         $this->assertEquals('NewTitle', $links->title);
         $this->assertEquals(false, $links->published);
-        $this->assertEquals(0, $links->rank);
+        $this->assertEquals('http://a.b.com', $links->url);
     }
 
     /** @test */
