@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\Link;
 use App\Models\Category\LinkCategory;
@@ -16,6 +17,7 @@ class LinksTest extends TestCase
     {
         parent::setUp();
         $this->actingAs(factory(User::class)->make());
+        factory(LinkCategory::class)->create(['title' => 'linksCatTitle']);
     }
 
     /** @test */
@@ -32,7 +34,6 @@ class LinksTest extends TestCase
     /** @test */
     public function can_visit_create_page()
     {
-        factory(LinkCategory::class)->create(['title' => 'linksCatTitle']);
         $response = $this->get('/admin/links/create');
 
         $response->assertSuccessful()
@@ -43,9 +44,7 @@ class LinksTest extends TestCase
     /** @test */
     public function can_visit_edit_page()
     {
-        factory(LinkCategory::class)->create(['title' => 'linksCatTitle']);
         $link = factory(Link::class)->create();
-
 
         $response = $this->get('/admin/links/' . $link->id . '/edit');
 
@@ -62,19 +61,41 @@ class LinksTest extends TestCase
             'cat_id' => 1,
             'title' => 'ANewLink',
             'published' => true,
-            'url' =>  'www.some_domain.com'
+            'url' => 'www.some_domain.com',
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo.jpg'),
         ];
 
         $response = $this->post('admin/links', $newLinkInfo);
 
-        $links = Link::first();
+        $link = Link::first();
         $response->assertRedirect('admin/links');
-        $this->assertEquals(1, $links->cat_id);
-        $this->assertEquals('ANewLink', $links->title);
-        $this->assertEquals('www.some_domain.com', $links->url);
-        $this->assertTrue($links->published);
+        $this->assertEquals(1, $link->cat_id);
+        $this->assertEquals('ANewLink', $link->title);
+        $this->assertEquals('www.some_domain.com', $link->url);
+        $this->assertTrue($link->published);
+        $this->assertNotNull($link->photoPath);
+        $this->assertFileExists(public_path('storage/' . $link->photoPath));
     }
 
+    /** @test */
+    public function no_photo_file_is_created_if_no_newFile_command_given()
+    {
+        $newLinkInfo = [
+            'cat_id' => 1,
+            'title' => 'ANewLink',
+            'published' => true,
+            'url' => 'www.some_domain.com',
+            'photoCtrl' => '',
+            'photo' => UploadedFile::fake()->image('photo.jpg'),
+        ];
+
+        $response = $this->post('admin/links', $newLinkInfo);
+
+        $link = Link::first();
+        $response->assertRedirect('admin/links');
+        $this->assertNull($link->photoPath);
+    }
 
     /** @test */
     public function can_update_an_existing_link()
@@ -84,17 +105,57 @@ class LinksTest extends TestCase
             'cat_id' => 500,
             'title' => 'NewTitle',
             'published' => false,
-            'url' => 'http://a.b.com'
+            'url' => 'http://a.b.com',
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo1.jpg'),
         ];
 
         $response = $this->patch('/admin/links/' . $link->id, $newLinkInput);
 
-        $links = $link->fresh();
+        $link = $link->fresh();
         $response->assertRedirect('admin/links');
-        $this->assertEquals(500, $links->cat_id);
-        $this->assertEquals('NewTitle', $links->title);
-        $this->assertEquals(false, $links->published);
-        $this->assertEquals('http://a.b.com', $links->url);
+        $this->assertEquals(500, $link->cat_id);
+        $this->assertEquals('NewTitle', $link->title);
+        $this->assertEquals(false, $link->published);
+        $this->assertEquals('http://a.b.com', $link->url);
+        $this->assertNotNull($link->photoPath);
+        $this->assertFileExists(public_path('storage/' . $link->photoPath));
+
+        //update again with a new photo
+        $firstPhotoPath = $link->photoPath;
+        $newLinkInput = [
+            'cat_id' => 500,
+            'title' => 'NewTitle',
+            'published' => false,
+            'url' => 'http://a.b.com',
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo2.jpg'),
+        ];
+
+        $response = $this->patch('/admin/links/' . $link->id, $newLinkInput);
+
+        $link = $link->fresh();
+        $response->assertRedirect('admin/links');
+        $this->assertNotNull($link->photoPath);
+        $this->assertFileExists(public_path('storage/' . $link->photoPath));
+        $this->assertFileNotExists(public_path('storage/' . $firstPhotoPath));
+
+        //update again to delete photo
+        $secondPhotoPath = $link->photoPath;
+        $newLinkInput = [
+            'cat_id' => 500,
+            'title' => 'NewTitle',
+            'published' => false,
+            'url' => 'http://a.b.com',
+            'photoCtrl' => 'deleteFile',
+            'photo' => UploadedFile::fake()->image('photo3.jpg'),
+        ];
+        $response = $this->patch('/admin/links/' . $link->id, $newLinkInput);
+        
+        $link = $link->fresh();
+        $response->assertRedirect('admin/links');
+        $this->assertNull($link->photoPath);
+        $this->assertFileNotExists(public_path('storage/' . $secondPhotoPath));
     }
 
     /** @test */
@@ -129,7 +190,7 @@ class LinksTest extends TestCase
         $response->assertRedirect('/admin/links');
         $this->assertNull($link->fresh());
     }
-    
+
     /** @test */
     public function can_set_published_for_many_links_at_one_time()
     {
@@ -206,7 +267,6 @@ class LinksTest extends TestCase
 
         $this->assertValidationError($response, 'published');
     }
-
 
     /** @test */
     public function published_is_required_to_update_a_link()

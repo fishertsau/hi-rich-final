@@ -53,6 +53,40 @@
                     @endif/>
         </td>
     </tr>
+
+    <tr>
+        <td align="right" bgcolor="#ECECEC" class="border-sdown">主圖：</td>
+        <td bgcolor="#FFFFFF" class="border-sdown">
+
+            @if(isset($link))
+                <input type="radio" name="photoCtrl"
+                       value="originalFile"
+                       v-model="formInput.photoCtrl"
+                />
+                維持原圖：
+                @if(isset($link->photoPath) && ($link->photoPath<>''))
+                    <img src="/storage/{{$link->photoPath}}" width="400" height="300"
+                         align="absmiddle" />
+                @endif
+                <br />
+                <input type="radio" name="photoCtrl" value="deleteFile"
+                       v-model="formInput.photoCtrl" />
+                刪除圖檔<br />
+            @endif
+
+            <input type="radio" name="photoCtrl" value="newFile"
+                   v-model="formInput.photoCtrl"
+            />
+            上傳檔案：
+            <input type="file" name="photo"
+                   @change="enablePhotoCtrl" />
+            <span>（圖片尺寸：{{config('app.product_photo_size_note')}}　解析度72dpi）</span>
+            <p style="color:red"
+               v-show="viewCtrl.showSelectPhotoWarning"
+               v-cloak>請選擇檔案</p>
+        </td>
+    </tr>
+
     <tr>
         <td align="right" bgcolor="#DEDEDE">建檔日期：</td>
         <td>

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category\NewsCategory;
 use App\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\News;
+use App\Models\Category\NewsCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class NewsTest extends TestCase

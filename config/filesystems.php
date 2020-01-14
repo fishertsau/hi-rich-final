@@ -4,7 +4,8 @@ return [
     'app' => [
         'public_storage_root' => 'storage',
         'image_baseDir' => 'images',
-        'origin_products_image_baseDir' => 'asset/images/products'
+        'origin_products_image_baseDir' => 'asset/images/products',
+        'origin_links_image_baseDir' => 'asset/images/links'
     ],
     /*
     |--------------------------------------------------------------------------

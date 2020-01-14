@@ -37,8 +37,8 @@
             <cat-selector
                     given_cat_id="{{isset($product)?$product->cat_id:(isset($copyProduct)?$copyProduct->cat_id:'')}}"
                     @catid-changed="handleCatIdChanged"
-                    selection_depth='leafNode'
-            >
+                    selection_depth='2'
+                    applied_model="product">
             </cat-selector>
         </td>
     </tr>
@@ -71,12 +71,12 @@
                 維持原圖：
                 @if(isset($product->photoPath) && ($product->photoPath<>''))
                     <img src="/storage/{{$product->photoPath}}" width="400" height="300"
-                         align="absmiddle"/>
+                         align="absmiddle" />
                 @endif
-                <br/>
+                <br />
                 <input type="radio" name="photoCtrl" value="deleteFile"
-                       v-model="formInput.photoCtrl"/>
-                刪除圖檔：xxxxx.jpg<br/>
+                       v-model="formInput.photoCtrl" />
+                刪除圖檔<br />
             @endif
 
             <input type="radio" name="photoCtrl" value="newFile"
@@ -84,13 +84,14 @@
             />
             上傳檔案：
             <input type="file" name="photo"
-                   @change="enablePhotoCtrl"/>
+                   @change="enablePhotoCtrl" />
             <span>（圖片尺寸：{{config('app.product_photo_size_note')}}　解析度72dpi）</span>
             <p style="color:red"
                v-show="viewCtrl.showSelectPhotoWarning"
                v-cloak>請選擇檔案</p>
         </td>
     </tr>
+    
     <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown" style="vertical-align: top; padding-top: 15px">
             <p>產品相關圖：</p>
@@ -120,8 +121,8 @@
                         <br>
                     </td>
                     <td style="border:1px solid black">
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <span v-for="productPhoto in photos"> &nbsp;
                             <button style="color:red"
                                     @click.prevent="lessNewPhotos(productPhoto)">刪除</button>
@@ -131,7 +132,7 @@
                             上傳檔案：<input type="file"
                                         name="photos[]"
                                         value="請選擇檔案"
-                                        class="photos"/>
+                                        class="photos" />
                             <hr>
                         </span>
                     </td>
@@ -145,12 +146,12 @@
             @if(isset($product))
                 <input type="radio" name="pdfCtrl"
                        value="originalPdfFile"
-                       v-model="formInput.pdfCtrl"/>
+                       v-model="formInput.pdfCtrl" />
                 維持原檔案
-                <br/>
+                <br />
                 <input type="radio" name="pdfCtrl" value="deletePdfFile"
-                       v-model="formInput.pdfCtrl"/>
-                刪除檔案<br/>
+                       v-model="formInput.pdfCtrl" />
+                刪除檔案<br />
                 <input type="radio" name="pdfCtrl" value="newPdfFile"
                        v-model="formInput.pdfCtrl"
                        @change="showSelectPdfWarning"
@@ -158,7 +159,7 @@
             @endif
             上傳檔案：
             <input type="file" name="pdfFile" value="請選擇檔案"
-                   @change="enablePdfFileCtrl"/>
+                   @change="enablePdfFileCtrl" />
             <p style="color:red" v-show="viewCtrl.showSelectPdfWarning" v-cloak>請選擇檔案</p>
             <p style="color:red">*若沒有設定pdf檔,前台產品說明中 "PDF 下載"的按鈕不會顯示</p>
         </td>
@@ -191,20 +192,20 @@
                         {{$copyProduct->body}}
                     @endif
                 </textarea>
-            <br/>
-            <br/>
+            <br />
+            <br />
         </td>
     </tr>
 </table>
-<img src="/system/images/empty.gif" width="10" height="30"/><br/>
+<img src="/system/images/empty.gif" width="10" height="30" /><br />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td align="center">
             <span class="border-right">
                 <input type="submit"
-                       value="確定修改"/>
+                       value="確定修改" />
 
-                <img src="/system/images/empty.gif" width="50" height="10"/>
+                <img src="/system/images/empty.gif" width="50" height="10" />
                 @include('system.partials.gobackBtn')
             </span>
         </td>

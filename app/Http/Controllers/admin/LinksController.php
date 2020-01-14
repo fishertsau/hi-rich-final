@@ -5,9 +5,24 @@ namespace App\Http\Controllers\admin;
 use App\Models\Link;
 use App\Http\Controllers\Controller;
 use App\Models\Category\LinkCategory;
+use App\Repositories\PhotoRepository;
 
 class LinksController extends Controller
 {
+    /**
+     * @var PhotoRepository
+     */
+    private $photoRepo;
+
+    /**
+     * ProductsController constructor.
+     * @param PhotoRepository $photoRepository
+     */
+    public function __construct(PhotoRepository $photoRepository)
+    {
+        $this->photoRepo = $photoRepository;
+    }
+    
     public function index()
     {
         $links = Link::latest()->with('category')->paginate(15);
@@ -29,15 +44,20 @@ class LinksController extends Controller
 
     public function store()
     {
-        Link::create($this->validateInput());
+        $link = Link::create($this->validateInput());
+        
+        $this->storeCoverPhoto($link);
 
         return redirect('admin/links');
     }
 
+    
     public function update(Link $link)
     {
         $link->update($this->validateInput());
 
+        $this->updatePhoto($link);
+        
         return redirect('admin/links');
     }
 
@@ -82,5 +102,46 @@ class LinksController extends Controller
             'published' => 'required|boolean',
             'url' => ''
         ]);
+    }
+    
+    /**
+     * @param Link $link
+     * @return LinksController
+     */
+    private function storeCoverPhoto($link)
+    {
+        if (request('photoCtrl') === 'newFile') {
+            $link->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo'))
+            ]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $model
+     * @return LinksController
+     */
+    private function updatePhoto($model)
+    {
+        if (request('photoCtrl') === 'newFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo')),
+            ]);
+        }
+
+        if (request('photoCtrl') === 'deleteFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' => null]);
+        }
+
+        return $this;
+    }
+
+    private function deleteFile($path)
+    {
+        \File::delete(public_path('storage') . '/' . $path);
     }
 }

@@ -142,7 +142,7 @@ $factory->define(LinkCategory::class, function (Faker\Generator $faker) {
 
 $factory->define(Link::class, function (Faker\Generator $faker) {
     return [
-        'cat_id' => $faker->numberBetween(1, 10),
+        'cat_id' => (LinkCategory::main()->get())[0]->id,
         'title' => $faker->name,
         'url' => $faker->domainName
     ];

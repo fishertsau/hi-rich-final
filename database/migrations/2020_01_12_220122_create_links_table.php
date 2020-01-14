@@ -19,6 +19,7 @@ class CreateLinksTable extends Migration
             $table->string('title')->nullable();
             $table->boolean('published')->default(true);
             $table->string('url')->nullable();
+            $table->string('photoPath')->nullable();
             $table->timestamps();
         });
     }

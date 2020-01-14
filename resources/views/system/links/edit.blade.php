@@ -18,7 +18,7 @@
 
 
     <div id="container">
-        <div id="site"><a href="/admin">首頁</a>>相關連結管理&gt;
+        <div id="site"><a href="/admin">首頁</a>> <a href="/admin/links">相關連結清單管理</a>&gt;
             @if(isset($link))
                 修改相關連結
             @else
@@ -27,14 +27,16 @@
         </div>
 
         @if(!isset($link))
-            <form action="/admin/links" method="POST">
+            <form action="/admin/links" method="POST"
+                  enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @include('system.links._form')
             </form>
         @endif
 
         @if(isset($link))
-            <form action="/admin/links/{{$link->id}}" method="POST">
+            <form action="/admin/links/{{$link->id}}" method="POST"
+                  enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PATCH">
                 @include('system.links._form')
@@ -46,5 +48,5 @@
 
 
 @section('pageJS')
-    @include('system.partials.ckeditor')
+    <script type="text/javascript" src="{{ asset('/js/system/links/edit.js') }}"></script>
 @endsection

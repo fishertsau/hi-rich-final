@@ -28,13 +28,13 @@ const app = new Vue({
     },
     methods: {
         showSelectPhotoWarning() {
-            let result = (this.formInput.photoCtrl == 'newFile') &
+            let result = (this.formInput.photoCtrl === 'newFile') &
                 (!document.querySelector("input[name='photo']").files.length);
             this.viewCtrl.showSelectPhotoWarning = result;
             document.querySelector("input[name='photo']").required = result;
         },
         showSelectPdfWarning() {
-            let result = (this.formInput.pdfCtrl == 'newPdfFile') &
+            let result = (this.formInput.pdfCtrl === 'newPdfFile') &
                 (!document.querySelector("input[name='pdfFile']").files.length);
             this.viewCtrl.showSelectPdfWarning = result;
             document.querySelector("input[name='pdfFile']").required = result;

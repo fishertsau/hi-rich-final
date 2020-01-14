@@ -27,6 +27,7 @@
                                         selection_depth="any"
                                         :clear_setting.sync="clear_setting"
                                         @catid-changed="handleCatIdChanged"
+                                        applied_model="product"
                                 >
                                 </cat-selector>
                             </div>

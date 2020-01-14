@@ -41,24 +41,10 @@
                                     <div v-for="link in activeLinkList"
                                          class="col-md-4 col-sm-6 col-xs-12">
                                         <a :href="link.url" class="links-item" target="_blank">
-                                            <img src="/asset/images/links/1111.jpg">
+                                            <img :src="'/storage/'+link.photoPath">
                                             <span class="text-links-name">@{{ link.title }}</span>
                                         </a>
                                     </div>
-                                    {{--todo: remove this--}}
-                                    {{--<div class="col-md-4 col-sm-6 col-xs-12">--}}
-                                    {{--<a href="https://www.momoshop.com.tw/main/Main.jsp" class="links-item"--}}
-                                    {{--target="_blank">--}}
-                                    {{--<img src="/asset/images/links/MOMO.jpg">--}}
-                                    {{--<span class="text-links-name">MOMO購物</span>--}}
-                                    {{--</a>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="col-md-4 col-sm-6 col-xs-12">--}}
-                                    {{--<a href="https://www.oac.gov.tw/" class="links-item" target="_blank">--}}
-                                    {{--<img src="/asset/images/links/SEA.jpg">--}}
-                                    {{--<span class="text-links-name">海洋委員會</span>--}}
-                                    {{--</a>--}}
-                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>

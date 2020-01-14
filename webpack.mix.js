@@ -13,6 +13,7 @@ mix.js('resources/assets/js/system/news/newsIndex.js', 'public/js/system/news');
 mix.js('resources/assets/js/system/sites/sitesIndex.js', 'public/js/system/sites');
 
 mix.js('resources/assets/js/system/links/index.js', 'public/js/system/links');
+mix.js('resources/assets/js/system/links/edit.js', 'public/js/system/links');
 
 mix.js('resources/assets/js/system/banner/banner.js', 'public/js/system/banner');
 mix.js('resources/assets/js/system/about/about.js', 'public/js/system/about');
