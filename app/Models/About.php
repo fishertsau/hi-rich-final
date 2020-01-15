@@ -16,4 +16,9 @@ class About extends Model
     {
         return $query->orderBy('ranking','asc');
     }
+    
+    public function scopePublished($query)
+    {
+        return $query->where('published', true);
+    }
 }

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\app;
 
+use App\Models\About;
 use App\Http\Controllers\Controller;
 
 class AboutsController extends Controller
 {
     public function index()
     {
-        // TODO: Implement this: get the content from backend
-        
-        return view('app.abouts.index');
+        $abouts = About::orderByRanking()->published()->get();
+        return view('app.abouts.index', compact('abouts'));
     }
 }

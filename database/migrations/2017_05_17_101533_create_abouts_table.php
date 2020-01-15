@@ -20,6 +20,7 @@ class CreateAboutsTable extends Migration
             $table->mediumText('body_en')->nullable();
             $table->boolean('published');
             $table->integer('ranking')->default(0);
+            $table->string('photoPath')->nullable();
             $table->timestamps();
         });
     }

@@ -16,7 +16,9 @@ mix.js('resources/assets/js/system/links/index.js', 'public/js/system/links');
 mix.js('resources/assets/js/system/links/edit.js', 'public/js/system/links');
 
 mix.js('resources/assets/js/system/banner/banner.js', 'public/js/system/banner');
-mix.js('resources/assets/js/system/about/about.js', 'public/js/system/about');
+
+mix.js('resources/assets/js/system/abouts/index.js', 'public/js/system/abouts');
+mix.js('resources/assets/js/system/abouts/edit.js', 'public/js/system/abouts');
 
 
 // 前台 

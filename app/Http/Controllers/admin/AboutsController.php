@@ -5,30 +5,50 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\About;
 use App\Http\Controllers\Controller;
+use App\Repositories\PhotoRepository;
 
 class AboutsController extends Controller
 {
+    /**
+     * @var PhotoRepository
+     */
+    private $photoRepo;
+
+    /**
+     * ProductsController constructor.
+     * @param PhotoRepository $photoRepository
+     */
+    public function __construct(PhotoRepository $photoRepository)
+    {
+        $this->photoRepo = $photoRepository;
+    }
+
     public function index()
     {
         $abouts = About::orderByRanking()->paginate(20);
 
-        return view('system.about.index', compact('abouts'));
+        return view('system.abouts.index', compact('abouts'));
     }
 
     public function edit($id)
     {
         $about = About::findOrFail($id);
-        return view('system.about.edit', compact('about'));
+        return view('system.abouts.edit', compact('about'));
     }
 
     public function create()
     {
-        return view('system.about.create');
+        return view('system.abouts.edit');
     }
 
     public function store()
     {
-        About::create($this->validateInput());
+        $input = $this->validateInput();
+        $input['ranking'] = About::get()->count() + 1;
+
+        $about = About::create($input);
+
+        $this->storeCoverPhoto($about);
 
         return redirect('admin/abouts');
     }
@@ -37,6 +57,8 @@ class AboutsController extends Controller
     {
         $about->update($this->validateInput());
 
+        $this->updatePhoto($about);
+
         return redirect('admin/abouts');
     }
 
@@ -44,22 +66,17 @@ class AboutsController extends Controller
     {
         return request()->validate([
             'title' => '',
-            'title_en' => '',
             'published' => 'required|boolean',
             'body' => '',
-            'body_en' => ''
         ]);
     }
 
     public function copy(About $about)
     {
         $about->title .= '(複製)';
+        $copy = true;
 
-        if (config('app.english_enabled')) {
-            $about->title_en .= '(複製)';
-        }
-
-        return view('system.about.create', compact('about'));
+        return view('system.abouts.edit', compact('about', 'copy'));
     }
 
 
@@ -105,5 +122,46 @@ class AboutsController extends Controller
         }
 
         return response(200);
+    }
+
+    /**
+     * @param $about
+     * @return AboutsController
+     */
+    private function storeCoverPhoto($about)
+    {
+        if (request('photoCtrl') === 'newFile') {
+            $about->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo'))
+            ]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $model
+     * @return AboutsController
+     */
+    private function updatePhoto($model)
+    {
+        if (request('photoCtrl') === 'newFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo')),
+            ]);
+        }
+
+        if (request('photoCtrl') === 'deleteFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' => null]);
+        }
+
+        return $this;
+    }
+
+    private function deleteFile($path)
+    {
+        \File::delete(public_path('storage') . '/' . $path);
     }
 }

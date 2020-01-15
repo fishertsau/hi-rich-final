@@ -2,15 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\About;
-use App\Models\WebConfig;
 use App\User;
 use Tests\TestCase;
+use App\Models\About;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AboutTest extends TestCase
 {
-    // todo: remove this
     use DatabaseMigrations;
 
     function setUp()
@@ -37,10 +36,9 @@ class AboutTest extends TestCase
         $response = $this->get('/admin/abouts/create');
 
         $response->assertSuccessful()
-            ->assertSee('新增資料')
+            ->assertSee('新增/修改資料')
             ->assertSee('公司簡介管理');
     }
-
 
     /** @test */
     public function can_visit_edit_page()
@@ -54,16 +52,15 @@ class AboutTest extends TestCase
             ->assertSee($about->title);
     }
 
-
     /** @test */
     public function can_create_a_new_about()
     {
         $newAboutInfo = [
             'title' => 'ANewAbout',
-            'title_en' => 'ANewAboutEnglish',
             'published' => true,
             'body' => 'SomeContent Body',
-            'body_en' => 'SomeContent BodyEnglish'
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo.jpg'),
         ];
 
         $response = $this->post('admin/abouts', $newAboutInfo);
@@ -72,15 +69,32 @@ class AboutTest extends TestCase
 
         tap(About::first(), function ($about) {
             $this->assertEquals('ANewAbout', $about->title);
-            $this->assertEquals('ANewAboutEnglish', $about->title_en);
             $this->assertEquals('SomeContent Body', $about->body);
-            $this->assertEquals('SomeContent BodyEnglish', $about->body_en);
             $this->assertEquals(true, $about->published);
             $this->assertNotNull($about->ranking);
-            $this->assertSame(0, (int)$about->ranking);
+            $this->assertSame(1, (int)$about->ranking);
+            $this->assertNotNull($about->photoPath);
+            $this->assertFileExists(public_path('storage/' . $about->photoPath));
         });
     }
 
+    /** @test */
+    public function no_photo_file_is_created_if_no_newFile_command_given()
+    {
+        $newAboutInfo = [
+            'title' => 'ANewAbout',
+            'published' => true,
+            'body' => 'SomeContent Body',
+            'photoCtrl' => '',
+            'photo' => UploadedFile::fake()->image('photo.jpg'),
+        ];
+
+        $response = $this->post('admin/abouts', $newAboutInfo);
+
+        $about = About::first();
+        $response->assertRedirect('admin/abouts');
+        $this->assertNull($about->photoPath);
+    }
 
     /** @test */
     public function can_update_an_existing_about()
@@ -88,10 +102,10 @@ class AboutTest extends TestCase
         $about = factory(About::class)->create();
         $newAboutInput = [
             'title' => 'NewTitle',
-            'title_en' => 'EnglishNewTitle',
             'published' => false,
             'body' => 'NewBody',
-            'body_en' => 'EnglishNewBody'
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo1.jpg'),
         ];
 
         $response = $this->patch('/admin/abouts/' . $about->id, $newAboutInput);
@@ -99,13 +113,47 @@ class AboutTest extends TestCase
         $about = $about->fresh();
         $response->assertRedirect('admin/abouts');
         $this->assertEquals('NewTitle', $about->title);
-        $this->assertEquals('EnglishNewTitle', $about->title_en);
         $this->assertEquals('NewBody', $about->body);
-        $this->assertEquals('EnglishNewBody', $about->body_en);
         $this->assertEquals(false, $about->published);
         $this->assertEquals(0, $about->rank);
-    }
+        $this->assertNotNull($about->photoPath);
+        $this->assertFileExists(public_path('storage/' . $about->photoPath));
 
+        //update again with a new photo
+        $firstPhotoPath = $about->photoPath;
+        $newAboutInput = [
+            'title' => 'NewTitle',
+            'published' => false,
+            'body' => 'NewBody',
+            'photoCtrl' => 'newFile',
+            'photo' => UploadedFile::fake()->image('photo1.jpg'),
+        ];
+
+        $response = $this->patch('/admin/abouts/' . $about->id, $newAboutInput);
+
+        $about = $about->fresh();
+        $response->assertRedirect('admin/abouts');
+        $this->assertNotNull($about->photoPath);
+        $this->assertFileExists(public_path('storage/' . $about->photoPath));
+        $this->assertFileNotExists(public_path('storage/' . $firstPhotoPath));
+
+
+        //update again with a new photo
+        $secondPhotoPath = $about->photoPath;
+        $newAboutInput = [
+            'title' => 'NewTitle',
+            'published' => false,
+            'body' => 'NewBody',
+            'photoCtrl' => 'deleteFile',
+            'photo' => UploadedFile::fake()->image('photo1.jpg'),
+        ];
+
+        $response = $this->patch('/admin/abouts/' . $about->id, $newAboutInput);
+        $about = $about->fresh();
+        $response->assertRedirect('admin/abouts');
+        $this->assertNull($about->photoPath);
+        $this->assertFileNotExists(public_path('storage/' . $secondPhotoPath));
+    }
 
     /** @test */
     public function can_copy_an_about()
@@ -115,11 +163,10 @@ class AboutTest extends TestCase
         $response = $this->get('/admin/abouts/' . $about->id . '/copy');
 
         $response->assertSuccessful()
-            ->assertSee('新增資料')
+            ->assertSee('修改資料')
             ->assertSee('公司簡介管理')
             ->assertSee($about->title . '(複製)');
     }
-
 
     /** @test */
     public function can_update_ranking()
@@ -137,7 +184,6 @@ class AboutTest extends TestCase
         $this->assertEquals(4, $abouts[1]->fresh()->ranking);
         $this->assertEquals(3, $abouts[2]->fresh()->ranking);
     }
-
 
     /** @test */
     public function can_delete_many_abouts_at_one_time()
@@ -171,7 +217,6 @@ class AboutTest extends TestCase
         $response->assertRedirect('/admin/abouts');
         $this->assertNull($about->fresh());
     }
-
 
     /** @test */
     public function can_set_published_for_many_abouts_at_one_time()

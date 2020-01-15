@@ -5,7 +5,8 @@ return [
         'public_storage_root' => 'storage',
         'image_baseDir' => 'images',
         'origin_products_image_baseDir' => 'asset/images/products',
-        'origin_links_image_baseDir' => 'asset/images/links'
+        'origin_links_image_baseDir' => 'asset/images/links',
+        'origin_abouts_image_baseDir' => 'asset/images/about'
     ],
     /*
     |--------------------------------------------------------------------------

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->clearTestPhotoFiles();
 
+        $this->call(AboutSeeder::class);
         $this->call(WebConfigSeeder::class);
         $this->call(BannerSeeder::class);
         $this->call(ProductCategorySeeder::class);

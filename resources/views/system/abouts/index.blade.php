@@ -110,5 +110,5 @@
 
 
 @section('pageJS')
-    <script type="text/javascript" src="{{ asset('/js/system/about/about.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/system/abouts/index.js') }}"></script>
 @endsection
