@@ -3,8 +3,8 @@
 namespace App\ViewComposers;
 
 use App;
-use App\Models\Category;
 use Illuminate\View\View;
+use App\Models\Category\ProductCategory;
 
 class HeaderComposer
 {
@@ -18,6 +18,6 @@ class HeaderComposer
      */
     private function getMainActivatedCategories()
     {
-        return Category::whereActivated(true)->whereLevel(1)->where('title', '<>', '')->orderByRanking()->get();
+        return ProductCategory::whereActivated(true)->main()->orderByRanking()->get();
     }
 }
