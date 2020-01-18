@@ -29,12 +29,21 @@ class CategoriesController extends Controller
         }
     }
 
+    public function index($appliedModel)
+    {
+        try {
+            return $this->catRepo->all($appliedModel);
+        } catch (Exception $e) {
+            return response('No correct applied model for category specified.', 404);
+        }
+    }
+    
     public function child($id)
     {
         return $this->catRepo->child($id);
     }
 
-    public function category($id)
+    public function get($id)
     {
         return Category::findOrFail($id);
     }

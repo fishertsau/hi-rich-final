@@ -11,7 +11,8 @@
 
                             <div class="mobile-select">
                                 <a class="item-active" @click.prevent="toggleShowCat()">全部連結</a>
-                                <div class="item-list" :class="isShowCat(showCat)">
+                                <div class="item-list" 
+                                     :class="isShowCat(showCat)">
                                     <a class="item" v-for="cat in cats" @click.prevent="setActiveCat(cat)">
                                         @{{ cat.title }}</a>
                                 </div>

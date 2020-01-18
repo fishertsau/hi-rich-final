@@ -1,3 +1,5 @@
+{{--todo: remove this page--}}
+
 @extends('app.layouts.master')
 
 @section('content')
@@ -41,6 +43,7 @@
                             <!-- 編輯器結束 -->
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </section>

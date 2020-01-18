@@ -1,4 +1,3 @@
-{{--todo: implement this--}}
 <div class="col-md-3 col-sm-4 col-12">
 
     <div class="section-title">-產品項目-</div>
@@ -17,12 +16,16 @@
     </div>
 
     <div class="side-bar">
-        <a href="/products" class="item is-active">全部產品</a>
-        {{--todo: get from db --}}
-        <a href="javascript:;" class="item">蝦類</a>
-        <a href="javascript:;" class="item">貝類</a>
-        <a href="javascript:;" class="item">魚類</a>
-        <a href="javascript:;" class="item">軟體類</a>
-        <a href="javascript:;" class="item">甲殼類</a>
+        {{--todo: change this--}}
+        <a href="javascript:;"
+           class="item"
+           :class="isAllCat"
+           @click="setActiveCat({})"
+        >全部產品</a>
+        <a v-for="cat in cats"
+           @click.prevent="setActiveCat(cat)"
+           :class="isActive(cat)"
+           href="javascript:;" class="item">@{{ cat.title }}
+        </a>
     </div>
 </div>

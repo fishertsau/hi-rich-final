@@ -42,31 +42,4 @@ class ProductsController extends Controller
 
         return view('app.products.index', compact('products'));
     }
-
-    public function indexByCategory($catId)
-    {
-        // TODO: Implement this
-//        $category = Category::findOrFail($catId);
-//
-//        $catIds = $this->catRepo->getSelfOrDescendantsId($catId);
-//
-//        if (App::getLocale() == 'en') {
-//            $products = Product::status(true)
-//                ->categories($catIds)
-//                //TODO: Implement this : cover this with test
-//                ->where('title_en', '<>', '')
-//                ->orderByRanking()
-//                ->paginate(WebConfig::firstOrCreate()->product_show_per_page);
-//
-//        } else {
-//            $products = Product::status(true)
-//                ->categories($catIds)
-//                //TODO: Implement this : cover this with test
-//                ->where('title', '<>', '')
-//                ->orderByRanking()
-//                ->paginate(WebConfig::firstOrCreate()->product_show_per_page);
-//        }
-
-        return view('app.products.index');
-    }
 }

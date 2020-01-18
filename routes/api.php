@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 //});
 
 Route::get('/categories/main/{appliedModel}', 'api\CategoriesController@main');
-Route::get('/categories/{id}', 'api\CategoriesController@category');
+Route::get('/categories/all/{appliedModel}', 'api\CategoriesController@index');
+Route::get('/categories/{id}', 'api\CategoriesController@get');
 Route::get('/categories/{id}/children', 'api\CategoriesController@child');
 Route::get('/categories/{id}/parent', 'api\CategoriesController@parent');
 
@@ -29,5 +30,8 @@ Route::get('/sites/list/published', 'api\SitesController@publishedIndex');
 // 最新消息清單
 Route::get('/news/list', 'api\NewsController@index');
 
-// 最新消息清單
+// 相關連結清單
 Route::get('/links/list', 'api\LinksController@index');
+
+// 產品清單 
+Route::get('/products/list', 'api\ProductsController@index');

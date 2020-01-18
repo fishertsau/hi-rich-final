@@ -11,7 +11,8 @@
     "/js/system/contact/contactShow.js": "/js/system/contact/contactShow.js",
     "/js/system/category/categoryIndex.js": "/js/system/category/categoryIndex.js",
     "/js/system/banner/banner.js": "/js/system/banner/banner.js",
+    "/js/system/abouts/index.js": "/js/system/abouts/index.js",
     "/js/system/abouts/edit.js": "/js/system/abouts/edit.js",
-    "/js/app/links/index.js": "/js/app/links/index.js",
-    "/js/system/abouts/index.js": "/js/system/abouts/index.js"
+    "/js/app/products/index.js": "/js/app/products/index.js",
+    "/js/app/links/index.js": "/js/app/links/index.js"
 }

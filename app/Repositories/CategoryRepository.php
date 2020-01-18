@@ -14,6 +14,15 @@ class CategoryRepository
         'link' => Category\LinkCategory::class
     ];
 
+    public function all($appliedModel)
+    {
+        if (!isset($this->categoryList[$appliedModel])) {
+            throw new RuntimeException('error');
+        }
+
+        return $this->categoryList[$appliedModel]::main()->with('childCategories')->get();
+    }
+    
     public function main($appliedModel)
     {
         if (!isset($this->categoryList[$appliedModel])) {

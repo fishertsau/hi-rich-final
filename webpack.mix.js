@@ -25,3 +25,4 @@ mix.js('resources/assets/js/system/abouts/edit.js', 'public/js/system/abouts');
 mix.js('resources/assets/js/app/contact/index.js', 'public/js/app/contact');
 mix.js('resources/assets/js/app/news/index.js', 'public/js/app/news');
 mix.js('resources/assets/js/app/links/index.js', 'public/js/app/links');
+mix.js('resources/assets/js/app/products/index.js', 'public/js/app/products');

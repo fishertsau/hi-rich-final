@@ -37,7 +37,7 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-export const getPublishedSites = () =>{
+export const getPublishedSites = () => {
   return getData('/api/sites/list/published');
 }
 
@@ -46,19 +46,19 @@ export const getData = (api) => {
 }
 
 export const deleteItem = (api) => {
-  return axios.post(api, {_method: 'DELETE'});
+  return axios.post(api, { _method: 'DELETE' });
 }
 
 // 最新消息
 export const getNewsCategory = () => {
- return getData('/api/categories/main/news')    
+  return getData('/api/categories/main/news')
 }
 
 export const getPublishedNews = () => {
   return getData('/api/news/list')
 }
 
-// 相關連結
+// 相關連結類別
 export const getLinkCategory = () => {
   return getData('/api/categories/main/link')
 }
@@ -66,6 +66,40 @@ export const getLinkCategory = () => {
 export const getPublishedLinks = () => {
   return getData('/api/links/list')
 }
+
+// 產品類別
+export const getAllProductCategories = () => {
+  return getData('/api/categories/all/product')
+}
+
+// 產品清單
+export const getPublishedProducts = () => {
+  return getData('/api/products/list')
+}
+
+// 類別
+export const getCategory = (id) => {
+  return getData(`/api/categories/${id}`);
+}
+
+
+export function ifCategoryInPathname() {
+  const uris = window.location.pathname.split('/');
+  const catIncluded = uris.includes('category');
+
+  return { uris, catIncluded }
+}
+
+export function isEmpty(obj) {
+  for(var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+
+  return JSON.stringify(obj) === JSON.stringify({});
+}
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
