@@ -1,13 +1,14 @@
 require('../../bootstrap');
 import {
   getAllProductCategories,
-  getPublishedProducts,
   getCategory,
+  getPublishedProducts,
   ifCategoryInPathname,
   isEmpty
 } from "../../bootstrap";
 
 const Vue = require('vue');
+Vue.component('pager', require('../../components/pager.vue'));
 
 new Vue({
   el: '#container',
@@ -18,16 +19,22 @@ new Vue({
     activeSubCat: {},
     products: [],
     chosenProducts: [],
+    visibleProducts: [],
     chosenProduct: {},
     pagination: {
+      current_page: 1,
       first_result: 0,
-      max_results: 10
+      max_results: 3,
+      qty_per_page: 3
     }
   },
   computed: {
     isAllCat: function () {
       return { 'is-active': isEmpty(this.activeCat) }
     },
+    products_qty: function () {
+      return this.chosenProducts.length;
+    }
   },
   watch: {
     activeCat: function () {
@@ -39,6 +46,9 @@ new Vue({
       handler: function (newVal, oldVal) {
         this.setChosenProducts(this.activeCat, this.activeSubCat);
       }
+    },
+    chosenProducts: function () {
+      this.setVisibleProducts();
     }
   },
   beforeCreate: async function () {
@@ -53,6 +63,7 @@ new Vue({
       .then(res => {
         if (!res) { return true; }
 
+        // 如果有需要,抓取active類別
         const localActiveCat = { ...res.data };
 
         if (parseInt(localActiveCat.level, 0) === 1) {
@@ -99,20 +110,24 @@ new Vue({
 
       const filterCriteria = p => localCatIds.includes(p.cat_id);
 
-      const localProducts = localCatIds.length === 0
+      this.chosenProducts = localCatIds.length === 0
         ? [...this.products]
         : this.products.filter(filterCriteria);
-
-      this.chosenProducts = localProducts.splice(this.pagination.first_result, this.pagination.max_results);
+    },
+    setVisibleProducts: function () {
+      const localProducts = [...this.chosenProducts];
+      const first = (this.pagination.current_page - 1) * (this.pagination.qty_per_page);
+      const fetchQty = this.pagination.qty_per_page;
+      this.visibleProducts = localProducts.splice(first, fetchQty);
     },
     setPageTitle: function (activeCat = {}, activeSubCat = {}) {
       const mainCatTitle = (isEmpty(activeCat)) ? '全部產品' : activeCat.title;
-      const subCatTitle = (isEmpty(activeSubCat)) ? '' : activeCat.title;
+      const subCatTitle = (isEmpty(activeSubCat)) ? '' : activeSubCat.title;
 
       this.pageTitle = `${mainCatTitle} ${subCatTitle}`;
     },
-    more: function () {
-      this.pagination.max_results++;
+    updateCurrentPage: function (newPage) {
+      this.pagination.current_page = newPage;
     }
   }
 })

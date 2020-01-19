@@ -11,11 +11,11 @@
                         <div v-show="!chosenProduct.title" v-cloak
                              class="col-md-9 col-sm-8 col-12">
                             <div class="section-title">
-                                @{{ pageTitle }} <span @click.prevent="more()">more</span>
+                                @{{ pageTitle }}
                             </div>
                             <div class="links-list set-height">
                                 <div class="row">
-                                    <div v-for="product in chosenProducts"
+                                    <div v-for="product in visibleProducts"
                                          class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                                         <a href="javascript:;"
                                            @click.prevent="setActiveProduct(product)"
@@ -27,8 +27,11 @@
                                 </div>
                             </div>
 
-                            {{--todo: implement this --}}
-                            {{$products->links('vendor.pagination.app')}}
+                            <pager :current_page="pagination.current_page"
+                                   :qty_per_page="pagination.qty_per_page"
+                                   :total_item_qty="chosenProducts.length"
+                                   :handler="updateCurrentPage">
+                            </pager>
                         </div>
 
                         {{-- todo: get content from db --}}
