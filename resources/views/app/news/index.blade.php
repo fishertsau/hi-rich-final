@@ -11,17 +11,23 @@
 
                             <div class="mobile-select">
                                 <a class="item-active" @click.prevent="toggleShowCat()">全部連結</a>
-                                <div class="item-list" 
+                                <div class="item-list"
                                      :class="isShowCat(showCat)">
-                                    <a class="item" v-for="cat in cats" @click.prevent="setActiveCat(cat)">
+                                    <a class="item"
+                                       v-for="cat in cats"
+                                       @click.prevent="setActiveCat(cat)">
                                         @{{ cat.title }}</a>
                                 </div>
                             </div>
 
                             <div class="news-list scroll-bar">
-                                <!-- 尺寸576以下時 點擊連到news-detail頁面-->
-                                {{--todo: 實作此功能--}}
-                                <a class="item active" href="#" v-for="(news,index) in activeNewsList">
+                                <!-- 手機裝置瀏覽 點擊連到news-detail頁面-->
+                                <a v-for="(news,index) in activeNewsList"
+                                   class="item"
+                                   :class="{'active': news.id === activeNews.id }"
+                                   v-show="!isMobile || !showDetail"
+                                   href="javascript:;"
+                                   @click.prevent="setActiveNews(news)">
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
                                     <span class="text-news"></span>
@@ -34,7 +40,7 @@
                         <div class="col-lg-8 col-md-7 col-sm-7 col-12 hidden-xs">
                             <div class="news-content">
                                 <div class="artical-title">
-                                    <span class="text-main">2019台北國際食品展-</span>
+                                    <span class="text-main">@{{ activeNews.title }}-</span>
                                     <span class="text-sub">2019/06/15</span>
                                 </div>
                                 <!-- 編輯器開始 -->
@@ -50,6 +56,30 @@
                                         http://www.hi-rich.com.tw<br />
                                         hi.rich@msa.hinet.net<br />
                                     </div>
+                                </div>
+                                <!-- 編輯器結束 -->
+                            </div>
+                        </div>
+
+                        {{--mobile device 顯示--}}
+                        <div v-show="isMobile && showDetail"
+                             class="col-12 mobile-news-detail">
+                            <div class="btn-box">
+                                {{-- todo: changet this--}}
+                                <a href="javascript:;"
+                                   @click.prevent="showDetail = false"
+                                   class="link-back">回上頁
+                                    <span class="img-back"></span></a>
+                            </div>
+                            <div class="news-content">
+                                <div class="artical-title">
+                                    <span class="text-main">@{{activeNews.title}}-</span>
+
+                                    <span class="text-sub">@{{isMobile}}</span>
+                                </div>
+                                <!-- 編輯器開始 -->
+                                <div class="editor-box set-height">
+                                    <span v-html="activeNews.body"></span>
                                 </div>
                                 <!-- 編輯器結束 -->
                             </div>

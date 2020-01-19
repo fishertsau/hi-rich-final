@@ -74,6 +74,8 @@
         <img src="/system/images/icon_arrowdown.gif" width="15" height="19"/><a href="/admin/products/create"><img
                     src="/system/images/new.gif" width="75" height="19"/></a><br/>
         <img src="/system/images/empty.gif" width="10" height="10"/>
+        
+        {{--todo: show 產品類別--}}
         <table width="99%" border="0" cellpadding="5" cellspacing="1">
             <tr>
                 <td width="20" align="center" bgcolor="#DEDEDE">

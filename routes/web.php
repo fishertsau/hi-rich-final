@@ -18,22 +18,13 @@ Route::post('/contact', 'app\ContactController@store');
 Route::get('/contact-ok', 'app\ContactController@contactOk');
 
 /** 產品與類別**/
-// TODO: Implement this
 Route::get('/products/category/{catId}', 'app\ProductsController@index');
 Route::get('/products', 'app\ProductsController@index');
-
-// todo: remove this
-Route::get('/products/{id}', 'app\ProductsController@show');
-
-// TODO: Implement this
-//Route::get('/categories/{catId}', 'app\CategoriesController@show');
-//Route::get('/categories', 'app\CategoriesController@index');
 
 /** 相關連結 **/
 Route::get('/links', 'app\LinksController@index');
 
 /** 系統後台*/
-// TODO: Implement this
 Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' => 'admin'], function () {
 
     Route::get('/', function () {

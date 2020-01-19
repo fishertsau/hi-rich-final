@@ -34,21 +34,20 @@
                             </pager>
                         </div>
 
-                        {{-- todo: get content from db --}}
                         <div v-show="chosenProduct.id" v-cloak
                              class="col-md-9 col-sm-8 col-12 mobile-product-detail">
                             {{--todo: change this--}}
                             <div class="btn-box">
-                                {{--todo: implement this--}}
+                                {{--todo: implement this 不見了--}}
                                 <a href="/products" class="link-back">回上頁<span class="img-back"></span></a>
                             </div>
                             <div class="product-content">
                                 <div class="artical-title">
-                                    <span class="text-main">蘭花蚌- @{{ chosenProduct.title }}</span>
+                                    <span class="text-main">@{{ chosenProduct.title }}</span>
                                     <span class="text-sub">Surf Clam Meat</span>
                                 </div>
                                 <div class="img-product">
-                                    <img src="/asset/images/products/product05.jpg">
+                                    <img :src="'/storage/'+ chosenProduct.photoPath">
                                 </div>
                                 <div class="product-form">
                                     {{--每個產品都要有這些嗎?--}}
@@ -64,7 +63,7 @@
 
                                 <!-- 編輯器開始 -->
                                 <div class="editor-box set-height">
-                                    {{--@{{ activeProduct.body }}--}}
+                                    <span v-html="chosenProduct.body"></span>
                                 </div>
                                 <!-- 編輯器結束 -->
                             </div>

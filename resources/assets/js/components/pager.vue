@@ -53,17 +53,11 @@ input/props:
     data() {
       return {
         total_page_qty: 0,
-        new_page: {
-          start: 0,
-          end: 0
-        },
         page_range: []
       }
     },
-    computed: {},
     methods: {
       setNewPage(newPage) {
-        this.new_page = newPage;
         this.handler(newPage);
       },
       generatePageRange() {
@@ -90,17 +84,19 @@ input/props:
         }
       },
       previousPage() {
-        if (this.current_page > 1) {
-          this.new_page--;
+        if (this.current_page <= 1) {
+          return;
         }
+
+        this.setNewPage(this.current_page - 1)
       },
       nextPage() {
-        if (this.current_page < this.total_page_qty) {
-          this.new_page++;
+        if (this.current_page >= this.total_page_qty) {
+          return;
         }
+        
+        this.setNewPage(this.current_page + 1)
       },
-      init() {
-      }
     },
     watch: {
       total_item_qty: function () {

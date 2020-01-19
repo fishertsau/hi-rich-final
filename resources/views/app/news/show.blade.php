@@ -20,6 +20,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-12 mobile-news-detail">
                         <div class="btn-box">
                             {{-- todo: changet this--}}

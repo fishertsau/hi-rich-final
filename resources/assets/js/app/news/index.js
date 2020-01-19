@@ -1,8 +1,6 @@
 require('../../bootstrap');
-import { getNewsCategory, getPublishedNews } from "../../bootstrap";
-
+import { getNewsCategory, getPublishedNews, mobilecheck } from "../../bootstrap";
 const Vue = require('vue');
-
 const vm = new Vue({
   el: '#container',
   data: {
@@ -11,19 +9,23 @@ const vm = new Vue({
     showCat: false,
     newsList: [],
     activeNewsList: [],
-    activeNews: {}
+    activeNews: {},
+    isMobile: false,
+    showDetail: false
   },
   computed: {},
   beforeCreate: async function () {
+    this.isMobile = await mobilecheck(); 
+    
+    Promise.all([getNewsCategory(), getPublishedNews()])
+      .then(([catResult, newsResult]) => {
+        this.cats = [...catResult.data];
+        this.activeCat = vm.cats[0] || {};
 
-    const [catResult, newsResult] = await Promise.all([getNewsCategory(), getPublishedNews()]);
-
-    this.cats = [...catResult.data];
-    this.activeCat = vm.cats[0] || {};
-
-    this.newsList = [...newsResult.data];
-    this.activeNewsList = [...vm.newsList];
-    this.activeNews = vm.newsList[0] || {};
+        this.newsList = [...newsResult.data];
+        this.activeNewsList = [...vm.newsList];
+        this.activeNews = vm.newsList[0] || {};
+      });
   },
   methods: {
     toggleShowCat: function () {
@@ -34,14 +36,20 @@ const vm = new Vue({
         'is-open': show
       }
     },
-    setActiveCat: function (cat) {
-      this.activeCat = cat;
+    setActiveCat: async function (cat) {
+      this.activeCat = {...cat};
       this.showCat = false;
-
+      this.showDetail = false;
+      
       const localActiveNewsList = this.newsList
         .filter(n => n.cat_id === cat.id);
 
       this.activeNewsList = [...localActiveNewsList];
+      this.activeNews = localActiveNewsList[0];
+    },
+    setActiveNews: function (news) {
+      this.activeNews = { ...news };
+      this.showDetail = true;
     }
   }
 });

@@ -97,6 +97,14 @@ class Category extends Model
         return null;
     }
 
+    /**
+     * 讓Category::all()失效
+     */
+    public static function all($columns=[])
+    {
+        return null;
+    }
+    
     public function scopeMain($query)
     {
         return $query
@@ -104,12 +112,17 @@ class Category extends Model
             ->where('level', 1);
     }
 
+    public function scopeActivated($query)
+    {
+        return $query
+            ->where('activated', true);
+    }
+    
     public function scopeForApplyModel($query)
     {
         return $query->where('for', $this->getCatIndex());
     }
 
-    //TODO: Implement this : cover this with test
     public function scopeOrderByRanking($query)
     {
         return $query->orderBy('ranking', 'asc');

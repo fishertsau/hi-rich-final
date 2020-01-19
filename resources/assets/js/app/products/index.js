@@ -10,6 +10,13 @@ import {
 const Vue = require('vue');
 Vue.component('pager', require('../../components/pager.vue'));
 
+const initPager = {
+  current_page: 1,
+  first_result: 0,
+  max_results: 15,
+  qty_per_page: 10
+}
+
 new Vue({
   el: '#container',
   data: {
@@ -21,35 +28,29 @@ new Vue({
     chosenProducts: [],
     visibleProducts: [],
     chosenProduct: {},
-    pagination: {
-      current_page: 1,
-      first_result: 0,
-      max_results: 3,
-      qty_per_page: 3
-    }
+    pagination: initPager
   },
   computed: {
     isAllCat: function () {
       return { 'is-active': isEmpty(this.activeCat) }
-    },
-    products_qty: function () {
-      return this.chosenProducts.length;
     }
   },
   watch: {
-    activeCat: function () {
-      this.setChosenProducts(this.activeCat, this.activeSubCat);
-      this.setPageTitle(this.activeCat, this.activeSubCat);
+    activeCat: {
+      deep: true,
+      handler: async function (newVal) {
+        await this.setChosenProducts(newVal);
+        this.setPageTitle(this.activeCat, this.activeSubCat);
+        this.pagination = { ...initPager };
+        this.setVisibleProducts({ ...initPager });
+      }
     },
     pagination: {
       deep: true,
-      handler: function (newVal, oldVal) {
-        this.setChosenProducts(this.activeCat, this.activeSubCat);
+      handler: function (newVal) {
+        this.setVisibleProducts(newVal);
       }
     },
-    chosenProducts: function () {
-      this.setVisibleProducts();
-    }
   },
   beforeCreate: async function () {
     Promise.all([getAllProductCategories(), getPublishedProducts()])
@@ -78,12 +79,14 @@ new Vue({
       })
       .then(() => {
         this.setChosenProducts(this.activeCat, this.activeSubCat);
-        this.setPageTitle(this.activeCat, this.activeSubCat);
+      })
+      .then(() => {
+        this.setVisibleProducts(this.pagination);
       })
       .catch(console.error);
   },
   methods: {
-    setActiveCat: function (cat) {
+    setActiveCat: async function (cat) {
       this.activeCat = { ...cat };
       this.activeSubCat = {};
       this.chosenProduct = {};
@@ -106,24 +109,33 @@ new Vue({
       return localActiveCat.child_categories.map(c => c.id);
     },
     setChosenProducts: function (activeCat = {}, activeSubCat = {}) {
+      // 全部產品
+      if (isEmpty(activeCat)) {
+        this.chosenProducts = [...this.products];
+        return;
+      }
+
       const localCatIds = this.chosenCatIds(activeCat, activeSubCat);
+
+      if (localCatIds.length === 0) {
+        this.chosenProducts = [];
+        return;
+      }
 
       const filterCriteria = p => localCatIds.includes(p.cat_id);
 
-      this.chosenProducts = localCatIds.length === 0
-        ? [...this.products]
-        : this.products.filter(filterCriteria);
+      this.chosenProducts = this.products.filter(filterCriteria);
     },
-    setVisibleProducts: function () {
+    setVisibleProducts: function (pagination) {
       const localProducts = [...this.chosenProducts];
-      const first = (this.pagination.current_page - 1) * (this.pagination.qty_per_page);
-      const fetchQty = this.pagination.qty_per_page;
+      const first = (pagination.current_page - 1) * (pagination.qty_per_page);
+      const fetchQty = pagination.qty_per_page;
       this.visibleProducts = localProducts.splice(first, fetchQty);
     },
     setPageTitle: function (activeCat = {}, activeSubCat = {}) {
       const mainCatTitle = (isEmpty(activeCat)) ? '全部產品' : activeCat.title;
       const subCatTitle = (isEmpty(activeSubCat)) ? '' : activeSubCat.title;
-
+      
       this.pageTitle = `${mainCatTitle} ${subCatTitle}`;
     },
     updateCurrentPage: function (newPage) {

@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
         Product::truncate();
         Photo::truncate();
 
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::getActivatedByLevel(2);
 
         $categories->each(function ($category) {
             if (!$category->hasDescendants) {
