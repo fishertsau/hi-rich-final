@@ -1,7 +1,7 @@
 <div id="leftmenu">
     <ul id="nav">
         <li>
-            <a href="/admin/banner">首頁跑馬燈</a>
+            <a href="/admin/banners">首頁跑馬燈</a>
         </li>
 
         {{--公司簡介管理--}}

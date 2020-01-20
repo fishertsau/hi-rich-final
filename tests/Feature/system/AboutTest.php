@@ -37,7 +37,7 @@ class AboutTest extends TestCase
 
         $response->assertSuccessful()
             ->assertSee('新增/修改資料')
-            ->assertSee('公司簡介管理');
+            ->assertSee('公司簡介');
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class AboutTest extends TestCase
 
         $response->assertSuccessful()
             ->assertSee('修改資料')
-            ->assertSee('公司簡介管理')
+            ->assertSee('公司簡介')
             ->assertSee($about->title);
     }
 
@@ -164,7 +164,7 @@ class AboutTest extends TestCase
 
         $response->assertSuccessful()
             ->assertSee('修改資料')
-            ->assertSee('公司簡介管理')
+            ->assertSee('公司管理')
             ->assertSee($about->title . '(複製)');
     }
 

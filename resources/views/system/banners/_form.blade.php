@@ -6,66 +6,33 @@
         <td width="150" align="right" bgcolor="#DEDEDE">顯示：</td>
         <td>
             <input type="radio" name="published" value="1"
-               @if(!isset($link))
-                   checked
-                @else
-                {{$link->published?'checked':''}}
-                    @endif
-            />
-            顯示
+                   {{(!isset($banner) || $banner->published)? 'checked' : '' }} /> 顯示
             <input type="radio" name="published" value="0"
-            @if(isset($link))
-                {{!$link->published?'checked':''}}
-                    @endif
-            />
-            不顯示
+                    {{(isset($banner) && !$banner->published)? 'checked' : '' }} /> 不顯示
         </td>
     </tr>
+
     <tr>
-        <td align="right" bgcolor="#DEDEDE">類別：</td>
+        <td align="right" bgcolor="#DEDEDE">名稱：</td>
         <td>
-            <select name="cat_id">
-                @foreach($cats as $cat)
-                    <option value="{{$cat->id}}"
-                            {{(isset($link) && $link->cat_id === $cat->id)?'selected':''}}>
-                        {{$cat->title}}</option>
-                @endforeach
-            </select>
+            <input name="title" type="text" size="50" required
+                   @if(isset($banner->title)) value="{{$banner->title}}" @endif/>
         </td>
     </tr>
-    <tr>
-        <td align="right" bgcolor="#DEDEDE">標題：</td>
-        <td>
-            <input name="title"
-                   type="text" size="50"
-                   @if(isset($link->title))
-                   value="{{$link->title}}"
-                    @endif/>
-        </td>
-    </tr>
-    <tr>
-        <td align="right" bgcolor="#DEDEDE">連結網址：</td>
-        <td>
-            <input name="url"
-                   type="text" size="100"
-                   @if(isset($link->url))
-                   value="{{$link->url}}"
-                    @endif/>
-        </td>
-    </tr>
+
 
     <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">主圖：</td>
         <td bgcolor="#FFFFFF" class="border-sdown">
 
-            @if(isset($link))
+            @if(isset($banner))
                 <input type="radio" name="photoCtrl"
                        value="originalFile"
                        v-model="formInput.photoCtrl"
                 />
                 維持原圖：
-                @if(isset($link->photoPath) && ($link->photoPath<>''))
-                    <img src="/storage/{{$link->photoPath}}" width="400" height="300"
+                @if(isset($banner->photoPath) && ($banner->photoPath<>''))
+                    <img src="/storage/{{$banner->photoPath}}" width="400" height="300"
                          align="absmiddle" />
                 @endif
                 <br />
@@ -90,13 +57,10 @@
     <tr>
         <td align="right" bgcolor="#DEDEDE">建檔日期：</td>
         <td>
-            @if(isset($link->created_at))
-                {{$link->created_at}}
-            @endif
+            @if(isset($banner->created_at)) {{$banner->created_at}} @endif
         </td>
     </tr>
 </table>
-
 <br />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
@@ -109,3 +73,4 @@
         </td>
     </tr>
 </table>
+

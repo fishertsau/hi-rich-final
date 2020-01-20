@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBannersTabler extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class CreateBannersTabler extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
+            $table->smallInteger('ranking')->unsigned();
+            $table->boolean('published')->default(true);
             $table->string('title')->nullable();
-            $table->string('subTitle')->nullable();
             $table->string('photoPath')->nullable();
-            $table->string('photoPath_en')->nullable();
             $table->timestamps();
         });
     }

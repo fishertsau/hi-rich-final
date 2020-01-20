@@ -9,8 +9,7 @@ class SitesController extends Controller
 {
     public function index()
     {
-        $sites = Site::orderByRanking()->get();
-        return view('system.sites.index', compact('sites'));
+        return view('system.sites.index');
     }
 
     public function create()
@@ -39,7 +38,7 @@ class SitesController extends Controller
 
         return redirect('admin/sites');
     }
-    
+
     public function destroy(Site $site)
     {
         $site->delete();

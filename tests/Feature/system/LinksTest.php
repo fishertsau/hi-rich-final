@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\Link;
+use Illuminate\Http\UploadedFile;
 use App\Models\Category\LinkCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 

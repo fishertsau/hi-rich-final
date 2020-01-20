@@ -2,11 +2,11 @@
 
 @section('content')
     <div id="container">
-        <div id="site"><a href="/admin">首頁</a>>據點清單</div>
-        <a href="/admin/sites/create"><img src="/system/images/new.gif" width="75" height="19" /></a><br />
+        <div id="banner"><a href="/admin">首頁</a>>跑馬燈清單</div>
+        <a href="/admin/banners/create"><img src="/system/images/new.gif" width="75" height="19" /></a><br />
         <img src="/system/images/empty.gif" width="10" height="10" />
 
-        <form action="/admin/sites/ranking" method="POST">
+        <form action="/admin/banners/ranking" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PATCH">
             <transition name="fade" mode="out-in" appear>
@@ -15,7 +15,7 @@
                         <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
                         <td width="80" align="center" bgcolor="#DEDEDE">顯示</td>
                         <td width="80" align="center" bgcolor="#DEDEDE">顯示排序</td>
-                        <td align="left" bgcolor="#DEDEDE">據點名稱</td>
+                        <td align="left" bgcolor="#DEDEDE">名稱</td>
                         <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
                         <td width="60" align="center" bgcolor="#DEDEDE">修改</td>
                         <td width="60" align="center" bgcolor="#DEDEDE">刪除</td>
@@ -37,14 +37,14 @@
                                    size="2" />
                         </td>
                         <td align="left" bgcolor="#ECECEC" class="border-sdown">
-                            <a :href="'/admin/sites/' +  item.id +'/edit'"> @{{item.name}} </a>
+                            <a :href="'/admin/banners/' +  item.id +'/edit'"> @{{item.title}} </a>
                         </td>
                         <td align="center" bgcolor="#ECECEC" class="border-sdown">
                             @{{item.created_at}}
                         </td>
 
                         <td align="center" bgcolor="#ECECEC" class="border-sdown">
-                            <a :href="'/admin/sites/' +  item.id +'/edit'">
+                            <a :href="'/admin/banners/' +  item.id +'/edit'">
                                 <img src="/system/images/bt-revise.gif" width="23" height="23" />
                             </a>
                         </td>
@@ -86,5 +86,5 @@
 @endsection
 
 @section('pageJS')
-    <script type="text/javascript" src="{{ asset('/js/system/sites/index.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/system/banners/index.js') }}"></script>
 @endsection

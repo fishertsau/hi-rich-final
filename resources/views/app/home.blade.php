@@ -10,11 +10,9 @@
                tabindex="-1"><span class="img-arrow-right"></span></a>
         </div>
         <div class="my-slider">
-            {{-- todo: get photos from backend --}}
-            <div class="banner-img"><img src="./asset/images/banner/banner01.jpg"></div>
-            <div class="banner-img"><img src="./asset/images/banner/banner02.jpg"></div>
-            <div class="banner-img"><img src="./asset/images/banner/banner03.jpg"></div>
-            <div class="banner-img"><img src="./asset/images/banner/banner04.jpg"></div>
+            @foreach($banners as $banner)
+                <div class="banner-img"><img src="/storage/{{$banner->photoPath}}"></div>
+            @endforeach
         </div>
     </div>
 

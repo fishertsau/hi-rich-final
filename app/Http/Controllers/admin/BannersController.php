@@ -3,98 +3,126 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Banner;
-use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\Repositories\PhotoRepository;
 
 class BannersController extends Controller
 {
+    /**
+     * @var PhotoRepository
+     */
     private $photoRepo;
 
     /**
-     * BannersController constructor.
-     * @param $photoRepo
+     * ProductsController constructor.
+     * @param PhotoRepository $photoRepository
      */
-    public function __construct(PhotoRepository $photoRepo)
+    public function __construct(PhotoRepository $photoRepository)
     {
-        $this->photoRepo = $photoRepo;
+        $this->photoRepo = $photoRepository;
+    }
+    
+    public function index()
+    {
+        $banners = Banner::orderByRanking()->get();
+       
+        return view('system.banners.index', compact('banners'));
     }
 
-
-    public function edit()
+    public function create()
     {
-        $bannerA = Banner::first();
-        $bannerB = Banner::last();
-        return view('system.banner.edit', compact('bannerA', 'bannerB'));
+        return view('system.banners.edit');
     }
 
-
-    public function update()
+    public function edit($id)
     {
-        $bannerA = Banner::firstOrCreate($this->getInput('titleA', 'subTitleA'));
-        $this->handlePhoto($bannerA, request('bannerA_photoCtrl'), request()->file('photoA'), 'photoPath');
-        $this->handlePhoto($bannerA, request('bannerA_photoEnCtrl'), request()->file('photoA_en'), 'photoPath_en');
+        $banner = Banner::findOrFail($id);
+        return view('system.banners.edit', compact('banner'));
+    }
 
-        $bannerB = Banner::secondOrCreate($this->getInput('titleB', 'subTitleB'));
-        $this->handlePhoto($bannerB, request('bannerB_photoCtrl'), request()->file('photoB'),'photoPath');
-        $this->handlePhoto($bannerB, request('bannerB_photoEnCtrl'), request()->file('photoB_en'), 'photoPath_en');
+    public function store()
+    {
+        $input = $this->validateInput();
+        $input['ranking'] = Banner::count() + 1;
+        $banner = Banner::create($input);
 
-        return redirect('/admin/banner');
+        $this->storeCoverPhoto($banner);
+        
+        return redirect('admin/banners');
+    }
+
+    public function update(Banner $banner)
+    {
+        $banner->update($this->validateInput());
+
+        $this->updatePhoto($banner);
+        
+        return redirect('admin/banners');
+    }
+    
+    public function destroy(Banner $banner)
+    {
+        $banner->delete();
+
+        return redirect('admin/banners');
+    }
+
+    public function ranking()
+    {
+        collect(request('id'))->each(function ($id, $key) {
+            Banner::findOrFail($id)
+                ->update(['ranking' => request('ranking')[$key]]);
+        });
+
+        return redirect('admin/banners');
+    }
+
+    private function validateInput()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'published' => 'required|boolean'
+        ]);
     }
 
     /**
-     * @internal param $bannerA
      * @param $banner
-     * @param $photoControl
-     * @param UploadedFile $photo
-     * @param $field
+     * @return BannersController
      */
-    private function handlePhoto($banner, $photoControl, UploadedFile $photo=null, $field)
+    private function storeCoverPhoto($banner)
     {
-        switch ($photoControl) {
-            case 'newFile':
-                $this->deletePhoto($banner,$field);
-                $photoPath = $this->photoRepo->store($photo,false);
-                $this->updatePhotoPath($banner, $photoPath, $field);
-                break;
-            case 'deleteFile':
-                $this->deletePhoto($banner,$field);
-                $this->updatePhotoPath($banner, '', $field);
-                break;
+        if (request('photoCtrl') === 'newFile') {
+            $banner->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo'))
+            ]);
         }
+
+        return $this;
     }
 
     /**
-     * @param null $titleField
-     * @param null $subTitleField
-     * @return array
+     * @param $model
+     * @return BannersController
      */
-    private function getInput($titleField = null, $subTitleField = null)
+    private function updatePhoto($model)
     {
-        return [
-            'title' => request($titleField),
-            'subTitle' => request($subTitleField),
-        ];
+        if (request('photoCtrl') === 'newFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo')),
+            ]);
+        }
+
+        if (request('photoCtrl') === 'deleteFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' => null]);
+        }
+
+        return $this;
     }
 
-    /**
-     * @param $banner
-     * @param $field
-     */
-    private function deletePhoto($banner,$field)
+    private function deleteFile($path)
     {
-        $oldPath = public_path('storage') . '/' . $banner->{$field};
-        \File::delete($oldPath);
-    }
-
-
-    /**
-     * @param Banner $banner
-     * @param $newPath
-     * @param $field
-     */
-    private function updatePhotoPath(Banner $banner, $newPath, $field)
-    {
-        $banner->update([$field => $newPath]);
+        \File::delete(public_path('storage') . '/' . $path);
     }
 }

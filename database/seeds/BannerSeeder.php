@@ -5,6 +5,12 @@ use Illuminate\Database\Seeder;
 
 class BannerSeeder extends Seeder
 {
+    private $photoList = [
+        'banner01.jpg',
+        'banner02.jpg',
+        'banner03.jpg',
+        'banner04.jpg'
+    ];
     /**
      * Run the database seeds.
      *
@@ -12,24 +18,25 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-       // todo: remove this 
-        return;
         Banner::truncate();
 
-        $photoPathA = 'images/' . str_random(40) . '.jpg';
-        File::copy(public_path('images/ban-1.jpg'),
-            public_path('storage/' . $photoPathA));
+        foreach ($this->photoList as $photo) {
+            factory(Banner::class)->create([
+                'photoPath' =>  $this->copyPhoto($photo)
+            ]);
+        }
+    }
 
-        $photoPathB = 'images/' . str_random(40) . '.jpg';
-        File::copy(public_path('images/ban-2.jpg'),
-            public_path('storage/' . $photoPathB));
+    private function copyPhoto($fileName)
+    {
+        $newPhotoPath = str_random(40) . '.jpg';
 
-        Banner::firstOrCreate([
-            'photoPath'=>$photoPathA
-        ]);
+        $targetOriginFile = public_path(config('filesystems.app.origin_banners_image_baseDir') . '/' . $fileName);
+        $targetDestFile = public_path(
+            config('filesystems.app.public_storage_root') . '/images/' . $newPhotoPath);
 
-        Banner::secondOrCreate([
-            'photoPath'=>$photoPathB
-        ]);
+        File::copy($targetOriginFile, $targetDestFile);
+
+        return 'images/' . $newPhotoPath;
     }
 }

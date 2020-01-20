@@ -10,12 +10,13 @@ mix.js('resources/assets/js/system/contact/contactShow.js', 'public/js/system/co
 
 mix.js('resources/assets/js/system/news/newsIndex.js', 'public/js/system/news');
 
-mix.js('resources/assets/js/system/sites/sitesIndex.js', 'public/js/system/sites');
+mix.js('resources/assets/js/system/sites/index.js', 'public/js/system/sites');
 
 mix.js('resources/assets/js/system/links/index.js', 'public/js/system/links');
 mix.js('resources/assets/js/system/links/edit.js', 'public/js/system/links');
 
-mix.js('resources/assets/js/system/banner/banner.js', 'public/js/system/banner');
+mix.js('resources/assets/js/system/banners/index.js', 'public/js/system/banners');
+mix.js('resources/assets/js/system/banners/edit.js', 'public/js/system/banners');
 
 mix.js('resources/assets/js/system/abouts/index.js', 'public/js/system/abouts');
 mix.js('resources/assets/js/system/abouts/edit.js', 'public/js/system/abouts');

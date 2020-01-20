@@ -7,34 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends Model
 {
     protected $guarded = [];
+    
+    protected $casts = [
+        'published' => 'boolean'
+    ];
 
-    public static function firstOrCreate($input)
+    public static function count()
     {
-        $banner = Banner::first();
-
-        if (!$banner) {
-            return Banner::create($input);
-        }
-
-        $banner->update($input);
-
-        return $banner;
+        return count(self::all());
     }
 
-    public static function secondOrCreate($input)
+    public function scopeOrderByRanking($query)
     {
-        if (Banner::all()->count() < 2) {
-            return Banner::create($input);
-        }
-
-        $banner = Banner::last();
-        $banner->update($input);
-
-        return $banner;
+        return $query->orderBy('ranking', 'asc');
     }
 
-    public static function last()
+    public function scopePublished($query)
     {
-        return Banner::all()->last();
+        return $query->where('published', true);
     }
 }

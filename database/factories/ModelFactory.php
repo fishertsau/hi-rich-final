@@ -2,16 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Category\LinkCategory;
-use App\Models\Link;
 use App\User;
 use App\Models\Site;
+use App\Models\Link;
 use App\Models\News;
 use App\Models\Photo;
 use App\Models\About;
+use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Contact;
 use App\Models\WebConfig;
+use App\Models\Category\LinkCategory;
 use App\Models\Category\NewsCategory;
 use App\Models\Category\ProductCategory;
 
@@ -27,7 +28,6 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 });
 
 
-// todo: remove this
 $factory->define(About::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence(3),
@@ -60,20 +60,17 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->state(Product::class, 'published', function () {
     return [
         'published' => true
     ];
 });
 
-
 $factory->state(Product::class, 'unpublished', function () {
     return [
         'published' => false
     ];
 });
-
 
 $factory->define(Photo::class, function () {
     return [
@@ -145,5 +142,13 @@ $factory->define(Link::class, function (Faker\Generator $faker) {
         'cat_id' => (LinkCategory::main()->get())[0]->id,
         'title' => $faker->name,
         'url' => $faker->domainName
+    ];
+});
+
+$factory->define(Banner::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->name,
+        'ranking' => count(Banner::all()) + 1,
+        'published' => true
     ];
 });

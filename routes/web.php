@@ -41,10 +41,10 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('/intro', 'IntroController@edit');
     Route::patch('/intro', 'IntroController@update');
 
-    /** Banner 管理*/
-    Route::get('banner', 'BannersController@edit');
-    Route::patch('banner', 'BannersController@update');
-
+    /** Banner管理*/
+    Route::patch('banners/ranking', 'BannersController@ranking');
+    Route::resource('banners', 'BannersController');
+    
     /***** 產品類別管理 ******/
     Route::patch('product/categories/ranking', 'ProductCategoriesController@ranking');
     Route::resource('product/categories', 'ProductCategoriesController');
@@ -93,6 +93,7 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::resource('contacts', 'ContactsController');
 
     /**設定管理*/
+    // todo: change this
     Route::group(['prefix' => 'settings'], function () {
         Route::patch('siteFooter', 'SettingsController@updateSiteFooter');
         Route::patch('pageInfo', 'SettingsController@updatePageInfo');
