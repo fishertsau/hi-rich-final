@@ -5,28 +5,85 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebConfig;
+use App\Repositories\PhotoRepository;
 
 class SettingsController extends Controller
 {
-    public function siteFooter()
+    private $photoRepo;
+
+    /**
+     * ProductsController constructor.
+     * @param PhotoRepository $photoRepository
+     */
+    public function __construct(PhotoRepository $photoRepository)
     {
-        return view('system.settings.siteFooter');
+        $this->photoRepo = $photoRepository;
     }
 
-    public function password()
+
+    public function companyInfo()
     {
-        return view('system.settings.password');
+        return view('system.settings.companyInfo');
     }
+
+    public function updateCompanyInfo()
+    {
+        WebConfig::firstOrCreate()->update([
+            'company_name' => request('company_name'),
+            'tel' => request('tel'),
+            'fax' => request('fax'),
+            'address' => request('address'),
+            'email' => request('email'),
+            'copyright_declare' => request('copyright_declare')
+        ]);
+
+
+        return redirect('/admin/settings/companyInfo');
+    }
+
+
+    public function marketingInfo()
+    {
+        return view('system.settings.marketingInfo');
+    }
+
+    public function updateMarketingInfo()
+    {
+        $webConfig = WebConfig::firstOrCreate();
+        
+        $webConfig->update([
+            'slogan' => request('slogan'),
+            'slogan_sub' => request('slogan_sub'),
+            'product' => request('product'),
+            'place' => request('place'),
+            'location' => request('location'),
+            'service_hour' => request('service_hour'),
+        ]);
+
+        $this->updatePhoto($webConfig)
+            ->updatePdfFile($webConfig);
+
+        return redirect('/admin/settings/marketingInfo');
+    }
+
 
     public function pageInfo()
     {
         return view('system.settings.pageInfo');
     }
 
-    public function googleMap()
+    public function updatePageInfo()
     {
-        return view('system.settings.googleMap');
+        WebConfig::firstOrCreate()->update([
+            'title' => request('title'),
+            'keywords' => request('keywords'),
+            'description' => request('description'),
+            'meta' => request('meta'),
+        ]);
+
+        return redirect('/admin/settings/pageInfo');
     }
+
 
     public function mailService()
     {
@@ -40,55 +97,52 @@ class SettingsController extends Controller
         return redirect('/admin/settings/mailService');
     }
 
-
-    public function updateSiteFooter()
+    public function password()
     {
-        WebConfig::firstOrCreate()->update([
-            'tel' => request('tel'),
-            'fax' => request('fax'),
-            'email' => request('email'),
-            'email2' => request('email2'),
-            'line_id' => request('line_id'),
-            'blog_url' => request('blog_url'),
-            'fb_url' => request('fb_url'),
-            'pikebon_url' => request('pikebon_url'),
-            'twitter_url' => request('twitter_url'),
-            'google_plus_url' => request('google_plus_url'),
-            'pinterest_url' => request('pinterest_url'),
-            'youtube_url' => request('youtube_url'),
-            'instagram_url' => request('instagram_url'),
-            'declare' => request('declare'),
-            'declare_en' => request('declare_en')
-        ]);
-
-        return redirect('/admin/settings/siteFooter');
+        return view('system.settings.password');
     }
 
-    public function updateGoogleMap()
+    /**
+     * @param $model
+     * @return SettingsController
+     */
+    private function updatePhoto($model)
     {
-        WebConfig::firstOrCreate()->update([
-            'address' => request('address'),
-            'address_en' => request('address_en'),
-            'address2' => request('address2'),
-            'address2_en' => request('address2_en'),
-        ]);
+        if (request('photoCtrl') === 'newFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' =>
+                $this->photoRepo->store(request()->file('photo')),
+            ]);
+        }
 
-        return redirect('/admin/settings/googleMap');
+        if (request('photoCtrl') === 'deleteFile') {
+            $this->deleteFile($model->photoPath);
+            $model->update(['photoPath' => null]);
+        }
+
+        return $this;
     }
 
-    public function updatePageInfo()
-    {
-        WebConfig::firstOrCreate()->update([
-            'title' => request('title'),
-            'keywords' => request('keywords'),
-            'description' => request('description'),
-            'meta' => request('meta'),
-            'title_en' => request('title_en'),
-            'keywords_en' => request('keywords_en'),
-            'description_en' => request('description_en'),
-            'meta_en' => request('meta_en')
-        ]);
 
-        return redirect('/admin/settings/pageInfo');
+    private function updatePdfFile(WebConfig $model)
+    {
+        if (request('pdfCtrl') === 'newPdfFile') {
+            $this->deleteFile($model->pdfPath);
+            $model->update(['pdfPath' =>
+                request()->file('pdfFile')->store('pdf', 'public')]);
+        }
+
+        if (request('pdfCtrl') === 'deletePdfFile') {
+            $this->deleteFile($model->pdfPath);
+            $model->update(['pdfPath' => null]);
+        }
+
+        return $this;
+    }
+
+
+    private function deleteFile($path)
+    {
+        \File::delete(public_path('storage') . '/' . $path);
     }
 }

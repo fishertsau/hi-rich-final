@@ -91,31 +91,6 @@
         </td>
     </tr>
 
-    @if(config('app.english_enabled'))
-        <tr>
-            <td align="right" bgcolor="#DEDEDE">標題(英文)：</td>
-            <td><input name="title_en"
-                       type="text" size="50"
-                       @if(isset($news->title_en))
-                       value="{{$news->title_en}}"
-                        @endif
-                /></td>
-        </tr>
-        <tr>
-            <td align="right" valign="top" bgcolor="#DEDEDE">內文(英文)：</td>
-            <td>
-            <textarea name="body_en"
-                      rows="4" cols="50"
-                      class="textarea"
-                      id="froala-editor"
-                      ckeditor="true"
-                      style="width: 100%; height: 200px; font-size: 14px;
-                      line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                    {{isset($news->body_en)?$news->body_en:''}}
-                </textarea>
-            </td>
-        </tr>
-    @endif
 </table>
 <br />
 <table width="100%" border="0" cellpadding="0" cellspacing="0">

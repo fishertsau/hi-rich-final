@@ -58,7 +58,7 @@
                 </li>
                 <li>
                     <a href="/admin/links"><img src="/system/images/arrow.png" width="10" height="10" />
-                       連結清單 
+                        連結清單
                     </a>
                 </li>
             </ul>
@@ -78,22 +78,32 @@
         {{--設定管理--}}
         <li><a href="#Menu=ChildMenu4" onclick="DoMenu('ChildMenu4')">各項設定<img src="/system/images/arrow-down.png">
                 <ul id="ChildMenu4" class="collapsed">
-                    <li><a href="/admin/settings/siteFooter">
+                    <li>
+                        <a href="/admin/settings/companyInfo">
                             <img src="/system/images/arrow.png" width="10" height="10" />
                             網站內容</a>
                     </li>
-                    <li><a href="/admin/settings/pageInfo"><img src="/system/images/arrow.png" width="10" height="10" />
-                            網站設定</a>
+                    <li>
+                        <a href="/admin/settings/marketingInfo">
+                            <img src="/system/images/arrow.png" width="10" height="10" />
+                            行銷內容</a>
                     </li>
-                    <li><a href="/admin/settings/googleMap"><img src="/system/images/arrow.png" width="10"
-                                                                 height="10" />
-                            Google地圖與地址設定</a>
+                    <li>
+                        <a href="/admin/settings/pageInfo"><img src="/system/images/arrow.png" width="10" height="10" />
+                            網站設定
+                        </a>
                     </li>
-                    <li><a href="/admin/settings/mailService"><img src="/system/images/arrow.png" width="10"
-                                                                   height="10" />
-                            信件設定</a></li>
-                    <li><a href="/admin/settings/password"><img src="/system/images/arrow.png" width="10" height="10" />
-                            修改密碼</a>
+                    <li>
+                        <a href="/admin/settings/mailService">
+                            <img src="/system/images/arrow.png" width="10" height="10" />
+                            信件設定
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/settings/password">
+                            <img src="/system/images/arrow.png" width="10" height="10" />
+                            修改密碼
+                        </a>
                     </li>
                 </ul>
             </a>

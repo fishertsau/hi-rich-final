@@ -44,7 +44,6 @@
     </div>
 @endsection
 
-
 @section('pageJS')
     @include('system.partials.ckeditor')
 
@@ -54,3 +53,6 @@
         }
     </script>
 @endsection
+
+
+

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\app;
 
 use App;
-use App\Models\News;
 use App\Models\Banner;
-use App\Models\Product;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller

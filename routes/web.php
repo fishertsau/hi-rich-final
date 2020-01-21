@@ -93,17 +93,19 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::resource('contacts', 'ContactsController');
 
     /**設定管理*/
-    // todo: change this
     Route::group(['prefix' => 'settings'], function () {
-        Route::patch('siteFooter', 'SettingsController@updateSiteFooter');
-        Route::patch('pageInfo', 'SettingsController@updatePageInfo');
-        Route::patch('mailService', 'SettingsController@updateMailService');
-        Route::patch('googleMap', 'SettingsController@updateGoogleMap');
+        Route::get('companyInfo', 'SettingsController@companyInfo');
+        Route::patch('companyInfo', 'SettingsController@updateCompanyInfo');
 
-        Route::get('siteFooter', 'SettingsController@siteFooter');
+        Route::get('marketingInfo', 'SettingsController@marketingInfo');
+        Route::patch('marketingInfo', 'SettingsController@updateMarketingInfo');
+
         Route::get('pageInfo', 'SettingsController@pageInfo');
-        Route::get('googleMap', 'SettingsController@googleMap');
+        Route::patch('pageInfo', 'SettingsController@updatePageInfo');
+        
+        Route::patch('mailService', 'SettingsController@updateMailService');
         Route::get('mailService', 'SettingsController@mailService');
+        
         Route::get('password', 'SettingsController@password');
     });
 });

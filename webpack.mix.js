@@ -21,6 +21,8 @@ mix.js('resources/assets/js/system/banners/edit.js', 'public/js/system/banners')
 mix.js('resources/assets/js/system/abouts/index.js', 'public/js/system/abouts');
 mix.js('resources/assets/js/system/abouts/edit.js', 'public/js/system/abouts');
 
+mix.js('resources/assets/js/system/settings/marketingInfoEdit.js', 'public/js/system/settings');
+
 
 // 前台 
 mix.js('resources/assets/js/app/contact/index.js', 'public/js/app/contact');
