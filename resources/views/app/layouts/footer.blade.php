@@ -1,4 +1,3 @@
-{{--todo: change link--}}
 <footer>
     <div class="footer-content">
         <div class="footer-link-box">
@@ -11,17 +10,18 @@
         <hr />
         <div class="footer-info">
             {{--todo: get content from backend--}}
-            <a href="/" class="logo"><img src="/asset/images/logo-black.png" alt="高豐海產股份有限公司"></a>
+            <a href="/" class="logo">
+                <img src="/storage/{{$webConfig->photoPath}}" alt="{{$webConfig->company_name}}">
+            </a>
             <div class="footer-info-content">
-                <span class="text-address">台北總公司248新北市五股區五工一路131號5樓</span>
-                <span class="text-phone">TEL:02-22901180</span>
-                <span class="text-phone">FAX:02-22901070</span>
+                <span class="text-address">{{$webConfig->address}}</span>
+                <span class="text-phone">TEL:{{$webConfig->tel}}</span>
+                <span class="text-phone">FAX:{{$webConfig->fax}}</span>
             </div>
         </div>
     </div>
     <div class="copyright">
-        {{-- todo: add in the company name --}}
-        ©2019高豐海產股份有限公司 | All Rights Reserved. 版權所有 <span>網頁設計 by XXX</span>
+        {{$webConfig->copyright_declare}} | All Rights Reserved. 版權所有 <span>網頁設計 by 異果設計</span>
     </div>
 </footer>
 

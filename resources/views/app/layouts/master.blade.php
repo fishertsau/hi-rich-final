@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<title>高豐海產股份有限公司</title>
+<title>{{$webConfig->title}}</title>
 <!-- Favicons -->
 <link rel="apple-touch-icon" href="/asset/images/icon/apple-touch-icon.png">
 <link rel="icon" href="/asset/images/icon/favicon.ico">

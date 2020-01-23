@@ -41,9 +41,8 @@
                     <span class="nav-title">相關連結</span>
                 </a>
             </li>
-            {{-- todo: implement this--}}
             <li class="nav-menu-item">
-                <a href="javascript:;">
+                <a href="/storage/{{$webConfig->pdfPath}}" download >
                     <span class="nav-title icon-download">電子型錄</span>
                 </a>
             </li>
