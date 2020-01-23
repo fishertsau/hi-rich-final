@@ -62,11 +62,8 @@ class ProductTest extends TestCase
             'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
-            'title_en' => 'ANewProductEnglish',
             'briefing' => 'ANewProductBriefing',
-            'briefing_en' => 'ANewProductBriefingEnglish',
             'body' => 'SomeContent Body',
-            'body_en' => 'SomeContent BodyEnglish',
             'photoCtrl' => 'newFile',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
             'pdfCtrl' => 'newPdfFile',
@@ -88,11 +85,8 @@ class ProductTest extends TestCase
         $this->assertEquals(true, $product->published_in_home);
         $this->assertEquals(1, $product->cat_id);
         $this->assertEquals('ANewProduct', $product->title);
-        $this->assertEquals('ANewProductEnglish', $product->title_en);
         $this->assertEquals('ANewProductBriefing', $product->briefing);
-        $this->assertEquals('ANewProductBriefingEnglish', $product->briefing_en);
         $this->assertEquals('SomeContent Body', $product->body);
-        $this->assertEquals('SomeContent BodyEnglish', $product->body_en);
         $this->assertNotNull($product->ranking);
         $this->assertSame(0, (int)$product->ranking);
         $this->assertNotNull($product->photoPath);
@@ -533,8 +527,6 @@ class ProductTest extends TestCase
     {
         $configSetting = [
             'product_show_per_page' => 10,
-            'category_photo_enabled' => true,
-            'category_description' => 'CatDescription'
         ];
 
         $response = $this->patch('/admin/products/config', $configSetting);
@@ -542,8 +534,6 @@ class ProductTest extends TestCase
         $updatedConfig = WebConfig::first();
         $response->assertRedirect('admin/products');
         $this->assertEquals(10, $updatedConfig->product_show_per_page);
-        $this->assertEquals('CatDescription', $updatedConfig->category_description);
-        $this->assertTrue($updatedConfig->category_photo_enabled);
     }
 
     /** @test */

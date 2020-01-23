@@ -74,10 +74,7 @@ class ContactTest extends TestCase
         $response->assertRedirect('/admin/contacts/template');
 
         tap(WebConfig::firstOrCreate(), function ($webConfig) {
-            $this->assertEquals('Google Track Code', $webConfig->google_track_code);
             $this->assertEquals('Contact ok page', $webConfig->contact_ok);
-            $this->assertEquals('English Contact ok page', $webConfig->contact_ok_en);
-            $this->assertEquals('A Google Map', $webConfig->google_map);
         });
     }
 

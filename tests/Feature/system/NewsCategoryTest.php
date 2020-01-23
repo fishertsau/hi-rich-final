@@ -119,24 +119,6 @@ class NewsCategoryTest extends TestCase
     }
 
     /** @test */
-    public function the_photo_upload_selection_is_shown_when_category_photo_enabled_is_on()
-    {
-        $category = factory(NewsCategory::class)->create(['title' => 'ASuperCategoryTitle']);
-
-        WebConfig::create(['category_photo_enabled' => true]);
-
-        $response = $this->get('/admin/news/categories/' . $category->id . '/edit');
-        $response->assertSuccessful()
-            ->assertSee('維持原圖');
-
-
-        WebConfig::firstOrCreate()->update(['category_photo_enabled' => false]);
-        $response = $this->get('/admin/news/categories/' . $category->id . '/edit');
-        $response->assertSuccessful()
-            ->assertDontSee('維持原圖');
-    }
-
-    /** @test */
     public function can_update_category()
     {
         $category = factory(NewsCategory::class)->create(['activated' => true, 'title' => 'CategoryTitle']);
