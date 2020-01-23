@@ -23,15 +23,13 @@ class ProductSeeder extends Seeder
         $categories = ProductCategory::getActivatedByLevel(2);
 
         $categories->each(function ($category) {
-            if (!$category->hasDescendants) {
-                collect(range(3, 6))->each(function () use ($category) {
-                    factory(Product::class)
-                        ->create([
-                            'cat_id' => $category->id,
-                            'photoPath' => $this->copyPhoto(),
-                        ]);
-                });
-            }
+            collect(range(3, 6))->each(function () use ($category) {
+                factory(Product::class)
+                    ->create([
+                        'cat_id' => $category->id,
+                        'photoPath' => $this->copyPhoto(),
+                    ]);
+            });
         });
     }
 

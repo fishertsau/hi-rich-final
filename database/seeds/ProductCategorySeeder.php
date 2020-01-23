@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Category\ProductCategory ;
+use App\Models\Category\ProductCategory;
 use Illuminate\Database\Seeder;
 
 class ProductCategorySeeder extends Seeder
@@ -33,25 +33,14 @@ class ProductCategorySeeder extends Seeder
 
         $mainCats = $this->createMainCats();
 
-        if (!(config('app.product_category_tier3_enabled')
-            || config('app.product_category_tier2_enabled'))) {
+        if (config('app.product_category_tier2_enabled')) {
             return;
         }
 
         $mainCats->each(function ($cat) use ($faker) {
-            $subNum = random_int(0, 3);
-
+            $subNum = random_int(1, 3);
             for ($i = 0; $i < $subNum; $i++) {
-                if ((config('app.product_category_tier3_enabled')
-                    || config('app.product_category_tier2_enabled'))) {
-                    $subCat = $this->createChildCategory($cat, $faker);
-                    if (config('app.product_category_tier3_enabled')) {
-                        $subSubNum = random_int(0, 3);
-                        for ($j = 0; $j < $subSubNum; $j++) {
-                            $this->createChildCategory($subCat, $faker);
-                        }
-                    }
-                }
+                $this->createChildCategory($cat, $faker);
             }
         });
     }
