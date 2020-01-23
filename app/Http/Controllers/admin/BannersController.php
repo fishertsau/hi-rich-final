@@ -8,6 +8,8 @@ use App\Repositories\PhotoRepository;
 
 class BannersController extends Controller
 {
+    use PhotoHandler;
+    
     /**
      * @var PhotoRepository
      */
@@ -83,46 +85,5 @@ class BannersController extends Controller
             'title' => 'required',
             'published' => 'required|boolean'
         ]);
-    }
-
-    /**
-     * @param $banner
-     * @return BannersController
-     */
-    private function storeCoverPhoto($banner)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $banner->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo'))
-            ]);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $model
-     * @return BannersController
-     */
-    private function updatePhoto($model)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo')),
-            ]);
-        }
-
-        if (request('photoCtrl') === 'deleteFile') {
-            $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' => null]);
-        }
-
-        return $this;
-    }
-
-    private function deleteFile($path)
-    {
-        \File::delete(public_path('storage') . '/' . $path);
     }
 }

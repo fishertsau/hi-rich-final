@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Repositories\PhotoRepository;
 
 abstract class CategoriesBaseController extends Controller
 {
+    use PhotoHandler;
+    
     private $photoRepo;
 
     protected $indexPageUri;
@@ -107,7 +108,6 @@ abstract class CategoriesBaseController extends Controller
         return redirect($this->indexPageUri);
     }
 
-
     public function ranking()
     {
         collect(request('id'))->each(function ($id, $key) {
@@ -116,17 +116,6 @@ abstract class CategoriesBaseController extends Controller
         });
 
         return redirect($this->indexPageUri);
-    }
-
-    /**
-     * @param $category
-     */
-    private function storePhoto(Category $category)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $category->update([
-                'photoPath' => $this->photoRepo->store(request()->file('photo'))]);
-        }
     }
 
     private function createSubCategory($input = [])
@@ -139,23 +128,6 @@ abstract class CategoriesBaseController extends Controller
             ->create($input);
 
         $this->storePhoto($subCategory);
-    }
-
-    /**
-     * @param $category
-     */
-    private function updatePhoto($category)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $this->photoRepo->deletePhotoFile($category->photoPath);
-            $category->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo'))]);
-        }
-
-        if (request('photoCtrl') === 'deleteFile') {
-            $this->photoRepo->deletePhotoFile($category->photoPath);
-            $category->update(['photoPath' => null]);
-        }
     }
 
     /**

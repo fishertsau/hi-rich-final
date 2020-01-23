@@ -12,6 +12,8 @@ use App\Repositories\CategoryRepository;
 
 class ProductsController extends Controller
 {
+    use PhotoHandler;
+
     /**
      * @var CategoryRepository
      */
@@ -55,9 +57,11 @@ class ProductsController extends Controller
     {
         $product = Product::create($this->validateInput());
 
-        $this->storeCoverPhoto($product)
-            ->storePdfFile($product)
-            ->storePhotos($product, request('photos'), request('photoTitles'));
+        $this->storeCoverPhoto($product);
+
+        $this->storePdfFile($product);
+
+        $this->storePhotos($product, request('photos'), request('photoTitles'));
 
         return redirect('/admin/products');
     }
@@ -84,8 +88,9 @@ class ProductsController extends Controller
 
         $product->update($this->validateInput());
 
-        $this->updatePhoto($product)
-            ->updatePdfFile($product)
+        $this->updatePhoto($product);
+        
+        $this->updatePdfFile($product)
             ->storePhotos($product, request('photos'), request('photoTitles'));
 
         return redirect('/admin/products');
@@ -170,18 +175,16 @@ class ProductsController extends Controller
             'published_in_home' => 'required|boolean',
             'cat_id' => '',
             'title' => '',
-            'title_en' => '',
             'briefing' => '',
-            'briefing_en' => '',
             'body' => '',
-            'body_en' => ''
         ]);
     }
 
     public function updateConfig()
     {
         WebConfig::firstOrCreate()
-            ->update(request()->only(['product_show_per_page', 'category_photo_enabled', 'category_description']));
+            ->update(request()
+                ->only(['product_show_per_page']));
 
         return redirect('admin/products');
     }
@@ -193,7 +196,6 @@ class ProductsController extends Controller
         $products = App::make(ProductFilter::class)->getList($queryTerm);
         return view('system.product.index', compact('products', 'queryTerm'));
     }
-
 
     private function getQueryTerm()
     {
@@ -233,22 +235,6 @@ class ProductsController extends Controller
         session()->put('queryTerm', $queryTerm);
     }
 
-    /**
-     * @param $product
-     * @return ProductsController
-     */
-    private function storeCoverPhoto($product)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $product->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo'))
-            ]);
-        }
-
-        return $this;
-    }
-
-
     private function storePdfFile(Product $product)
     {
         if (request('pdfCtrl') === 'newPdfFile') {
@@ -257,28 +243,6 @@ class ProductsController extends Controller
         }
         return $this;
     }
-
-    /**
-     * @param $product
-     * @return ProductsController
-     */
-    private function updatePhoto($product)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $this->deleteFile($product->photoPath);
-            $product->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo')),
-            ]);
-        }
-
-        if (request('photoCtrl') === 'deleteFile') {
-            $this->deleteFile($product->photoPath);
-            $product->update(['photoPath' => null]);
-        }
-
-        return $this;
-    }
-
 
     private function updatePdfFile(Product $product)
     {

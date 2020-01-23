@@ -28,10 +28,7 @@ class ContactsController extends Controller
     public function updateTemplate()
     {
         WebConfig::firstOrCreate()->update([
-            'google_track_code' => request('google_track_code'),
-            'google_map' => request('google_map'),
             'contact_ok' => request('contact_ok'),
-            'contact_ok_en' => request('contact_ok_en'),
         ]);
 
         return redirect('/admin/contacts/template');

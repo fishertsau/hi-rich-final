@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 
-use App\Http\Controllers\Controller;
 use App\Models\WebConfig;
+use App\Http\Controllers\Controller;
 use App\Repositories\PhotoRepository;
 
 class SettingsController extends Controller
 {
+    use PhotoHandler;
+
     private $photoRepo;
 
     /**
@@ -19,7 +21,6 @@ class SettingsController extends Controller
     {
         $this->photoRepo = $photoRepository;
     }
-
 
     public function companyInfo()
     {
@@ -37,7 +38,6 @@ class SettingsController extends Controller
             'copyright_declare' => request('copyright_declare')
         ]);
 
-
         return redirect('/admin/settings/companyInfo');
     }
 
@@ -50,7 +50,7 @@ class SettingsController extends Controller
     public function updateMarketingInfo()
     {
         $webConfig = WebConfig::firstOrCreate();
-        
+
         $webConfig->update([
             'slogan' => request('slogan'),
             'slogan_sub' => request('slogan_sub'),
@@ -60,8 +60,8 @@ class SettingsController extends Controller
             'service_hour' => request('service_hour'),
         ]);
 
-        $this->updatePhoto($webConfig)
-            ->updatePdfFile($webConfig);
+        $this->updatePhoto($webConfig);
+        $this->updatePdfFile($webConfig);
 
         return redirect('/admin/settings/marketingInfo');
     }
@@ -102,28 +102,6 @@ class SettingsController extends Controller
         return view('system.settings.password');
     }
 
-    /**
-     * @param $model
-     * @return SettingsController
-     */
-    private function updatePhoto($model)
-    {
-        if (request('photoCtrl') === 'newFile') {
-            $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo')),
-            ]);
-        }
-
-        if (request('photoCtrl') === 'deleteFile') {
-            $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' => null]);
-        }
-
-        return $this;
-    }
-
-
     private function updatePdfFile(WebConfig $model)
     {
         if (request('pdfCtrl') === 'newPdfFile') {
@@ -138,11 +116,5 @@ class SettingsController extends Controller
         }
 
         return $this;
-    }
-
-
-    private function deleteFile($path)
-    {
-        \File::delete(public_path('storage') . '/' . $path);
     }
 }

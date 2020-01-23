@@ -100,9 +100,7 @@ class NewsController extends Controller
         return request()->validate([
             'cat_id' =>  'required',
             'title' => 'required',
-            'title_en' => '',
             'body' => '',
-            'body_en' => '',
             'published' => 'required|boolean',
             'published_since' => '',
             'published_until' => '',
