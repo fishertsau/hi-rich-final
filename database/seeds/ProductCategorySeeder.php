@@ -31,14 +31,11 @@ class ProductCategorySeeder extends Seeder
     {
         ProductCategory::where('for', ProductCategory::getCatIndex())->delete();
 
-        $mainCats = $this->createMainCats();
-
-        if (config('app.product_category_tier2_enabled')) {
-            return;
-        }
+//        $mainCats = $this->createMainCats();
+        $mainCats = $this->createMainCatsWithTitles();
 
         $mainCats->each(function ($cat) use ($faker) {
-            $subNum = random_int(1, 3);
+            $subNum = random_int(5, 10);
             for ($i = 0; $i < $subNum; $i++) {
                 $this->createChildCategory($cat, $faker);
             }
@@ -78,25 +75,25 @@ class ProductCategorySeeder extends Seeder
         return 'images/' . $photoPath;
     }
 
-    private function createMainCats()
-    {
-        if ($this->hasMainCatTitle()) {
-            return $this->createMainCatWithTitles();
-        }
+//    private function createMainCats()
+//    {
+//        if ($this->hasMainCatTitle()) {
+//            return $this->createMainCatWithTitles();
+//        }
+//
+//        return factory(ProductCategory::class, 3)
+//            ->create(['photoPath' => $this->copyPhoto()]);
+//    }
 
-        return factory(ProductCategory::class, 3)
-            ->create(['photoPath' => $this->copyPhoto()]);
-    }
+//    /**
+//     * @return bool
+//     */
+//    private function hasMainCatTitle(): bool
+//    {
+//        return collect($this->mainCatTitles)->count() > 0;
+//    }
 
-    /**
-     * @return bool
-     */
-    private function hasMainCatTitle(): bool
-    {
-        return collect($this->mainCatTitles)->count() > 0;
-    }
-
-    private function createMainCatWithTitles()
+    private function createMainCatsWithTitles()
     {
         return collect($this->mainCatTitles)->map(function ($title) {
             return factory(ProductCategory::class)->create([
