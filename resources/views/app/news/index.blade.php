@@ -68,7 +68,9 @@
 
                         {{--mobile device 顯示--}}
                         <div v-show="isMobile && showDetail"
-                             class="col-12 mobile-news-detail">
+                             class="col-12 mobile-news-detail"
+                             v-cloak
+                        >
                             <div class="btn-box">
                                 {{-- todo: changet this--}}
                                 <a href="javascript:;"
