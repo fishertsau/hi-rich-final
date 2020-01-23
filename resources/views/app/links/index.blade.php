@@ -29,12 +29,13 @@
                                 <a v-for="cat in cats"
                                    class="item"
                                    :class="isActive(cat)"
-                                   @click.prevent="setActiveCat(cat)">
+                                   @click.prevent="setActiveCat(cat)"
+                                   v-cloak>
                                     @{{ cat.title }}
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-9 col-sm-8 col-12">
+                        <div class="col-md-9 col-sm-8 col-12" v-cloak>
                             <div class="section-title">@{{ linkCatTitle }}</div>
                             <div class="links-list set-height">
                                 <div class="row">

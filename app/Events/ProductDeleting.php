@@ -13,7 +13,7 @@ class ProductDeleting extends CoverPhotoDeleting
     public function __construct(Model $model)
     {
         parent::__construct($model);
-        $this->deletePdfFile($model->pdfFile);
+        $this->deletePdfFile($model->pdfPath);
         $this->deletePhotos($model);
     }
 

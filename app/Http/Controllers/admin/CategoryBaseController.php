@@ -8,13 +8,11 @@ use App\Repositories\PhotoRepository;
 abstract class CategoriesBaseController extends Controller
 {
     use PhotoHandler;
-    
-    private $photoRepo;
-
-    protected $indexPageUri;
 
     abstract protected function baseViewPath();
     
+    private $photoRepo;
+    protected $indexPageUri;
     protected $appliedCategory;
 
     /**

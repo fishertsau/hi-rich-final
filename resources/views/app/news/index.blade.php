@@ -15,8 +15,10 @@
                                      :class="isShowCat(showCat)">
                                     <a class="item"
                                        v-for="cat in cats"
-                                       @click.prevent="setActiveCat(cat)">
-                                        @{{ cat.title }}</a>
+                                       @click.prevent="setActiveCat(cat)"
+                                       v-cloak>
+                                        @{{ cat.title }}
+                                    </a>
                                 </div>
                             </div>
 
@@ -27,7 +29,9 @@
                                    :class="{'active': news.id === activeNews.id }"
                                    v-show="!isMobile || !showDetail"
                                    href="javascript:;"
-                                   @click.prevent="setActiveNews(news)">
+                                   @click.prevent="setActiveNews(news)"
+                                   v-cloak
+                                >
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
                                     <span class="text-news"></span>
@@ -38,7 +42,7 @@
 
                         {{--todo: change this --}}
                         <div class="col-lg-8 col-md-7 col-sm-7 col-12 hidden-xs">
-                            <div class="news-content">
+                            <div class="news-content" v-cloak>
                                 <div class="artical-title">
                                     <span class="text-main">@{{ activeNews.title }}-</span>
                                     <span class="text-sub">2019/06/15</span>

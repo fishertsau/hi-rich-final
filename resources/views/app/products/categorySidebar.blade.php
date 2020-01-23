@@ -25,7 +25,8 @@
         <a v-for="cat in cats"
            @click.prevent="setActiveCat(cat)"
            :class="isActive(cat)"
-           href="javascript:;" class="item">@{{ cat.title }}
+           href="javascript:;" class="item"
+           v-cloak>@{{ cat.title }}
         </a>
     </div>
 </div>

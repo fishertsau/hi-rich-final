@@ -16,7 +16,8 @@
                             <div class="links-list set-height">
                                 <div class="row">
                                     <div v-for="product in visibleProducts"
-                                         class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                         class="col-lg-3 col-md-4 col-sm-4 col-xs-12"
+                                         v-cloak>
                                         <a href="javascript:;"
                                            @click.prevent="setActiveProduct(product)"
                                            class="links-item">
