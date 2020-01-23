@@ -23,7 +23,7 @@
                                 </div>
                             </div>
 
-                            <div class="news-list scroll-bar">
+                            <div class="news-list scroll-bar" v-cloak>
                                 <!-- 手機裝置瀏覽 點擊連到news-detail頁面-->
                                 <a v-for="(news,index) in activeNewsList"
                                    class="item"
@@ -31,7 +31,6 @@
                                    v-show="!isMobile || !showDetail"
                                    href="javascript:;"
                                    @click.prevent="setActiveNews(news)"
-                                   v-cloak
                                 >
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
