@@ -14,8 +14,8 @@
         {{-- todo: add 'active' --}}
         <ul class="nav-menu">
             <li class="nav-menu-item">
-                {{--todo: implement this--}}
-                <!-- acitve 在當下對應的頁面時需加上此class -->
+            {{--todo: implement this--}}
+            <!-- acitve 在當下對應的頁面時需加上此class -->
                 <a href="/abouts">
                     <span class="nav-title">關於高豐</span>
                 </a>
@@ -41,11 +41,13 @@
                     <span class="nav-title">相關連結</span>
                 </a>
             </li>
-            <li class="nav-menu-item">
-                <a href="/storage/{{$webConfig->pdfPath}}" download >
-                    <span class="nav-title icon-download">電子型錄</span>
-                </a>
-            </li>
+            @if($webConfig->pdfPath <>'')
+                <li class="nav-menu-item">
+                    <a href="/storage/{{$webConfig->pdfPath}}" download>
+                        <span class="nav-title icon-download">電子型錄</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
 </header>

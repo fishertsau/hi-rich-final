@@ -10,7 +10,8 @@
                             <div class="section-title">-最新動態-</div>
 
                             <div class="mobile-select">
-                                <a class="item-active" @click.prevent="toggleShowCat()">全部連結</a>
+                                <a class="item-active"
+                                   @click.prevent="toggleShowCat()">全部連結</a>
                                 <div class="item-list"
                                      :class="isShowCat(showCat)">
                                     <a class="item"
