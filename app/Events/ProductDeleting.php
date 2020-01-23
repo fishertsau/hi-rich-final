@@ -2,45 +2,34 @@
 
 namespace App\Events;
 
-use App\Models\Product;
+use App\Photoable;
+use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\admin\PhotoHandler;
 
-class ProductDeleting
+class ProductDeleting extends CoverPhotoDeleting
 {
-    private $product;
+    use PhotoHandler;
 
-    public function __construct(Product $product)
+    public function __construct(Model $model)
     {
-        $this->product = $product;
-        $this
-            ->deleteCoverPhoto()
-            ->deletePdfFile()
-            ->deletePhotos();
+        parent::__construct($model);
+        $this->deletePdfFile($model->pdfFile);
+        $this->deletePhotos($model);
     }
 
-
-    private function deletePdfFile()
+    private function deletePdfFile($filePath)
     {
-        $this->deleteFile($this->product->pdfPath);
+        $this->deleteFile($filePath);
+        
         return $this;
     }
 
-    private function deleteCoverPhoto()
+    private function deletePhotos(Photoable $photoable)
     {
-        $this->deleteFile($this->product->photoPath);
-        return $this;
-    }
-
-    private function deletePhotos()
-    {
-        $this->product->photos->each(function ($photo) {
-            $this->deleteFile($photo->photoPath);
+        $photoable->photos->each(function ($photo) {
+            \File::delete(public_path('storage') . '/' . $photo->photoPath);
         });
 
-        $this->product->photos()->delete();
-    }
-
-    private function deleteFile($path)
-    {
-        \File::delete(public_path('storage') . '/' . $path);
+        $photoable->photos()->delete();
     }
 }

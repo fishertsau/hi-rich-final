@@ -4,7 +4,6 @@ namespace Tests\Feature\system;
 
 use App\User;
 use Tests\TestCase;
-use App\Models\WebConfig;
 use Illuminate\Http\UploadedFile;
 use App\Models\Category\ProductCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -88,9 +87,7 @@ class ProductCategoryTest extends TestCase
         $this->assertTrue($category->activated);
         $this->assertEquals('p', $category->for);
         $this->assertEquals('CategoryTitle', $category->title);
-        $this->assertEquals('EnglishCategoryTitle', $category->title_en);
         $this->assertEquals('CategoryDescription', $category->description);
-        $this->assertEquals('EnglishCategoryDescription', $category->description_en);
         $this->assertNotNull($category->ranking);
         $this->assertEquals(0, $category->ranking);
         $this->assertEquals(1, $category->level);
@@ -127,9 +124,7 @@ class ProductCategoryTest extends TestCase
             'parent_id' => $category->id,
             'activated' => true,
             'title' => 'subCategoryTitle',
-            'title_en' => 'englishSubCategoryTitle',
             'description' => 'subCategoryDescription',
-            'description_en' => 'englishSubCategoryDescription',
             'photoCtrl' => 'newFile',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
         ];
@@ -140,9 +135,7 @@ class ProductCategoryTest extends TestCase
         $response->assertRedirect('/admin/product/categories');
         $this->assertTrue($subCategory->activated);
         $this->assertEquals('subCategoryTitle', $subCategory->title);
-        $this->assertEquals('englishSubCategoryTitle', $subCategory->title_en);
         $this->assertEquals('subCategoryDescription', $subCategory->description);
-        $this->assertEquals('englishSubCategoryDescription', $subCategory->description_en);
         $this->assertEquals(2, $subCategory->level);
         $this->assertNotNull($subCategory->photoPath);
         $this->assertFileExists(public_path('storage/' . $subCategory->photoPath));
@@ -164,9 +157,7 @@ class ProductCategoryTest extends TestCase
         $subCategory = $category->childCategories()->create([
             'activated' => true,
             'title' => 'subCategoryTitle',
-            'title_en' => 'englishSubCategoryTitle',
             'description' => 'subCategoryDescription',
-            'description_en' => 'englishSubCategoryDescription',
             'level' => $category->level + 1
         ]);
 
@@ -174,9 +165,7 @@ class ProductCategoryTest extends TestCase
             'parent_id' => $subCategory->id,
             'activated' => true,
             'title' => 'subSubCategoryTitle',
-            'title_en' => 'englishSubSubCategoryTitle',
             'description' => 'subSubCategoryDescription',
-            'description_en' => 'englishSubSubCategoryDescription',
         ];
 
         $response = $this->post('/admin/product/categories', $newInput);
@@ -185,9 +174,7 @@ class ProductCategoryTest extends TestCase
         $response->assertRedirect('/admin/product/categories');
         $this->assertTrue($subSubCategory->activated);
         $this->assertEquals('subSubCategoryTitle', $subSubCategory->title);
-        $this->assertEquals('englishSubSubCategoryTitle', $subSubCategory->title_en);
         $this->assertEquals('subSubCategoryDescription', $subSubCategory->description);
-        $this->assertEquals('englishSubSubCategoryDescription', $subSubCategory->description_en);
         $this->assertEquals(3, $subSubCategory->level);
 
         //sub category and child category
@@ -246,24 +233,6 @@ class ProductCategoryTest extends TestCase
     }
 
     /** @test */
-    public function the_photo_upload_selection_is_shown_when_category_photo_enabled_is_on()
-    {
-        $category = factory(ProductCategory::class)->create(['title' => 'ASuperCategoryTitle']);
-
-        WebConfig::create(['category_photo_enabled' => true]);
-
-        $response = $this->get('/admin/product/categories/' . $category->id . '/edit');
-        $response->assertSuccessful()
-            ->assertSee('維持原圖');
-
-
-        WebConfig::firstOrCreate()->update(['category_photo_enabled' => false]);
-        $response = $this->get('/admin/product/categories/' . $category->id . '/edit');
-        $response->assertSuccessful()
-            ->assertDontSee('維持原圖');
-    }
-
-    /** @test */
     public function can_update_category()
     {
         $category = factory(ProductCategory::class)->create(['activated' => true, 'title' => 'CategoryTitle']);
@@ -271,9 +240,7 @@ class ProductCategoryTest extends TestCase
         $firstUpdatedInput = [
             'activated' => false,
             'title' => '1stCategoryTitle',
-            'title_en' => '1stCategoryTitleEnglish',
             'description' => '1stDescription',
-            'description_en' => '1stDescriptionEnglish',
             'photoCtrl' => 'newFile',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
         ];
@@ -284,9 +251,7 @@ class ProductCategoryTest extends TestCase
         $response->assertRedirect('/admin/product/categories');
         $this->assertEquals(false, $category->activated);
         $this->assertEquals('1stCategoryTitle', $category->title);
-        $this->assertEquals('1stCategoryTitleEnglish', $category->title_en);
         $this->assertEquals('1stDescription', $category->description);
-        $this->assertEquals('1stDescriptionEnglish', $category->description_en);
         $this->assertNotNull($category->photoPath);
         $this->assertFileExists(public_path('storage/' . $category->photoPath));
 

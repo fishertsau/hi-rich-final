@@ -42,7 +42,6 @@ $factory->define(ProductCategory::class, function (Faker\Generator $faker) {
         'activated' => true,
         'title' => $faker->name,
         'description' => 'CategoryDescription',
-        'description_en' => 'EnglishCategoryDescription',
         'level' => 1
     ];
 });
@@ -96,7 +95,6 @@ $factory->define(NewsCategory::class, function (Faker\Generator $faker) {
         'activated' => true,
         'title' => $faker->name,
         'description' => 'CategoryDescription',
-        'description_en' => 'EnglishCategoryDescription',
         'level' => 1
     ];
 });
@@ -132,7 +130,6 @@ $factory->define(LinkCategory::class, function (Faker\Generator $faker) {
         'activated' => true,
         'title' => $faker->name,
         'description' => 'CategoryDescription',
-        'description_en' => 'EnglishCategoryDescription',
         'level' => 1
     ];
 });

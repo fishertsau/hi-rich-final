@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CoverPhotoDeleting;
 use Illuminate\Database\Eloquent\Model;
 
 class Banner extends Model
@@ -10,6 +11,10 @@ class Banner extends Model
     
     protected $casts = [
         'published' => 'boolean'
+    ];
+
+    protected $dispatchesEvents = [
+        'deleting' => CoverPhotoDeleting::class,
     ];
 
     public static function count()

@@ -62,10 +62,8 @@ class NewsTest extends TestCase
         $newNewsInfo = [
             'cat_id' => 1,
             'title' => 'ANewNews',
-            'title_en' => 'ANewNewsEnglish',
             'published' => true,
             'body' => 'SomeContent Body',
-            'body_en' => 'SomeContent BodyEnglish',
             'published_since' => Carbon::parse('-1 week'),
             'published_until' => Carbon::parse('+1 week')
         ];
@@ -76,9 +74,7 @@ class NewsTest extends TestCase
         $response->assertRedirect('admin/news');
         $this->assertEquals(1, $news->cat_id);
         $this->assertEquals('ANewNews', $news->title);
-        $this->assertEquals('ANewNewsEnglish', $news->title_en);
         $this->assertEquals('SomeContent Body', $news->body);
-        $this->assertEquals('SomeContent BodyEnglish', $news->body_en);
         $this->assertTrue($news->published);
         $this->assertEquals(Carbon::parse('-1 week')->toDateTimeString(), $news->published_since);
         $this->assertEquals(Carbon::parse('+1 week')->toDateTimeString(), $news->published_until);
@@ -94,7 +90,6 @@ class NewsTest extends TestCase
         $newNewsInput = [
             'cat_id' => 500,
             'title' => 'NewTitle',
-            'title_en' => 'ANewNewsEnglish',
             'published' => false,
             'body' => 'NewBody',
             'body_en' => 'SomeContent BodyEnglish',
@@ -108,9 +103,7 @@ class NewsTest extends TestCase
         $response->assertRedirect('admin/news');
         $this->assertEquals(500, $news->cat_id);
         $this->assertEquals('NewTitle', $news->title);
-        $this->assertEquals('ANewNewsEnglish', $news->title_en);
         $this->assertEquals('NewBody', $news->body);
-        $this->assertEquals('SomeContent BodyEnglish', $news->body_en);
         $this->assertEquals(false, $news->published);
         $this->assertEquals(Carbon::parse('-1 week')->toDateTimeString(), $news->published_since);
         $this->assertEquals(Carbon::parse('+1 week')->toDateTimeString(), $news->published_until);

@@ -59,9 +59,7 @@ class NewsCategoryTest extends TestCase
         $this->assertTrue($category->activated);
         $this->assertEquals('n', $category->for);
         $this->assertEquals('CategoryTitle', $category->title);
-        $this->assertEquals('EnglishCategoryTitle', $category->title_en);
         $this->assertEquals('CategoryDescription', $category->description);
-        $this->assertEquals('EnglishCategoryDescription', $category->description_en);
         $this->assertNotNull($category->ranking);
         $this->assertEquals(0, $category->ranking);
         $this->assertEquals(1, $category->level);
@@ -139,9 +137,7 @@ class NewsCategoryTest extends TestCase
         $response->assertRedirect('/admin/news/categories');
         $this->assertEquals(false, $category->activated);
         $this->assertEquals('1stCategoryTitle', $category->title);
-        $this->assertEquals('1stCategoryTitleEnglish', $category->title_en);
         $this->assertEquals('1stDescription', $category->description);
-        $this->assertEquals('1stDescriptionEnglish', $category->description_en);
         $this->assertNotNull($category->photoPath);
         $this->assertFileExists(public_path('storage/' . $category->photoPath));
 

@@ -52,4 +52,10 @@ trait PhotoHandler
     {
         \File::delete(public_path('storage') . '/' . $path);
     }
+    
+    private function deleteCoverPhoto($filePath)
+    {
+        $this->deleteFile($filePath);
+        return $this;
+    }
 }

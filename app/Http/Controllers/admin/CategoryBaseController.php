@@ -95,9 +95,7 @@ abstract class CategoriesBaseController extends Controller
         return request()->validate([
             'activated' => 'required|boolean',
             'title' => '',
-            'title_en' => '',
-            'description' => '',
-            'description_en' => ''
+            'description' => ''
         ]);
     }
 

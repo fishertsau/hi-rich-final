@@ -96,7 +96,6 @@ class ProductTest extends TestCase
         $this->assertCount(2, $product->photos);
     }
 
-
     /** @test */
     public function no_photo_or_pdf_file_is_created_if_no_newFile_command_is_given()
     {
@@ -268,6 +267,7 @@ class ProductTest extends TestCase
     /** @test */
     public function can_delete_a_product()
     {
+        
         $product = factory(Product::class)->create();
 
         $response = $this->delete('/admin/products/' . $product->id);

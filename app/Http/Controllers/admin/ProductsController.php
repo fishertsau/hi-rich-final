@@ -67,12 +67,12 @@ class ProductsController extends Controller
 
     private function storePhotos(Photoable $product, $photos = [], $photoTitles = [])
     {
-        collect($photos)->each(function ($photofile, $key) use ($product, $photoTitles) {
-            if (!is_file($photofile)) {
+        collect($photos)->each(function ($photoFile, $key) use ($product, $photoTitles) {
+            if (!is_file($photoFile)) {
                 return;
             }
 
-            $photoPath = $this->photoRepo->store($photofile);
+            $photoPath = $this->photoRepo->store($photoFile);
 
             $product->photos()->create([
                 'photoPath' => $photoPath,
@@ -100,10 +100,6 @@ class ProductsController extends Controller
     {
         $copyProduct = $product;
         $copyProduct->title .= '(複製)';
-
-        if (config('app.english_enabled')) {
-            $copyProduct->title_en .= '(複製)';
-        }
 
         return view('system.product.create', compact('copyProduct'));
     }
