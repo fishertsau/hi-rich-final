@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
 
         $categories->each(function ($category) {
             if (!$category->hasDescendants) {
-                collect(range(1, 3))->each(function () use ($category) {
+                collect(range(3, 6))->each(function () use ($category) {
                     factory(Product::class)
                         ->create([
                             'cat_id' => $category->id,
