@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Events\ProductDeleting;
+use App\Photoable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category\ProductCategory;
 use Illuminate\Database\Eloquent\Collection;
 
-class Product extends Model
+class Product extends Model implements Photoable
 {
     protected $guarded = [];
 

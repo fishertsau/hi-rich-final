@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App;
+use App\Photoable;
 use App\Models\Product;
 use App\Models\WebConfig;
 use App\Filterable\ProductFilter;
@@ -58,15 +59,13 @@ class ProductsController extends Controller
         $product = Product::create($this->validateInput());
 
         $this->storeCoverPhoto($product);
-
         $this->storePdfFile($product);
-
         $this->storePhotos($product, request('photos'), request('photoTitles'));
 
         return redirect('/admin/products');
     }
 
-    private function storePhotos(Product $product, $photos, $photoTitles)
+    private function storePhotos(Photoable $product, $photos = [], $photoTitles = [])
     {
         collect($photos)->each(function ($photofile, $key) use ($product, $photoTitles) {
             if (!is_file($photofile)) {
@@ -89,7 +88,7 @@ class ProductsController extends Controller
         $product->update($this->validateInput());
 
         $this->updatePhoto($product);
-        
+
         $this->updatePdfFile($product)
             ->storePhotos($product, request('photos'), request('photoTitles'));
 
@@ -253,19 +252,13 @@ class ProductsController extends Controller
         }
 
         if (request('pdfCtrl') === 'deletePdfFile') {
-            $this->deleteFile($product->pdfPath);
+            \File::delete(public_path('storage') . '/' . $product->pdfPath);
+
             $product->update(['pdfPath' => null]);
         }
 
         return $this;
     }
-
-
-    private function deleteFile($path)
-    {
-        \File::delete(public_path('storage') . '/' . $path);
-    }
-
 
     public function getPublishedInHome()
     {
