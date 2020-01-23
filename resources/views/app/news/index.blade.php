@@ -9,7 +9,7 @@
                         <div class="col-lg-4 col-md-5 col-sm-5 col-12">
                             <div class="section-title">-最新動態-</div>
 
-                            <div class="mobile-select">
+                            <div class="mobile-select" v-cloak>
                                 <a class="item-active"
                                    @click.prevent="toggleShowCat()">全部連結</a>
                                 <div class="item-list"
