@@ -8,7 +8,7 @@ use App\Models\Link;
 use App\Models\News;
 use App\Models\Photo;
 use App\Models\About;
-use App\Models\Banner;
+use App\Models\Ad;
 use App\Models\Product;
 use App\Models\Contact;
 use App\Models\WebConfig;
@@ -142,10 +142,11 @@ $factory->define(Link::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Banner::class, function (Faker\Generator $faker) {
+$factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
-        'ranking' => count(Banner::all()) + 1,
+        'location' => 1,
+        'ranking' => count(Ad::all()) + 1,
         'published' => true
     ];
 });

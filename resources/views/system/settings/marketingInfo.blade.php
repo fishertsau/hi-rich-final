@@ -70,7 +70,7 @@
                     </td>
                 </tr> 
                 <tr>
-                    <td align="right" bgcolor="#ECECEC" class="border-sdown">PDF檔上傳：</td>
+                    <td align="right" bgcolor="#ECECEC" class="border-sdown">產品型錄檔上傳：(建議pdf)</td>
                     <td bgcolor="#FFFFFF" class="border-sdown">
                             <input type="radio" name="pdfCtrl"
                                    value="originalPdfFile"

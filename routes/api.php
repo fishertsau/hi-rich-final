@@ -36,6 +36,6 @@ Route::get('/links/list', 'api\LinksController@index');
 // 產品清單 
 Route::get('/products/list', 'api\ProductsController@index');
 
-// Banner清單
-Route::get('/banners/list', 'api\BannersController@index');
-Route::get('/banners/list/published', 'api\BannersController@publishedIndex');
+// Ad清單
+Route::get('/ads/list', 'api\AdsController@index');
+Route::get('/ads/list/published', 'api\AdsController@publishedIndex');

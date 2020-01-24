@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Banner;
+use App\Models\Ad;
 use App\Http\Controllers\Controller;
 use App\Repositories\PhotoRepository;
 
-class BannersController extends Controller
+class AdsController extends Controller
 {
     use PhotoHandler;
-    
+
     /**
      * @var PhotoRepository
      */
@@ -23,66 +23,67 @@ class BannersController extends Controller
     {
         $this->photoRepo = $photoRepository;
     }
-    
+
     public function index()
     {
-        $banners = Banner::orderByRanking()->get();
-       
-        return view('system.banners.index', compact('banners'));
+        return view('system.ads.index');
     }
 
     public function create()
     {
-        return view('system.banners.edit');
+        $locations = Ad::LOCATIONS;
+        return view('system.ads.edit', compact('locations'));
     }
 
     public function edit($id)
     {
-        $banner = Banner::findOrFail($id);
-        return view('system.banners.edit', compact('banner'));
+        $ad = Ad::findOrFail($id);
+        $locations = Ad::LOCATIONS;
+        return view('system.ads.edit', compact('ad', 'locations'));
     }
 
     public function store()
     {
         $input = $this->validateInput();
-        $input['ranking'] = Banner::count() + 1;
-        $banner = Banner::create($input);
+        $input['ranking'] = Ad::count() + 1;
+        $ad = Ad::create($input);
 
-        $this->storeCoverPhoto($banner);
-        
-        return redirect('admin/banners');
+        $this->storeCoverPhoto($ad);
+
+        return redirect('admin/ads');
     }
 
-    public function update(Banner $banner)
+    public function update(Ad $ad)
     {
-        $banner->update($this->validateInput());
+        $ad->update($this->validateInput());
 
-        $this->updatePhoto($banner);
-        
-        return redirect('admin/banners');
+        $this->updatePhoto($ad);
+
+        return redirect('admin/ads');
     }
-    
-    public function destroy(Banner $banner)
-    {
-        $banner->delete();
 
-        return redirect('admin/banners');
+    public function destroy(Ad $ad)
+    {
+        $ad->delete();
+
+        return redirect('admin/ads');
     }
 
     public function ranking()
     {
         collect(request('id'))->each(function ($id, $key) {
-            Banner::findOrFail($id)
+            Ad::findOrFail($id)
                 ->update(['ranking' => request('ranking')[$key]]);
         });
 
-        return redirect('admin/banners');
+        return redirect('admin/ads');
     }
 
     private function validateInput()
     {
         return request()->validate([
             'title' => 'required',
+            'location' => 'required',
             'published' => 'required|boolean'
         ]);
     }

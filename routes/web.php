@@ -41,9 +41,9 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::get('/intro', 'IntroController@edit');
     Route::patch('/intro', 'IntroController@update');
 
-    /** Banner管理*/
-    Route::patch('banners/ranking', 'BannersController@ranking');
-    Route::resource('banners', 'BannersController');
+    /** 廣告管理*/
+    Route::patch('ads/ranking', 'AdsController@ranking');
+    Route::resource('ads', 'AdsController');
     
     /***** 產品類別管理 ******/
     Route::patch('product/categories/ranking', 'ProductCategoriesController@ranking');

@@ -2,6 +2,7 @@ require('../../bootstrap');
 import { getLinkCategory, getPublishedLinks } from "../../bootstrap";
 
 const Vue = require('vue');
+alert('he')
 
 new Vue({
   el: '#vueContainer',
@@ -10,7 +11,8 @@ new Vue({
     activeCat: {},
     linkList: [],
     activeLinkList: [],
-    activeLink: {}
+    activeLink: {},
+    showCat: false 
   },
   computed: {
     linkCatTitle: function () {
@@ -43,6 +45,9 @@ new Vue({
         .filter(n => n.cat_id === cat.id);
 
       this.activeLinkList = [...localActiveLinkList];
+    },
+    toggleShowCat: function(){
+      this.showCat = !this.showCat; 
     }
   }
 });

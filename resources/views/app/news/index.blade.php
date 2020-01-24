@@ -11,7 +11,9 @@
 
                             <div class="mobile-select" v-cloak>
                                 <a class="item-active"
-                                   @click.prevent="toggleShowCat()">全部連結</a>
+                                   @click.prevent="toggleShowCat()"
+                                   v-cloak
+                                >@{{ activeCatTitle(activeCat) }}</a>
                                 <div class="item-list"
                                      :class="isShowCat(showCat)">
                                     <a class="item"
@@ -30,8 +32,7 @@
                                    :class="{'active': news.id === activeNews.id }"
                                    v-show="!isMobile || !showDetail"
                                    href="javascript:;"
-                                   @click.prevent="setActiveNews(news)"
-                                >
+                                   @click.prevent="setActiveNews(news)">
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
                                     <span class="text-news"></span>
@@ -40,25 +41,16 @@
                             </div>
                         </div>
 
-                        {{--todo: change this --}}
                         <div class="col-lg-8 col-md-7 col-sm-7 col-12 hidden-xs">
                             <div class="news-content" v-cloak>
                                 <div class="artical-title">
                                     <span class="text-main">@{{ activeNews.title }}-</span>
-                                    <span class="text-sub">2019/06/15</span>
+                                    <span class="text-sub">@{{ activeNews.published_since.substring(0,11).replace(/-/g,'/') }}</span>
                                 </div>
                                 <!-- 編輯器開始 -->
                                 <div class="editor-box set-height">
-                                    <img src="/asset/images/news.jpg" style="width:100%;height:auto">
-                                    <div style="color:#be2120;font-size:22px;margin:25px 0 20px 0;">高豐海產誠摯邀請您</div>
-                                    <div style="font-size:16px;color:#707070;line-height: 24px;">
-                                        職人海鮮盡在高豐<br />
-                                        展出日期：2019/06/19~06/22 ｜ 攤位位置•B0336（由B出入口進入.面對台北101金融中心<br />
-                                        展場資訊：台北世貿展覽一館（地址: 臺北市信義路五段五號<br />
-                                        聯絡我們：<br />
-                                        +886-2-22901180<br />
-                                        http://www.hi-rich.com.tw<br />
-                                        hi.rich@msa.hinet.net<br />
+                                   
+                                    <span v-html="activeNews.body"></span>
                                     </div>
                                 </div>
                                 <!-- 編輯器結束 -->
@@ -68,10 +60,8 @@
                         {{--mobile device 顯示--}}
                         <div v-show="isMobile && showDetail"
                              class="col-12 mobile-news-detail"
-                             v-cloak
-                        >
+                             v-cloak >
                             <div class="btn-box">
-                                {{-- todo: changet this--}}
                                 <a href="javascript:;"
                                    @click.prevent="showDetail = false"
                                    class="link-back">回上頁
@@ -80,8 +70,7 @@
                             <div class="news-content">
                                 <div class="artical-title">
                                     <span class="text-main">@{{activeNews.title}}-</span>
-
-                                    <span class="text-sub">@{{isMobile}}</span>
+                                    <span class="text-sub">@{{ activeNews.published_since.substring(0,11).replace(/-/g,'/') }}</span>
                                 </div>
                                 <!-- 編輯器開始 -->
                                 <div class="editor-box set-height">

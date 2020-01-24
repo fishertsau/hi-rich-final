@@ -4,7 +4,7 @@
     "/js/system/product/productIndex.js": "/js/system/product/productIndex.js",
     "/js/system/category/categoryCreate.js": "/js/system/category/categoryCreate.js",
     "/js/system/sites/index.js": "/js/system/sites/index.js",
-    "/js/system/banners/index.js": "/js/system/banners/index.js",
+    "/js/system/ads/index.js": "/js/system/ads/index.js",
     "/js/app/news/index.js": "/js/app/news/index.js",
     "/js/app/contact/index.js": "/js/app/contact/index.js",
     "/js/system/settings/marketingInfoEdit.js": "/js/system/settings/marketingInfoEdit.js",
@@ -13,7 +13,7 @@
     "/js/system/links/edit.js": "/js/system/links/edit.js",
     "/js/system/contact/contactShow.js": "/js/system/contact/contactShow.js",
     "/js/system/category/categoryIndex.js": "/js/system/category/categoryIndex.js",
-    "/js/system/banners/edit.js": "/js/system/banners/edit.js",
+    "/js/system/ads/edit.js": "/js/system/ads/edit.js",
     "/js/system/abouts/index.js": "/js/system/abouts/index.js",
     "/js/system/abouts/edit.js": "/js/system/abouts/edit.js",
     "/js/app/links/index.js": "/js/app/links/index.js"

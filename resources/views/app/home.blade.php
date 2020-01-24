@@ -17,22 +17,16 @@
     </div>
 
     <!-- 產品圖可連結到產品頁 -->
-    {{-- todo: get photos from backend --}}
     <section class="home-product">
         <div class="container-fluid">
             <div class="row no-gutters">
-                <div class="col-sm-3 col-6">
-                    <a class="product-imgbox" href="./product.html"><span class="img-home-product img-product-a"></span></a>
-                </div>
-                <div class="col-sm-3 col-6">
-                    <a class="product-imgbox" href="./product.html"><span class="img-home-product img-product-b"></span></a>
-                </div>
-                <div class="col-sm-3 col-6">
-                    <a class="product-imgbox" href="./product.html"><span class="img-home-product img-product-c"></span></a>
-                </div>
-                <div class="col-sm-3 col-6">
-                    <a class="product-imgbox" href="./product.html"><span class="img-home-product img-product-d"></span></a>
-                </div>
+                @foreach($products as $product)
+                    <div class="col-sm-3 col-6">
+                        <span class="img-home-product">
+                           <img src="/storage/{{$product->photoPath}}" width="100%"> 
+                        </span>
+                    </div>
+                @endforeach
             </div>
         </div>
         <div class="home-slogan">
@@ -122,29 +116,51 @@
 
     <!-- 聯絡我們 -->
     <section class="home-contact">
-        {{--todo: implment this --}}
         <div class="container-fluid">
             <div class="row no-gutters">
-                <div class="col-sm-6 col-12 img-store"></div>
                 <div class="col-sm-6 col-12">
-                    <div class="contact-form">
-                        <div class="input-box">
-                            <input type="text" name="email" placeholder="*您的姓名或公司行號" required="">
+                    {{--todo: restore this--}}
+                    <img src="/storage/{{$activity->photoPath}}" width="100%;">
+                </div>
+                <div class="col-sm-6 col-12">
+                    <form action="/contact"
+                          method="post"
+                          onsubmit="return validateVerification()">
+                        {{csrf_field()}}
+                        <div class="contact-form">
+                            <div class="input-box">
+                                <input type="text" name="contact" placeholder="*您的姓名或公司行號" required="">
+                            </div>
+                            <div class="input-box">
+                                <input type="tel" name="tel" placeholder="您的聯絡電話">
+                            </div>
+                            <div class="input-box">
+                                <input type="email" name="email" placeholder="*您的EMAIL" required="">
+                            </div>
+                            <div class="input-box">
+                                <textarea rows="6" 
+                                          name="message"
+                                          placeholder="*請留言" required
+                                          class="form-style form-textarea"></textarea>
+                            </div>
+
+                            <div class="input-box">
+                                <input name="verification"
+                                       type="text"
+                                       placeholder="* 輸入右方數字"
+                                       onfocus="this.value = '';"
+                                       required
+                                       style="width:50%;margin-right:2%">
+                                <span id="securityCode"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <span class="text-need">*必填</span>
+                                <button class="btn-submit">送出</button>
+                            </div>
                         </div>
-                        <div class="input-box">
-                            <input type="text" name="phone" placeholder="您的聯絡電話" required="">
-                        </div>
-                        <div class="input-box">
-                            <input type="text" name="name" placeholder="*您的EMAIL" required="">
-                        </div>
-                        <div class="input-box">
-                            <textarea rows="6" placeholder="*請留言" required class="form-style form-textarea"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span class="text-need">*必填</span>
-                            <button class="btn-submit">送出</button>
-                        </div>
-                    </div>
+                        
+                    </form>
                 </div>
             </div>
         </div>
@@ -154,4 +170,32 @@
 @section('pageJS')
     <script src="/asset/js/tiny-slider.js" type="text/javascript"></script>
     <script> initTns(); </script>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function (event) {
+        generateVerificationCode();
+      });
+
+      function generateVerificationCode() {
+        document.querySelector('#securityCode').innerText = randomFixedInteger(5);
+      }
+
+      const randomFixedInteger = function (length) {
+        return Math.floor(Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1));
+      }
+
+      function validateVerification() {
+        let inputVerification = document.querySelector("input[name='verification']").value;
+
+        let generatedVerification = document.querySelector('#securityCode').innerText;
+
+        if (!(inputVerification.toString() === generatedVerification)) {
+          alert('驗證號碼錯誤,請重新輸入');
+          document.querySelector("input[name='verification']").value = '';
+          document.querySelector("input[name='verification']").focus();
+          return false;
+        }
+        return true;
+      }
+    </script>
 @endsection

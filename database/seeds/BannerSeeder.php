@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Banner;
+use App\Models\Ad;
 use Illuminate\Database\Seeder;
 
 class BannerSeeder extends Seeder
@@ -18,10 +18,10 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        Banner::truncate();
+        Ad::truncate();
 
         foreach ($this->photoList as $photo) {
-            factory(Banner::class)->create([
+            factory(Ad::class)->create([
                 'photoPath' =>  $this->copyPhoto($photo)
             ]);
         }

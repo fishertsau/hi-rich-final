@@ -15,8 +15,8 @@ mix.js('resources/assets/js/system/sites/index.js', 'public/js/system/sites');
 mix.js('resources/assets/js/system/links/index.js', 'public/js/system/links');
 mix.js('resources/assets/js/system/links/edit.js', 'public/js/system/links');
 
-mix.js('resources/assets/js/system/banners/index.js', 'public/js/system/banners');
-mix.js('resources/assets/js/system/banners/edit.js', 'public/js/system/banners');
+mix.js('resources/assets/js/system/ads/index.js', 'public/js/system/ads');
+mix.js('resources/assets/js/system/ads/edit.js', 'public/js/system/ads');
 
 mix.js('resources/assets/js/system/abouts/index.js', 'public/js/system/abouts');
 mix.js('resources/assets/js/system/abouts/edit.js', 'public/js/system/abouts');

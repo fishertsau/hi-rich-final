@@ -36,6 +36,7 @@
                     <span class="nav-title">聯絡我們</span>
                 </a>
             </li>
+            {{-- todo: 手機版不見了--}}
             <li class="nav-menu-item active">
                 <a href="/links">
                     <span class="nav-title">相關連結</span>

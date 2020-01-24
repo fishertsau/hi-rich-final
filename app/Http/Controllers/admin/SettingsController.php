@@ -92,7 +92,9 @@ class SettingsController extends Controller
 
     public function updateMailService()
     {
-        WebConfig::firstOrCreate()->update(request()->only(['mail_service_provider', 'mail_receivers']));
+        WebConfig::firstOrCreate()
+            ->update(request()
+                ->only(['mail_service_provider', 'mail_receivers']));
 
         return redirect('/admin/settings/mailService');
     }

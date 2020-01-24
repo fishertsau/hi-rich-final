@@ -1,5 +1,6 @@
 require('../../bootstrap');
 import { getNewsCategory, getPublishedNews, mobilecheck } from "../../bootstrap";
+
 const Vue = require('vue');
 const vm = new Vue({
   el: '#container',
@@ -9,19 +10,17 @@ const vm = new Vue({
     showCat: false,
     newsList: [],
     activeNewsList: [],
-    activeNews: {},
+    activeNews: { published_since: '' },
     isMobile: false,
     showDetail: false
   },
   computed: {},
   beforeCreate: async function () {
-    this.isMobile = await mobilecheck(); 
-    
+    this.isMobile = await mobilecheck();
+
     Promise.all([getNewsCategory(), getPublishedNews()])
       .then(([catResult, newsResult]) => {
         this.cats = [...catResult.data];
-        this.activeCat = vm.cats[0] || {};
-
         this.newsList = [...newsResult.data];
         this.activeNewsList = [...vm.newsList];
         this.activeNews = vm.newsList[0] || {};
@@ -37,10 +36,10 @@ const vm = new Vue({
       }
     },
     setActiveCat: async function (cat) {
-      this.activeCat = {...cat};
+      this.activeCat = { ...cat };
       this.showCat = false;
       this.showDetail = false;
-      
+
       const localActiveNewsList = this.newsList
         .filter(n => n.cat_id === cat.id);
 
@@ -50,6 +49,13 @@ const vm = new Vue({
     setActiveNews: function (news) {
       this.activeNews = { ...news };
       this.showDetail = true;
+    },
+    activeCatTitle: function (cat) {
+      if (!cat.title) {
+        return '全部連結';
+      }
+
+      return cat.title;
     }
   }
 });

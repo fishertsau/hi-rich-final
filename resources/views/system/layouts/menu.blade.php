@@ -1,7 +1,7 @@
 <div id="leftmenu">
     <ul id="nav">
         <li>
-            <a href="/admin/banners">首頁跑馬燈</a>
+            <a href="/admin/ads">廣告/圖片管理</a>
         </li>
 
         {{--公司簡介管理--}}
@@ -29,19 +29,15 @@
         {{--最新消息--}}
         <li>
             <a href="#Menu=ChildMenu2"
-               onclick="DoMenu('ChildMenu2')">最新消息 <img src="/system/images/arrow-down.png"></a>
+               onclick="DoMenu('ChildMenu2')">最新動態 <img src="/system/images/arrow-down.png"></a>
             <ul id="ChildMenu2" class="collapsed">
                 <li>
                     <a href="/admin/news/categories">
                         <img src="/system/images/arrow.png" width="10" height="10" />
-                        消息分類設定
+                        動態分類設定
                     </a>
                 </li>
-                <li><a href="/admin/news"><img src="/system/images/arrow.png" width="10" height="10" /> 消息清單</a>
-                {{--todo: 視情況將此項做設定--}}
-                <li><a href="/admin/news/config"><img src="/system/images/arrow.png" width="10" height="10" />
-                        前台筆數顯示設定</a></li>
-                </li>
+                <li><a href="/admin/news"><img src="/system/images/arrow.png" width="10" height="10" /> 動態清單</a>
             </ul>
         </li>
 

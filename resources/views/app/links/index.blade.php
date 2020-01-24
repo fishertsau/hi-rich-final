@@ -10,15 +10,18 @@
 
                             <div class="section-title">-相關連結-</div>
 
-                        {{--todo: implement this--}}
-                        <!-- 小尺寸時才出現的下拉選單 -->
-                            <div class="mobile-select">
-                                <a class="item-active" tab-title>全部連結</a>
-                                <div class="item-list">
-                                    <a class="item">配合廠商</a>
-                                    <a class="item">異業結盟</a>
-                                    <a class="item">政府/政策</a>
-                                    <a class="item">其他連結</a>
+                            <div class="mobile-select"
+                                 @click.prevent="toggleShowCat()">
+                                <a class="item-active"> @{{ linkCatTitle }}</a>
+                                <div v-show="showCat"
+                                     class="item-list"
+                                     style="display:block">
+
+                                    <a v-for="cat in cats"
+                                       class="item"
+                                       @click.prevent="setActiveCat(cat)"
+                                       v-cloak
+                                       style="display:block">@{{cat.title}}</a>
                                 </div>
                             </div>
 
@@ -57,5 +60,7 @@
 @endsection
 
 @section('pageJS')
+    <script>
+    </script>
     <script type="text/javascript" src="{{ asset('/js/app/links/index.js') }}"></script>
 @endsection

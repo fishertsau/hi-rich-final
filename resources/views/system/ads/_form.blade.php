@@ -6,17 +6,31 @@
         <td width="150" align="right" bgcolor="#DEDEDE">顯示：</td>
         <td>
             <input type="radio" name="published" value="1"
-                   {{(!isset($banner) || $banner->published)? 'checked' : '' }} /> 顯示
+                   {{(!isset($ad) || $ad->published)? 'checked' : '' }} /> 顯示
             <input type="radio" name="published" value="0"
-                    {{(isset($banner) && !$banner->published)? 'checked' : '' }} /> 不顯示
+                    {{(isset($ad) && !$ad->published)? 'checked' : '' }} /> 不顯示
         </td>
     </tr>
 
     <tr>
+        <td width="150" align="right" bgcolor="#DEDEDE">位置：</td>
+        <td>
+            <select name="location">
+                @foreach(array_keys($locations) as $key)
+                    <option value="{{$key}}"
+                            {{isset($ad) && $ad->location === $key ? 'selected':''}}>
+                        {{$locations[$key]}}
+                    </option>
+                @endforeach
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
         <td align="right" bgcolor="#DEDEDE">名稱：</td>
         <td>
             <input name="title" type="text" size="50" required
-                   @if(isset($banner->title)) value="{{$banner->title}}" @endif/>
+                   @if(isset($ad->title)) value="{{$ad->title}}" @endif/>
         </td>
     </tr>
 
@@ -25,14 +39,14 @@
         <td align="right" bgcolor="#ECECEC" class="border-sdown">主圖：</td>
         <td bgcolor="#FFFFFF" class="border-sdown">
 
-            @if(isset($banner))
+            @if(isset($ad))
                 <input type="radio" name="photoCtrl"
                        value="originalFile"
                        v-model="formInput.photoCtrl"
                 />
                 維持原圖：
-                @if(isset($banner->photoPath) && ($banner->photoPath<>''))
-                    <img src="/storage/{{$banner->photoPath}}" width="400" height="300"
+                @if(isset($ad->photoPath) && ($ad->photoPath<>''))
+                    <img src="/storage/{{$ad->photoPath}}" width="400" height="300"
                          align="absmiddle" />
                 @endif
                 <br />
@@ -57,7 +71,7 @@
     <tr>
         <td align="right" bgcolor="#DEDEDE">建檔日期：</td>
         <td>
-            @if(isset($banner->created_at)) {{$banner->created_at}} @endif
+            @if(isset($ad->created_at)) {{$ad->created_at}} @endif
         </td>
     </tr>
 </table>

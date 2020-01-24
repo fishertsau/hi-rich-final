@@ -16,30 +16,30 @@
     </style>
 
     <div id="container">
-        <div id="banner"><a href="/admin">首頁</a>> <a href="/admin/banners">跑馬燈清單&gt;</a>
-            @if(isset($banner))
-                修改跑馬燈
+        <div id="ad"><a href="/admin">首頁</a>> <a href="/admin/ads">廣告清單&gt;</a>
+            @if(isset($ad))
+                修改廣告
             @else
-                新增跑馬燈
+                新增廣告
             @endif</div>
 
         {{--新增--}}
-        @if(!isset($banner))
+        @if(!isset($ad))
             {{--todo: add multi/... for photo input--}}
-            <form action="/admin/banners" method="POST"
+            <form action="/admin/ads" method="POST"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}
-                @include('system.banners._form')
+                @include('system.ads._form')
             </form>
         @endif
 
         {{--修改--}}
-        @if(isset($banner))
-            <form action="/admin/banners/{{$banner->id}}" method="POST"
+        @if(isset($ad))
+            <form action="/admin/ads/{{$ad->id}}" method="POST"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PATCH">
-                @include('system.banners._form')
+                @include('system.ads._form')
             </form>
         @endif
         <br />
@@ -47,5 +47,5 @@
 @endsection
 
 @section('pageJS')
-    <script type="text/javascript" src="{{ asset('/js/system/banners/edit.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/system/ads/edit.js') }}"></script>
 @endsection

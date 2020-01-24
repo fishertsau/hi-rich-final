@@ -22,8 +22,6 @@ class ContactController extends Controller
 
     public function store()
     {
-
-// TODO: Implement this
         $validInput = request()->validate([
             'contact' => 'required',
             'tel' => '',
@@ -34,7 +32,6 @@ class ContactController extends Controller
 
         // todo: change this
         $contact = Contact::create($validInput);
-
 //        $this->sendNotificationEmail($contact);
 
         return redirect('contact-ok');
