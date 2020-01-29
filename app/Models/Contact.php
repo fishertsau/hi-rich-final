@@ -14,6 +14,6 @@ class Contact extends Model
 
     public function getProcessedStatusAttribute()
     {
-        return ($this->processed) ? '已完成' : '未完成';
+        return ($this->processed) ? '已讀' : '未閱讀';
     }
 }

@@ -87,7 +87,6 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     /** 聯絡我們管理*/
     Route::get('contacts/template', 'ContactsController@template');
     Route::patch('contacts/template', 'ContactsController@updateTemplate');
-    Route::post('contacts/{id}/processed', 'ContactsController@processed');
     Route::resource('contacts', 'ContactsController');
 
     /**設定管理*/

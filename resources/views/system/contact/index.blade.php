@@ -2,17 +2,17 @@
 
 @section('content')
     <div id="container">
-        <div id="site"><a href="index.php">首頁</a>>聯絡表單管理&gt;聯絡信件管理
+        <div id="site"><a href="/admin">首頁</a>>聯絡表單管理&gt;聯絡信件管理
             <br/>
             <img src="/system/images/empty.gif" width="10" height="10"/></div>
         <table width="99%" border="0" cellpadding="5" cellspacing="1">
             <tr>
                 <td width="50" align="center" bgcolor="#DEDEDE">項次</td>
-                <td align="center" bgcolor="#DEDEDE">主旨</td>
-                <td align="center" bgcolor="#DEDEDE">姓名</td>
-                <td width="100" align="center" bgcolor="#DEDEDE">詢問日期</td>
+                <td width="100" align="center" bgcolor="#DEDEDE">主旨</td>
+                <td width="100" align="center" bgcolor="#DEDEDE">姓名</td>
+                <td width="100" align="center" bgcolor="#DEDEDE">詢問日期/時間</td>
                 <td width="100" align="center" bgcolor="#DEDEDE">處理情形</td>
-                <td width="50" align="center" bgcolor="#DEDEDE">修改</td>
+                <td width="50" align="center" bgcolor="#DEDEDE">閱讀</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">刪除</td>
             </tr>
 

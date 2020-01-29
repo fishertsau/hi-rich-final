@@ -60,7 +60,12 @@
             </ul>
         </li>
 
-        <li><a href="#Menu=ChildMenu3"
+        {{--聯絡信件--}}
+        <li>
+            <a href="/admin/contacts">聯絡信件</a>
+        </li>
+        <li style="display:none;">
+            <a href="#Menu=ChildMenu3"
                onclick="DoMenu('ChildMenu3')">聯絡表單<img
                         src="/system/images/arrow-down.png" width="11" height="6" /></a>
             <ul id="ChildMenu3" class="collapsed">

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
-
 use App\Models\Contact;
-use App\Http\Controllers\Controller;
 use App\Models\WebConfig;
+use App\Http\Controllers\Controller;
 
 class ContactsController extends Controller
 {
@@ -37,6 +36,9 @@ class ContactsController extends Controller
     public function show($id)
     {
         $contact = Contact::findOrFail($id);
+        $contact->update([
+            'processed' => true
+        ]);
 
         return view('system.contact.show', compact('contact'));
     }
@@ -47,15 +49,5 @@ class ContactsController extends Controller
         Contact::findOrFail($id)->delete();
 
         return redirect('/admin/contacts');
-    }
-
-
-    public function processed($id)
-    {
-        Contact::findOrFail($id)->update(['processed' => true]);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'An Contact is set to processed.']);
     }
 }

@@ -77,22 +77,4 @@ class ContactTest extends TestCase
             $this->assertEquals('Contact ok page', $webConfig->contact_ok);
         });
     }
-
-
-    /** @test */
-    public function can_set_an_contact_as_processed()
-    {
-        $contact = $this->create(Contact::class);
-
-        $this->assertFalse($contact->fresh()->processed);
-        $response = $this
-            ->post('/admin/contacts/' . $contact->id . '/processed');
-
-        $response->assertJson([
-            'status' => 'success',
-            'message' => 'An Contact is set to processed.'
-        ]);
-
-        $this->assertTrue($contact->fresh()->processed);
-    }
 }

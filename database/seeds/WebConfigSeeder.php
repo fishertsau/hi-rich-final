@@ -19,6 +19,7 @@ class WebConfigSeeder extends Seeder
             'tel' => config('app.phone'),
             'email' => config('app.email'),
             'fax' => config('app.fax'),
+            'copyright_declare' => '©高豐海產股份有限公司',
 
             // marketing info
             'slogan' => config('app.slogan'),
