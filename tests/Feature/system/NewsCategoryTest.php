@@ -25,7 +25,7 @@ class NewsCategoryTest extends TestCase
         $response = $this->get('/admin/news/categories');
 
         $response->assertSuccessful()
-            ->assertSee('消息分類');
+            ->assertSee('動態分類');
     }
 
     /** @test */

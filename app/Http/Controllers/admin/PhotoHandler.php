@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\admin;
 
 
@@ -8,13 +9,15 @@ trait PhotoHandler
 {
     /**
      * @param Model $model
+     * @param string $ctrl
+     * @param string $attribute
      * @return PhotoHandler
      */
-    private function storeCoverPhoto(Model $model)
+    private function storeCoverPhoto(Model $model, $ctrl = 'photoCtrl', $attribute = 'photoPath')
     {
-        if (request('photoCtrl') === 'newFile') {
+        if (request($ctrl) === 'newFile') {
             $model->update([
-                'photoPath' => $this->photoRepo->store(request()->file('photo'))
+                $attribute => $this->photoRepo->store(request()->file('photo'))
             ]);
         }
 
@@ -26,23 +29,27 @@ trait PhotoHandler
         $this->storeCoverPhoto($model);
         return $this;
     }
-    
+
     /**
      * @param $model
+     * @param string $ctrl
+     * @param string $attribute
+     * @param string $fileInput
+     * @param bool $resize
      * @return PhotoHandler
      */
-    private function updatePhoto($model)
+    private function updatePhoto($model, $ctrl = 'photoCtrl', $attribute = 'photoPath', $fileInput = 'photo', $resize = true)
     {
-        if (request('photoCtrl') === 'newFile') {
+        if (request($ctrl) === 'newFile') {
             $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' =>
-                $this->photoRepo->store(request()->file('photo')),
+            $model->update([$attribute =>
+                $this->photoRepo->store(request()->file($fileInput), $resize),
             ]);
         }
 
-        if (request('photoCtrl') === 'deleteFile') {
+        if (request($ctrl) === 'deleteFile') {
             $this->deleteFile($model->photoPath);
-            $model->update(['photoPath' => null]);
+            $model->update([$attribute => null]);
         }
 
         return $this;
@@ -52,8 +59,8 @@ trait PhotoHandler
     {
         \File::delete(public_path('storage') . '/' . $path);
     }
-    
-    private function deleteCoverPhoto($filePath)
+
+    private function deletePhoto($filePath)
     {
         $this->deleteFile($filePath);
         return $this;

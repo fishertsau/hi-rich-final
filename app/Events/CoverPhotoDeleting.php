@@ -11,6 +11,6 @@ class CoverPhotoDeleting
 
     public function __construct(Model $model)
     {
-        $this->deleteCoverPhoto($model->photoPath);
+        $this->deletePhoto($model->photoPath);
     }
 }

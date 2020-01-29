@@ -108,6 +108,9 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
         
         Route::get('password', 'SettingsController@password');
     });
+
+    /** 使用說明*/
+    Route::get('readme', 'ReadmeController@index');
 });
 
 /** 登入登出*/

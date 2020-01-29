@@ -23,7 +23,7 @@
 
         {{--據點清單--}}
         <li>
-            <a href="/admin/sites">據點清單</a>
+            <a href="/admin/sites">營運據點</a>
         </li>
 
         {{--最新消息--}}
@@ -103,6 +103,10 @@
                     </li>
                 </ul>
             </a>
+        </li>
+        {{--據點清單--}}
+        <li>
+            <a href="/admin/readme">使用說明</a>
         </li>
     </ul>
 </div>

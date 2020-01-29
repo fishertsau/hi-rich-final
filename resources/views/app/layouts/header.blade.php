@@ -2,7 +2,9 @@
     <nav class="nav">
         <div class="header-logo-box">
             <a href="/" class="header-logo">
-                <img src="/asset/images/logo-white.png" alt="高豐海產股份有限公司">
+                <img src="/storage/{{$webConfig->logoB_photoPath}}" 
+                     alt="{{$webConfig->company_name}}"
+                >
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                     aria-controls="navbar"

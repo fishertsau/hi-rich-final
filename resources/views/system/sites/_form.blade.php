@@ -48,7 +48,7 @@
     </tr>
     
     <tr>
-        <td align="right" bgcolor="#DEDEDE">據點地址：</td>
+        <td align="right" bgcolor="#DEDEDE">地址：</td>
         <td>
             <input name="address"
                    type="text" size="100"
@@ -56,11 +56,15 @@
         </td>
     </tr>
     <tr>
-        <td align="right" bgcolor="#DEDEDE">Google Map訊息：</td>
+        <td align="right" bgcolor="#DEDEDE">Google Map位置：</td>
         <td>
             <input name="google_map"
                    type="text" size="100"
                    @if(isset($site->google_map)) value="{{$site->google_map}}" @endif/>
+            <p>輸入內容說明:</p>
+            <p>(1)Google Map上顯示地址(<span style="color:red">只輸入到門號即可</span>,不需樓層或其他如室等)</p>
+            <p>(2)Google我的商家上商家名稱 <a href="https://www.google.com/business/?gmbsrc=us-en-et-gs-z-gmb-l-z-h~pl|redirect|u&ppsrc=GMBLR&utm_campaign=us-en-et-gs-z-gmb-l-z-h~pl|redirect|u&utm_source=gmb&utm_medium=et&dialog=places-transition">相關連結
+                </a>
         </td>
     </tr>
     <tr>

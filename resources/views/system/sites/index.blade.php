@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="container">
-        <div id="site"><a href="/admin">首頁</a>>據點清單</div>
+        <div id="site"><a href="/admin">首頁</a>>營運據點</div>
         <a href="/admin/sites/create"><img src="/system/images/new.gif" width="75" height="19" /></a><br />
         <img src="/system/images/empty.gif" width="10" height="10" />
 

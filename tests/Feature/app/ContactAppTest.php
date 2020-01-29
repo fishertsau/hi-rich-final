@@ -28,6 +28,7 @@ class ContactAppTest extends TestCase
     private function params($override = [])
     {
         return array_merge([
+            'title' => 'someTitle',
             'contact' => 'contactPerson',
             'email' => 'john@example.com',
             'tel' => '22226666',
@@ -62,15 +63,14 @@ class ContactAppTest extends TestCase
         $this->assertEquals('MessageContent', $contact->message);
         $this->assertFalse($contact->processed);
 
-        // todo: remove this?
-//        Mail::assertSent(UserContactEmail::class, function ($mail) use ($contact) {
-//            return
-//                $mail->hasTo('jane@example.com')
-//                &&
-//                $mail->hasTo('jack@example.com')
-//                &&
-//                $mail->contact->id == $contact->id;
-//        });
+        Mail::assertSent(UserContactEmail::class, function ($mail) use ($contact) {
+            return
+                $mail->hasTo('jane@example.com')
+                &&
+                $mail->hasTo('jack@example.com')
+                &&
+                $mail->contact->id == $contact->id;
+        });
     }
 
     /** @test */

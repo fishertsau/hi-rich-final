@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\app;
 
-use App\Mail\UserContactEmail;
-use App\Models\Contact;
-use App\Http\Controllers\Controller;
-use App\Models\Site;
-use App\Models\WebConfig;
 use Mail;
+use App\Models\Site;
+use App\Models\Contact;
+use App\Models\WebConfig;
+use App\Mail\UserContactEmail;
+use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
@@ -23,6 +23,7 @@ class ContactController extends Controller
     public function store()
     {
         $validInput = request()->validate([
+            'title' => 'required',
             'contact' => 'required',
             'tel' => '',
             'email' => 'required',
@@ -30,9 +31,8 @@ class ContactController extends Controller
         ]);
 
 
-        // todo: change this
         $contact = Contact::create($validInput);
-//        $this->sendNotificationEmail($contact);
+        $this->sendNotificationEmail($contact);
 
         return redirect('contact-ok');
     }

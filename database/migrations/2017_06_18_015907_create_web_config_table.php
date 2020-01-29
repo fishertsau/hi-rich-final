@@ -29,10 +29,10 @@ class CreateWebConfigTable extends Migration
             //marketing introduction
             $table->string('slogan')->nullable();
             $table->string('slogan_sub')->nullable();
-            $table->mediumText('product')->nullable();
-            $table->mediumText('place')->nullable();
-            $table->mediumText('location')->nullable();
-            $table->mediumText('service_hour')->nullable();
+            $table->text('product')->nullable();
+            $table->text('place')->nullable();
+            $table->string('service_week')->nullable();
+            $table->string('service_hour')->nullable();
 
             //site header info
             $table->string('title')->nullable();
@@ -47,8 +47,9 @@ class CreateWebConfigTable extends Migration
             //others
             $table->mediumText('contact_ok')->nullable();
             $table->string('copyright_declare')->nullable();
-            $table->string('photoPath')->nullable();
-            $table->string('pdfPath')->nullable();
+            $table->string('logoA_photoPath')->default('')->nullable();
+            $table->string('logoB_photoPath')->default('')->nullable();
+            $table->string('pdfPath')->default('')->nullable();
 
             $table->timestamps();
         });

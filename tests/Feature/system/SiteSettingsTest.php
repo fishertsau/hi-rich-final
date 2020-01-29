@@ -111,6 +111,4 @@ class SiteSettingsTest extends TestCase
         $this->assertEquals('A service provider', $webConfig->mail_service_provider);
         $this->assertEquals('some receivers', $webConfig->mail_receivers);
     }
-
-
 }

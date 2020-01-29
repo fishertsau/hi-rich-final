@@ -30,13 +30,11 @@
             </div>
         </div>
         <div class="home-slogan">
-            {{--todo: get content from backend --}}
             <div class="bg-slogan"></div>
             <div class="slogan-content">
-                <span class="title-slogan">職人海鮮盡在高豐</span>
+                <span class="title-slogan">{{$webConfig->slogan}}</span>
                 <span class="text-slogan">
-          集世界海洋風味之菁華，<br />
-          溶烹飪鮮美食材於一體！
+                {!! $webConfig->slogan_sub !!}
         </span>
             </div>
         </div>
@@ -44,7 +42,6 @@
 
     <!-- 資訊 -->
     <section class="home-info">
-        {{--todo: implement this--}}
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-12">
@@ -55,8 +52,7 @@
                         <div class="info-content">
                             <div class="info-title">品項與產地</div>
                             <div class="info-text">
-                                嚴選各國優質冷凍海鮮，產品類別有：蝦類、貝類、魚類、軟體類、甲殼類。
-                                主要產地如下：加拿大、中美洲、智利、東南亞、台灣、日本、韓國、中國、俄羅斯。
+                                {{$webConfig->product}}
                             </div>
                         </div>
                     </div>
@@ -69,8 +65,7 @@
                         <div class="info-content">
                             <div class="info-title">行銷通路與合作夥伴</div>
                             <div class="info-text">
-                                行銷通路有：餐廳、飯店、外燴、各盤商、漁市場攤商、大賣場、超市....等等。
-                                主要夥伴大多為團購業務及電子商務業者，竭誠歡迎異業商談合作與結盟。
+                                {{$webConfig->place}}
                             </div>
                         </div>
                     </div>
@@ -83,15 +78,21 @@
                         <div class="info-content">
                             <div class="info-title">營運據點</div>
                             <div class="info-text">
-                                <span>台北營業所</span>
-                                <span>TEL:02-22901180 FAX:02-22901070</span>
-                                <span>高雄營業所</span>
-                                <span>TEL:07-8154925 FAX:07-8155543</span>
-                                <span>台中營業所</span>
-                                <span>TEL:04-23158593 FAX:04-23158541</span>
+                                @foreach($sites as $site)
+                                    <span>{{$site->name}}</span>
+                                    <span>
+                                        @if(isset($site->tel) && $site->tel <> '')
+                                            TEL: {{$site->tel}}
+                                        @endif
+
+                                        @if(isset($site->fax) && $site->fax <> '')
+                                            FAX: {{$site->fax}}
+                                        @endif 
+                                    </span>
+                                @endforeach
                             </div>
                             <div class="more-box">
-                                <a href="./contact.html" class="text-more">+ more</a>
+                                <a href="/contact" class="text-more">+ more</a>
                             </div>
                         </div>
                     </div>
@@ -104,8 +105,8 @@
                         <div class="info-content">
                             <div class="info-title">服務時間</div>
                             <div class="info-text">
-                                <span>星期一至星期五</span>
-                                <span>上午8：30~12：30；下午1：30~5：30</span>
+                                <span>{{$webConfig->service_week}}</span>
+                                <span>{{$webConfig->service_hour}}</span>
                             </div>
                         </div>
                     </div>
@@ -119,8 +120,7 @@
         <div class="container-fluid">
             <div class="row no-gutters">
                 <div class="col-sm-6 col-12">
-                    {{--todo: restore this--}}
-                    <img src="/storage/{{$activity->photoPath}}" width="100%;">
+                    <img src="/storage/{{isset($activity->photoPath)?$activity->photoPath:''}}" width="100%;">
                 </div>
                 <div class="col-sm-6 col-12">
                     <form action="/contact"
@@ -128,6 +128,9 @@
                           onsubmit="return validateVerification()">
                         {{csrf_field()}}
                         <div class="contact-form">
+                            <div class="input-box">
+                                <input type="text" name="title" placeholder="*相關事宜" required="">
+                            </div>
                             <div class="input-box">
                                 <input type="text" name="contact" placeholder="*您的姓名或公司行號" required="">
                             </div>
@@ -138,7 +141,7 @@
                                 <input type="email" name="email" placeholder="*您的EMAIL" required="">
                             </div>
                             <div class="input-box">
-                                <textarea rows="6" 
+                                <textarea rows="6"
                                           name="message"
                                           placeholder="*請留言" required
                                           class="form-style form-textarea"></textarea>
@@ -159,7 +162,7 @@
                                 <button class="btn-submit">送出</button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

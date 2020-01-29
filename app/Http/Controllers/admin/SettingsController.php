@@ -56,11 +56,12 @@ class SettingsController extends Controller
             'slogan_sub' => request('slogan_sub'),
             'product' => request('product'),
             'place' => request('place'),
-            'location' => request('location'),
+            'service_week' => request('service_week'),
             'service_hour' => request('service_hour'),
         ]);
 
-        $this->updatePhoto($webConfig);
+        $this->updatePhoto($webConfig,'logoA_photoCtrl', 'logoA_photoPath', 'logoA_photo', false);
+        $this->updatePhoto($webConfig,'logoB_photoCtrl', 'logoB_photoPath', 'logoB_photo', false);
         $this->updatePdfFile($webConfig);
 
         return redirect('/admin/settings/marketingInfo');

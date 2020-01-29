@@ -1,5 +1,3 @@
-@inject('localePresenter', 'App\Presenter\LocalePresenter')
-
 @extends('system.layouts.master')
 
 @section('content')
@@ -42,113 +40,77 @@
                 <tr>
                     <td align="right" bgcolor="#ECECEC" class="border-sdown">公司logo：</td>
                     <td bgcolor="#FFFFFF" class="border-sdown">
-                            <input type="radio" name="photoCtrl"
-                                   value="originalFile"
-                                   v-model="formInput.photoCtrl"
-                            />
-                            維持原圖：
-                            @if($webConfig->photoPath<>'')
-                                <img src="/storage/{{$webConfig->photoPath}}" 
-                                     width="400" height="300"
-                                     align="absmiddle"/>
-                            @endif
-                            <br/>
-                            <input type="radio" name="photoCtrl" value="deleteFile"
-                                   v-model="formInput.photoCtrl"/>
-                            刪除圖檔<br/>
-
-                        <input type="radio" name="photoCtrl" value="newFile"
-                               v-model="formInput.photoCtrl"
+                        <p>Logo1</p>
+                        <photo-input
+                                input_name="logoA_photo"
+                                input_ctrl_name="logoA_photoCtrl"
+                                photo_path="{{$webConfig->logoA_photoPath}}"
+                        >
+                        </photo-input>
+                        <hr>
+                        <p>Logo2</p>
+                        <photo-input
+                                input_name="logoB_photo"
+                                input_ctrl_name="logoB_photoCtrl"
+                                photo_path="{{$webConfig->logoB_photoPath}}"
+                        >
+                        </photo-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" bgcolor="#ECECEC" class="border-sdown">產品型錄檔上傳：</td>
+                    <td bgcolor="#FFFFFF" class="border-sdown">
+                        <p style="color:red;">建議pdf,其他格式檔案在傳輸時,可能會出現非預期的問題</p>
+                        <input type="radio" name="pdfCtrl"
+                               value="originalPdfFile"
+                               v-model="formInput.pdfCtrl" />
+                        維持原檔案
+                        <br />
+                        <input type="radio" name="pdfCtrl" value="deletePdfFile"
+                               v-model="formInput.pdfCtrl" />
+                        刪除檔案<br />
+                        <input type="radio" name="pdfCtrl" value="newPdfFile"
+                               v-model="formInput.pdfCtrl"
+                               @change="showSelectPdfWarning"
                         />
                         上傳檔案：
-                        <input type="file" name="photo"
-                               @change="enablePhotoCtrl"/>
-                        <span>（圖片尺寸：{{config('app.logo_size_note')}}　解析度72dpi）</span>
-                        <p style="color:red"
-                           v-show="viewCtrl.showSelectPhotoWarning"
-                           v-cloak>請選擇檔案</p>
-                    </td>
-                </tr> 
-                <tr>
-                    <td align="right" bgcolor="#ECECEC" class="border-sdown">產品型錄檔上傳：(建議pdf)</td>
-                    <td bgcolor="#FFFFFF" class="border-sdown">
-                            <input type="radio" name="pdfCtrl"
-                                   value="originalPdfFile"
-                                   v-model="formInput.pdfCtrl"/>
-                            維持原檔案
-                            <br/>
-                            <input type="radio" name="pdfCtrl" value="deletePdfFile"
-                                   v-model="formInput.pdfCtrl"/>
-                            刪除檔案<br/>
-                            <input type="radio" name="pdfCtrl" value="newPdfFile"
-                                   v-model="formInput.pdfCtrl"
-                                   @change="showSelectPdfWarning"
-                            />
-                        上傳檔案：
                         <input type="file" name="pdfFile" value="請選擇檔案"
-                               @change="enablePdfFileCtrl"/>
+                               @change="enablePdfFileCtrl" />
                         <p style="color:red" v-show="viewCtrl.showSelectPdfWarning" v-cloak>請選擇檔案</p>
-                        {{--<p style="color:red">*若沒有設定pdf檔,前台產品說明中 "PDF 下載"的按鈕不會顯示</p>--}}
                     </td>
                 </tr>
-                
+
                 <tr>
-                    <td align="right" valign="top" bgcolor="#ECECEC">"項" 內文：</td>
+                    <td align="right" valign="top" bgcolor="#ECECEC">
+                        <p>品項/通路/營運據點/服務時間內文：</p>
+                    </td>
                     <td>
+                        <p>品項與產地</p>
                         <textarea name="product"
-                                  rows="2" cols="30"
-                                  class="textarea"
-                                  id="froala-editor"
-                                  ckeditor="true"
-                                  style="width: 100%; height: 200px; font-size: 14px; 
-                                  line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                            {{$webConfig->product}}
-                            </textarea>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="right" valign="top" bgcolor="#ECECEC">"銷" 內文：</td>
-                    <td>
+                                  rows="1" cols="30"
+                                  style="width: 100%; height: 100px; font-size: 14px;">{{$webConfig->product}}</textarea>
+                        <hr>
+                        <p>行銷通路與合作夥伴</p>
                         <textarea name="place"
-                                  rows="2" cols="30"
-                                  class="textarea"
+                                  rows="1" cols="30"
                                   id="froala-editor"
-                                  ckeditor="true"
-                                  style="width: 100%; height: 200px; font-size: 14px; 
-                                  line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                            {{$webConfig->place}}
-                            </textarea>
-                    </td>
-                </tr>
+                                  style="width: 100%; height: 100px; font-size: 14px; 
+                                  line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$webConfig->place}}</textarea>
+                        <hr>
+                        <p>服務時間</p>
 
-                <tr>
-                    <td align="right" valign="top" bgcolor="#ECECEC">"點" 內文：</td>
-                    <td>
-                        <textarea name="location"
-                                  rows="2" cols="30"
-                                  class="textarea"
-                                  id="froala-editor"
-                                  ckeditor="true"
-                                  style="width: 100%; height: 200px; font-size: 14px; 
-                                  line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                            {{$webConfig->location}}
-                            </textarea>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="right" valign="top" bgcolor="#ECECEC">"時" 內文：</td>
-                    <td>
-                        <textarea name="service_hour"
-                                  rows="2" cols="30"
-                                  class="textarea"
-                                  id="froala-editor"
-                                  ckeditor="true"
-                                  style="width: 100%; height: 200px; font-size: 14px; 
-                                  line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                            {{$webConfig->service_hour}}
-                            </textarea>
+                        <p>
+                            週&nbsp;<input type="text" name="service_week"
+                                          style="width: 75%"
+                                          value="{{$webConfig->service_week}}"
+                                          placeholder="範例: 週一到週五" />
+                        </p>
+                        <p>
+                            時間&nbsp;<input type="text" name="service_hour"
+                                           style="width: 75%"
+                                           placeholder="範例: 9:00 - 12:00; 13:00-18:00 "
+                                           value="{{$webConfig->service_hour}}" />
+                        </p>
                     </td>
                 </tr>
             </table>
@@ -173,7 +135,4 @@
 
 @section('pageJS')
     <script type="text/javascript" src="{{ asset('/js/system/settings/marketingInfoEdit.js') }}"></script>
-    @include('system.partials.ckeditor_small')
 @endsection
-
-

@@ -7,7 +7,8 @@ return [
         'origin_products_image_baseDir' => 'asset/images/products',
         'origin_links_image_baseDir' => 'asset/images/links',
         'origin_abouts_image_baseDir' => 'asset/images/about',
-        'origin_banners_image_baseDir' => 'asset/images/banner'
+        'origin_banners_image_baseDir' => 'asset/images/banner',
+        'origin_home_image_baseDir' => 'asset/images'
     ],
     /*
     |--------------------------------------------------------------------------

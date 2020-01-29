@@ -25,7 +25,7 @@ return [
 
     // marketing info
     'slogan' => '職人海鮮盡在高豐',
-    'slogan_sub' => '集世界海洋風味之菁華，\n溶烹飪鮮美食材於一體！',
+    'slogan_sub' => '集世界海洋風味之菁華，溶烹飪鮮美食材於一體！',
     'product_category_tier3_enabled' => false,
     'product_category_tier2_enabled' => true,
     'env' => env('APP_ENV', 'production'),

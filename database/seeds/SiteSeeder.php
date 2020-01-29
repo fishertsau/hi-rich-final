@@ -13,7 +13,8 @@ class SiteSeeder extends Seeder
             'tel' => '02-22901180',
             'fax' => '02-22901070',
             'ranking' => 1,
-            'email' => 'hi.rich@msa.hinet.net'
+            'email' => 'hi.rich@msa.hinet.net',
+            'google_map' => '高豐海產股份有限公司'
         ],
         [
             'name' => '高雄營業所',
@@ -21,7 +22,8 @@ class SiteSeeder extends Seeder
             'tel' => '07-8154925',
             'fax' => '07-81555430',
             'ranking' => 2,
-            'email' => null
+            'email' => null,
+            'google_map' => '高雄市前鎮區漁港東二路3號'
         ],
         [
             'name' => '台中營業所',
@@ -29,7 +31,8 @@ class SiteSeeder extends Seeder
             'tel' => '04-23158593',
             'fax' => '04-23158541',
             'ranking' => 3,
-            'email' => null
+            'email' => null,
+            'google_map' => '台中市西屯區大河街77號'
         ]
     ];
     

@@ -4,14 +4,10 @@
     <div id="container">
         <section class="contact-box">
             <div class="map-box">
-                {{--todo: 需要顯示名稱 --}}
-                {{--<iframe class="my-map"--}}
-                {{--src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.9231898020207!2d121.4472412510532!3d25.070592383876583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a89e93374c43%3A0xe64ac385b37fed80!2z6auY6LGQ5rW355Si6IKh5Lu95pyJ6ZmQ5YWs5Y-4!5e0!3m2!1szh-TW!2stw!4v1572092925554!5m2!1szh-TW!2stw"--}}
-                {{--frameborder="0" allowfullscreen=""></iframe>--}}
                 <div v-for="site in sites" v-cloak>
                     <iframe v-show="site === activeSite"
                             class="my-map"
-                            :src="'https://www.google.com/maps/embed/v1/place?q='+ site.address + '&key=AIzaSyDJ5an-s6QDM1525riFKTstEbiMex0iq-U'"
+                            :src="'https://www.google.com/maps/embed/v1/place?q='+ site.google_map + '&key=AIzaSyDJ5an-s6QDM1525riFKTstEbiMex0iq-U'"
                             allowfullscreen></iframe>
                 </div>
             </div>
@@ -58,6 +54,9 @@
                             <div class="section-title">聯絡我們</div>
                             <div class="home-contact">
                                 <div class="contact-form">
+                                    <div class="input-box">
+                                        <input type="text" name="title" placeholder="*相關事宜" required="">
+                                    </div>
                                     <div class="input-box">
                                         <input type="text" name="contact" placeholder="*您的姓名或公司行號" required>
                                     </div>

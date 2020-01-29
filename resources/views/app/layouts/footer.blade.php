@@ -9,9 +9,8 @@
         </div>
         <hr />
         <div class="footer-info">
-            {{--todo: get content from backend--}}
             <a href="/" class="logo">
-                <img src="/storage/{{$webConfig->photoPath}}" alt="{{$webConfig->company_name}}">
+                <img src="/storage/{{$webConfig->logoA_photoPath}}" alt="{{$webConfig->company_name}}">
             </a>
             <div class="footer-info-content">
                 <span class="text-address">{{$webConfig->address}}</span>
