@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App;
 use App\Photoable;
 use App\Models\Product;
-use App\Models\WebConfig;
 use App\Filterable\ProductFilter;
 use App\Http\Controllers\Controller;
 use App\Repositories\PhotoRepository;
@@ -167,9 +166,9 @@ class ProductsController extends Controller
     {
         return request()->validate([
             'published' => 'required|boolean',
-            'published_in_home' => 'required|boolean',
             'cat_id' => '',
             'title' => '',
+            'title_en' => '',
             'briefing' => '',
             'body' => '',
         ]);
@@ -245,10 +244,5 @@ class ProductsController extends Controller
         }
 
         return $this;
-    }
-
-    public function getPublishedInHome()
-    {
-        return Product::where('published_in_home', true)->get();
     }
 }

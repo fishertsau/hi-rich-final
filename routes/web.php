@@ -50,7 +50,6 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::resource('product/categories', 'ProductCategoriesController');
 
     /***** 產品管理 ******/
-    Route::get('product/publishedInHome', 'ProductsController@getPublishedInHome');
     Route::any('products/list', 'ProductsController@getList');
     Route::patch('products/ranking', 'ProductsController@ranking');
     Route::patch('products/action', 'ProductsController@action');

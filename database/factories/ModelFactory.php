@@ -49,13 +49,13 @@ $factory->define(ProductCategory::class, function (Faker\Generator $faker) {
 
 $factory->define(Product::class, function (Faker\Generator $faker) {
     return [
-        'title' => "pro_$faker->name",
+        'title' => "中文名稱" . $faker->text(5),
+        'title_en' => "英文名稱" . $faker->text(5),
         'published' => true,
-        'published_in_home' => true,
         'cat_id' => function () {
             return create(ProductCategory::class)->id;
         },
-        'body' => $faker->paragraph(2),
+        'body' => "產品內容" . $faker->paragraph(2),
     ];
 });
 

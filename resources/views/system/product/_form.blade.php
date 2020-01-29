@@ -13,20 +13,6 @@
         </td>
     </tr>
     <tr>
-        <td align="right" bgcolor="#ECECEC" class="border-sdown">首頁：</td>
-        <td bgcolor="#FFFFFF" class="border-sdown">
-            <input type="radio" name="published_in_home" value="1"
-                   {{!isset($product)?'':($product->published_in_home?'checked':'')}}
-                   @change="validatePublishedInHome"
-            />
-            是　
-            <input type="radio" name="published_in_home" value="0"
-                    {{!isset($product)?'checked':(!$product->published_in_home?'checked':'')}}
-            />
-            否
-        </td>
-    </tr>
-    <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">分類：</td>
         <td bgcolor="#FFFFFF" class="border-sdown" id="catID-cell">
             <input type="number"
@@ -42,6 +28,7 @@
             </cat-selector>
         </td>
     </tr>
+    
     <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">
             品名
@@ -60,9 +47,25 @@
     </tr>
 
     <tr>
+        <td align="right" bgcolor="#ECECEC" class="border-sdown">
+            英文品名
+        </td>
+        <td bgcolor="#FFFFFF" class="border-sdown">
+            <input name="title_en" type="text" size="100%"
+                   @if(isset($product))
+                   value="{{$product->title_en}}"
+                   @endif
+
+                   @if(isset($copyProduct))
+                   value="{{$copyProduct->title_en}}"
+                    @endif
+            />
+        </td>
+    </tr>
+
+    <tr>
         <td align="right" bgcolor="#ECECEC" class="border-sdown">產品主圖：</td>
         <td bgcolor="#FFFFFF" class="border-sdown">
-
             @if(isset($product))
                 <input type="radio" name="photoCtrl"
                        value="originalFile"
@@ -91,8 +94,8 @@
                v-cloak>請選擇檔案</p>
         </td>
     </tr>
-    
-    <tr>
+
+    <tr style="display: none;">
         <td align="right" bgcolor="#ECECEC" class="border-sdown" style="vertical-align: top; padding-top: 15px">
             <p>產品相關圖：</p>
             <p style="color:red">最多20張</p></td>
@@ -174,7 +177,7 @@
             <strong>商品簡述區，只限文字，約390字，含符號、空白鍵，可斷行</strong>
         </td>
     </tr>
-    <tr style="display: none">
+    <tr>
         <td width="130" align="right" bgcolor="#ECECEC" class="border-sdown"
             valign="top">內文
         </td>

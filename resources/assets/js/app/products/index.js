@@ -4,7 +4,8 @@ import {
   getCategory,
   getPublishedProducts,
   ifCategoryInPathname,
-  isEmpty
+  isEmpty,
+  mobilecheck
 } from "../../bootstrap";
 
 const Vue = require('vue');
@@ -28,7 +29,9 @@ new Vue({
     chosenProducts: [],
     visibleProducts: [],
     chosenProduct: {},
-    pagination: initPager
+    pagination: initPager,
+    showCat: false,
+    isMobile: false
   },
   computed: {
     isAllCat: function () {
@@ -53,6 +56,8 @@ new Vue({
     },
   },
   beforeCreate: async function () {
+    this.isMobile = await mobilecheck();
+    
     Promise.all([getAllProductCategories(), getPublishedProducts()])
       .then(([catResult, productsResult]) => {
         this.cats = [...catResult.data];
@@ -83,6 +88,9 @@ new Vue({
       .then(() => {
         this.setVisibleProducts(this.pagination);
       })
+      .then(()=>{
+        this.setPageTitle(this.activeCat, this.activeSubCat);
+      })
       .catch(console.error);
   },
   methods: {
@@ -90,6 +98,7 @@ new Vue({
       this.activeCat = { ...cat };
       this.activeSubCat = {};
       this.chosenProduct = {};
+      this.showCat = false;
     },
     isActive: function (cat) {
       return { 'is-active': (this.activeCat.id || 0) === (cat.id || 0) }
@@ -135,11 +144,26 @@ new Vue({
     setPageTitle: function (activeCat = {}, activeSubCat = {}) {
       const mainCatTitle = (isEmpty(activeCat)) ? '全部產品' : activeCat.title;
       const subCatTitle = (isEmpty(activeSubCat)) ? '' : activeSubCat.title;
-      
+
       this.pageTitle = `${mainCatTitle} ${subCatTitle}`;
     },
     updateCurrentPage: function (newPage) {
       this.pagination.current_page = newPage;
+    },
+    activeCatTitle: function (cat) {
+      if (!cat.title) {
+        return '全部產品';
+      }
+
+      return cat.title;
+    },
+    toggleShowCat: function () {
+      this.showCat = !this.showCat;
+    },
+    isShowCat: (show) => {
+      return {
+        'is-open': show
+      }
     }
   }
 })

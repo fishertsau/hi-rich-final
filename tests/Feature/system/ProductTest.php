@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\User;
 use Tests\TestCase;
 use App\Models\Product;
-use App\Models\WebConfig;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -59,9 +58,9 @@ class ProductTest extends TestCase
     {
         $newProductInfo = [
             'published' => true,
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
+            'title_en' => 'ANewProductEnglish',
             'briefing' => 'ANewProductBriefing',
             'body' => 'SomeContent Body',
             'photoCtrl' => 'newFile',
@@ -82,9 +81,9 @@ class ProductTest extends TestCase
         $product = Product::first();
         $response->assertRedirect('admin/products');
         $this->assertEquals(true, $product->published);
-        $this->assertEquals(true, $product->published_in_home);
         $this->assertEquals(1, $product->cat_id);
         $this->assertEquals('ANewProduct', $product->title);
+        $this->assertEquals('ANewProductEnglish', $product->title_en);
         $this->assertEquals('ANewProductBriefing', $product->briefing);
         $this->assertEquals('SomeContent Body', $product->body);
         $this->assertNotNull($product->ranking);
@@ -101,7 +100,6 @@ class ProductTest extends TestCase
     {
         $newProductInfo = [
             'published' => true,
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
             'body' => 'SomeContent Body',
@@ -126,9 +124,9 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create();
         $newProductInfo = [
             'published' => true,
-            'published_in_home' => false,
             'cat_id' => 3,
             'title' => 'ANewTitle',
+            'title_en' => 'ANewTitleEnglish',
             'body' => 'SomeNewContent Body',
             'photoCtrl' => 'newFile',
             'photo' => UploadedFile::fake()->image('photo.jpg'),
@@ -146,9 +144,9 @@ class ProductTest extends TestCase
         $product = $product->fresh();
         $response->assertRedirect('admin/products');
         $this->assertEquals(true, $product->published);
-        $this->assertEquals(false, $product->published_in_home);
         $this->assertEquals(3, $product->cat_id);
         $this->assertEquals('ANewTitle', $product->title);
+        $this->assertEquals('ANewTitleEnglish', $product->title_en);
         $this->assertEquals('SomeNewContent Body', $product->body);
         $this->assertEquals($product->ranking, (int)$product->ranking);
         $this->assertNotNull($product->photoPath);
@@ -164,7 +162,6 @@ class ProductTest extends TestCase
 
         $updatedProductInfo = [
             'published' => true,
-            'published_in_home' => false,
             'cat_id' => 3,
             'title' => 'ANewTitle',
             'body' => 'SomeNewContent Body',
@@ -189,7 +186,6 @@ class ProductTest extends TestCase
         $secondPdfPath = $product->pdfPath;
         $updatedProductInfo = [
             'published' => true,
-            'published_in_home' => false,
             'cat_id' => 3,
             'title' => 'ANewTitle',
             'body' => 'SomeNewContent Body',
@@ -325,59 +321,10 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function can_set_show_at_home_for_many_products_at_one_time()
-    {
-        $products = factory(Product::class, 3)->create(['published_in_home' => false]);
-        $products->each(function ($product) {
-            $this->assertFalse($product->published_in_home);
-        });
-
-        $input = [
-            'chosen_id' => [
-                $products[0]->id,
-                $products[2]->id
-            ],
-            'action' => 'setToShowAtHome'
-        ];
-
-        $response = $this->patch('/admin/products/action', $input);
-
-        $response->assertSuccessful();
-        $this->assertTrue($products[0]->fresh()->published_in_home);
-        $this->assertFalse($products[1]->fresh()->published_in_home);
-        $this->assertTrue($products[2]->fresh()->published_in_home);
-    }
-
-    /** @test */
-    public function can_set_noShow_at_home_for_many_products_at_one_time()
-    {
-        $products = factory(Product::class, 3)->create(['published_in_home' => true]);
-        $products->each(function ($product) {
-            $this->assertTrue($product->published_in_home);
-        });
-        $input = [
-            'chosen_id' => [
-                $products[0]->id,
-                $products[2]->id
-            ],
-            'action' => 'setToNoShowAtHome'
-        ];
-
-        $response = $this->patch('/admin/products/action', $input);
-
-        $response->assertSuccessful();
-        $this->assertFalse($products[0]->fresh()->published_in_home);
-        $this->assertTrue($products[1]->fresh()->published_in_home);
-        $this->assertFalse($products[2]->fresh()->published_in_home);
-    }
-
-
-    /** @test */
     public function published_is_required_to_create_a_new_product()
     {
         $this->withExceptionHandling();
         $newProductInfo = [
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
             'body' => 'SomeContent Body'
@@ -387,23 +334,6 @@ class ProductTest extends TestCase
 
         $this->assertValidationError($response, 'published');
     }
-
-    /** @test */
-    public function published_in_home_is_required_to_create_a_new_product()
-    {
-        $this->withExceptionHandling();
-        $newProductInfo = [
-            'published' => true,
-            'cat_id' => 1,
-            'title' => 'ANewProduct',
-            'body' => 'SomeContent Body'
-        ];
-
-        $response = $this->post('admin/products', $newProductInfo);
-
-        $this->assertValidationError($response, 'published_in_home');
-    }
-
 
     /** @test */
     public function published_should_be_boolean_when_creating_a_product()
@@ -411,7 +341,6 @@ class ProductTest extends TestCase
         $this->withExceptionHandling();
         $newProductInfo = [
             'published' => 'published',
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
             'body' => 'SomeContent Body'
@@ -421,31 +350,13 @@ class ProductTest extends TestCase
 
         $this->assertValidationError($response, 'published');
     }
-
-    /** @test */
-    public function published_in_home_should_be_boolean_when_creating_a_product()
-    {
-        $this->withExceptionHandling();
-        $newProductInfo = [
-            'published' => true,
-            'published_in_home' => 'true',
-            'cat_id' => 1,
-            'title' => 'ANewProduct',
-            'body' => 'SomeContent Body'
-        ];
-
-        $response = $this->post('admin/products', $newProductInfo);
-
-        $this->assertValidationError($response, 'published_in_home');
-    }
-
+    
     /** @test */
     public function published_is_required_to_update_a_product()
     {
         $this->withExceptionHandling();
         $product = factory(Product::class)->create();
         $newProductInfo = [
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
             'body' => 'SomeContent Body'
@@ -454,23 +365,6 @@ class ProductTest extends TestCase
         $response = $this->patch('/admin/products/' . $product->id, $newProductInfo);
         $this->assertValidationError($response, 'published');
     }
-
-    /** @test */
-    public function published_in_home_is_required_to_update_a_product()
-    {
-        $this->withExceptionHandling();
-        $product = factory(Product::class)->create();
-        $newProductInfo = [
-            'published' => true,
-            'cat_id' => 1,
-            'title' => 'ANewProduct',
-            'body' => 'SomeContent Body'
-        ];
-
-        $response = $this->patch('/admin/products/' . $product->id, $newProductInfo);
-        $this->assertValidationError($response, 'published_in_home');
-    }
-
 
     /** @test */
     public function published_should_be_boolean_to_update_a_product()
@@ -480,7 +374,6 @@ class ProductTest extends TestCase
 
         $newProductInfo = [
             'published' => 'published',
-            'published_in_home' => true,
             'cat_id' => 1,
             'title' => 'ANewProduct',
             'body' => 'SomeContent Body'
@@ -490,26 +383,6 @@ class ProductTest extends TestCase
 
         $this->assertValidationError($response, 'published');
     }
-
-    /** @test */
-    public function published_in_home_should_be_boolean_to_update_a_product()
-    {
-        $this->withExceptionHandling();
-        $product = factory(Product::class)->create();
-
-        $newProductInfo = [
-            'published' => true,
-            'published_in_home' => 'true',
-            'cat_id' => 1,
-            'title' => 'ANewProduct',
-            'body' => 'SomeContent Body'
-        ];
-
-        $response = $this->patch('/admin/products/' . $product->id, $newProductInfo);
-
-        $this->assertValidationError($response, 'published_in_home');
-    }
-
 
     /** @test */
     public function can_visit_config_page_from_admin()

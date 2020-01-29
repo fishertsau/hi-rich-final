@@ -2,9 +2,8 @@
     <nav class="nav">
         <div class="header-logo-box">
             <a href="/" class="header-logo">
-                <img src="/storage/{{$webConfig->logoB_photoPath}}" 
-                     alt="{{$webConfig->company_name}}"
-                >
+                <img src="/storage/{{$webConfig->logoB_photoPath}}"
+                     alt="{{$webConfig->company_name}}" />
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                     aria-controls="navbar"
@@ -13,37 +12,43 @@
             </button>
         </div>
 
-        {{-- todo: add 'active' --}}
+    {{-- todo: add 'active' --}}
+    {{--todo: implement this--}}
+    <!-- acitve 在當下對應的頁面時需加上此class -->
         <ul class="nav-menu">
-            <li class="nav-menu-item">
-            {{--todo: implement this--}}
-            <!-- acitve 在當下對應的頁面時需加上此class -->
+            <li class="nav-menu-item active">
                 <a href="/abouts">
                     <span class="nav-title">關於高豐</span>
                 </a>
             </li>
+
             <li class="nav-menu-item">
                 <a href="/news">
                     <span class="nav-title">最新動態</span>
                 </a>
             </li>
+
             <li class="nav-menu-item">
                 <a href="/products">
                     <span class="nav-title">產品項目</span>
                 </a>
                 @include('app.layouts.product_category')
             </li>
+
             <li class="nav-menu-item">
                 <a href="/contact">
                     <span class="nav-title">聯絡我們</span>
                 </a>
             </li>
+
             {{-- todo: 手機版不見了--}}
-            <li class="nav-menu-item active">
+            {{--<li class="nav-menu-item active">--}}
+            <li class="nav-menu-item">
                 <a href="/links">
                     <span class="nav-title">相關連結</span>
                 </a>
             </li>
+
             @if($webConfig->pdfPath <>'')
                 <li class="nav-menu-item">
                     <a href="/storage/{{$webConfig->pdfPath}}" download>
@@ -52,6 +57,7 @@
                 </li>
             @endif
         </ul>
+
     </nav>
 </header>
 
