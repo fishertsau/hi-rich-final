@@ -39,7 +39,8 @@
                             </div>
                         </div>
                         <div class="col-md-9 col-sm-8 col-12" v-cloak>
-                            <div class="section-title">@{{ linkCatTitle }}</div>
+                            <div class="section-title" 
+                                 v-if="!isMobile" v-cloak>@{{ linkCatTitle }}</div>
                             <div class="links-list set-height">
                                 <div class="row">
                                     <div v-for="link in activeLinkList"

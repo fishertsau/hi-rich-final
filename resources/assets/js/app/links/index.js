@@ -1,8 +1,7 @@
 require('../../bootstrap');
-import { getLinkCategory, getPublishedLinks } from "../../bootstrap";
+import { getLinkCategory, getPublishedLinks, mobilecheck } from "../../bootstrap";
 
 const Vue = require('vue');
-alert('he')
 
 new Vue({
   el: '#vueContainer',
@@ -12,7 +11,8 @@ new Vue({
     linkList: [],
     activeLinkList: [],
     activeLink: {},
-    showCat: false 
+    showCat: false,
+    isMobile: false
   },
   computed: {
     linkCatTitle: function () {
@@ -22,13 +22,15 @@ new Vue({
       return { 'is-active': !!!this.activeCat.title }
     },
   },
-  beforeCreate: function () {
+  beforeCreate: async function () {
     Promise.all([getLinkCategory(), getPublishedLinks()])
       .then(([catResult, linkResult]) => {
         this.cats = [...catResult.data];
         this.linkList = [...linkResult.data];
         this.activeLinkList = [...this.linkList];
       });
+    
+    this.isMobile = await mobilecheck();
   },
   methods: {
     isActive: function (cat) {
