@@ -25,7 +25,6 @@
 
         {{--新增--}}
         @if(!isset($ad))
-            {{--todo: add multi/... for photo input--}}
             <form action="/admin/ads" method="POST"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}

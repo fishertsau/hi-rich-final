@@ -1,9 +1,8 @@
 require('../../bootstrap');
 
 window.Vue = require('vue');
-// Vue.component('cat-selector', require('../../components/categorySelector.vue'));
 
-const app = new Vue({
+new Vue({
     el: '#container',
     data: {
         contact: {

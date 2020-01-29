@@ -1,5 +1,3 @@
-@inject('localePresenter', 'App\Presenter\LocalePresenter')
-
 @extends('system.layouts.master')
 
 @section('content')

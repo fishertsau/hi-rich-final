@@ -523,20 +523,6 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function can_update_product_config()
-    {
-        $configSetting = [
-            'product_show_per_page' => 10,
-        ];
-
-        $response = $this->patch('/admin/products/config', $configSetting);
-
-        $updatedConfig = WebConfig::first();
-        $response->assertRedirect('admin/products');
-        $this->assertEquals(10, $updatedConfig->product_show_per_page);
-    }
-
-    /** @test */
     public function can_query_products_and_send_new_query_term_from_admin()
     {
         $publishedProductQty = random_int(5, 10);

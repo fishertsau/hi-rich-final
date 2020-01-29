@@ -43,9 +43,8 @@ class ContactController extends Controller
     }
 
     /**
-     * @param $inquiry
+     * @param $contact
      */
-    // TODO: Implement this
     private function sendNotificationEmail($contact)
     {
         Mail::to($this->getSiteMailReceivers())

@@ -15,10 +15,6 @@ class CreateWebConfigTable extends Migration
         Schema::create('web_config', function (Blueprint $table) {
             $table->increments('id');
 
-            //product display control
-            // todo: remove this ??? 
-            $table->tinyInteger('product_show_per_page')->unsigned()->default(20)->nullable();
-
             //company info
             $table->string('company_name')->nullable();
             $table->string('address')->nullable();

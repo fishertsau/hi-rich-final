@@ -1,5 +1,3 @@
-@inject('localePresenter', 'App\Presenter\LocalePresenter')
-
 @extends('system.layouts.master')
 
 @section('content')
@@ -17,7 +15,7 @@
             <input type="hidden" name="_method" value="PATCH">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            送出頁{{$localePresenter->ChinesePostfix()}}：<br/>
+            送出頁：<br/>
             <textarea name="contact_ok" cols="30" rows="10"
                       class="textarea"
                       ckeditor="true"

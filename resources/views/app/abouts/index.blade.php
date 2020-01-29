@@ -1,7 +1,6 @@
 @extends('app.layouts.master')
 
 @section('content')
-    {{-- ´todo: get content from db --}}
     <div class="page-bg">
         <section class="about-box">
             <div class="container">

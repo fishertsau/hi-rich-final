@@ -6,7 +6,6 @@ use App\Events\CategoryCreating;
 use App\Events\CategoryDeleting;
 use Illuminate\Database\Eloquent\Model;
 
-// todo: should become abstract or not???
 
 class Category extends Model
 {
@@ -31,8 +30,6 @@ class Category extends Model
         'creating' => CategoryCreating::class,
     ];
 
-    // todo: restore or remove ???
-//    abstract public static function getCatIndex();
     public static function getCatIndex(){}
 
     public function parentCategory()

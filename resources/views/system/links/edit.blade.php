@@ -1,6 +1,3 @@
-{{--todo: remove this--}}
-@inject('carbonPresenter', 'App\Presenter\CarbonPresenter')
-
 @extends('system.layouts.master')
 
 @section('content')

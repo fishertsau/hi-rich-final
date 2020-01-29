@@ -3,12 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    {{--todo: implement this--}}
-    {{--<title>{{$webConfig->title}}</title>--}}
-    <title>高豐海產</title>
+    <title>{{$webConfig->title}}</title>
     <link href="/system/css/systemcss.css" rel="stylesheet" type="text/css"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--todo: remove this --}}
     <script>
         function goBack() {
             window.history.back();

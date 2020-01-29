@@ -57,13 +57,8 @@ class CategoryRepository
                 : $id;
     }
 
-    //TODO: Implement this : cover  this with test
     public function hasCategory(): bool
     {
-        if (App::getLocale() == 'en') {
-            return Category::where('title_en', '<>', '')->exists();
-        }
-
         return Category::where('title', '<>', '')->exists();
     }
 }

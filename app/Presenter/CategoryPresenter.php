@@ -29,26 +29,23 @@ class CategoryPresenter
         return '新增分類';
     }
 
-    public function listByCategory(Category $category = null, $sequence = 0, $forProduct=false)
+    public function listByCategory(Category $category = null, $sequence = 0, $forProduct = false)
     {
         if (!$category) {
             return '';
         }
 
-        //TODO: Implement this : cover this with test
-        $title = App::getLocale() === 'en'
-            ? $category->title_en
-            : $title = $category->title;
+        $title = $category->title;
 
         if ($this->middleNodeOrForProduct($sequence, $forProduct)) {
-            $listString ="
+            $listString = "
                 <li><a href='/products/category/{$category->id}'>{$title}</a></li>";
         } else {
             $listString =
                 "<li>{$title}</li>";
         }
 
-        return $category->parentCategory ? $this->listByCategory($category->parentCategory,++$sequence) . $listString : $listString;
+        return $category->parentCategory ? $this->listByCategory($category->parentCategory, ++$sequence) . $listString : $listString;
     }
 
 

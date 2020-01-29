@@ -55,7 +55,6 @@ Route::group(["prefix" => "admin", 'middleware' => ['web', 'auth'], 'namespace' 
     Route::patch('products/ranking', 'ProductsController@ranking');
     Route::patch('products/action', 'ProductsController@action');
     Route::get('products/config', 'ProductsController@config');
-    Route::patch('products/config', 'ProductsController@updateConfig');
     Route::get('products/{product}/copy', 'ProductsController@copy');
     Route::resource('products', 'ProductsController');
 

@@ -75,7 +75,6 @@
                     src="/system/images/new.gif" width="75" height="19"/></a><br/>
         <img src="/system/images/empty.gif" width="10" height="10"/>
         
-        {{--todo: show 產品類別--}}
         <table width="99%" border="0" cellpadding="5" cellspacing="1">
             <tr>
                 <td width="20" align="center" bgcolor="#DEDEDE">
@@ -86,6 +85,7 @@
                 <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">首頁</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">顯示</td>
+                <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">品名</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">排序</td>
@@ -116,6 +116,9 @@
                             <img src="/system/images/notok.gif" width="11"
                                  height="11"/>
                         @endif
+                    </td>
+                    <td align="center" bgcolor="#ECECEC" class="border-sdown">
+                            {{$product->category->title}}
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">

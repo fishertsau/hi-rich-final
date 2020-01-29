@@ -175,15 +175,6 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function updateConfig()
-    {
-        WebConfig::firstOrCreate()
-            ->update(request()
-                ->only(['product_show_per_page']));
-
-        return redirect('admin/products');
-    }
-
     public function getList()
     {
         $queryTerm = $this->getQueryTerm();
