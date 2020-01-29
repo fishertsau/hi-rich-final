@@ -1,0 +1,8 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name www.hi-rich.com.tw;
+
+  return 301 http://hi-rich.com.tw$request_uri;
+}
