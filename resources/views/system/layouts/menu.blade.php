@@ -15,9 +15,6 @@
                 <li><a href="/admin/product/categories"><img src="/system/images/arrow.png" width="10" height="10" />
                         產品分類管理</a></li>
                 <li><a href="/admin/products"><img src="/system/images/arrow.png" width="10" height="10" /> 產品上架管理</a>
-                <li><a href="/admin/products/config"><img src="/system/images/arrow.png" width="10" height="10" />
-                        前台筆數顯示設定</a></li>
-                </li>
             </ul>
         </li>
 

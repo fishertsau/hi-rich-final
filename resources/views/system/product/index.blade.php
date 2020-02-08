@@ -83,7 +83,6 @@
                            id="selectAll"/>
                 </td>
                 <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
-                <td width="50" align="center" bgcolor="#DEDEDE">首頁</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">顯示</td>
                 <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">品名</td>
@@ -101,14 +100,6 @@
                                class="chosenId id"
                                value="{{$product->id}}"/></td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">{{$loop->index+1}}</td>
-                    <td align="center" bgcolor="#ECECEC" class="border-sdown">
-                        @if($product->published_in_home)
-                            <img src="/system/images/ok.gif" width="11" height="11"/>
-                        @else
-                            <img src="/system/images/notok.gif" width="11"
-                                 height="11"/>
-                        @endif
-                    </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         @if($product->published)
                             <img src="/system/images/ok.gif" width="11" height="11"/>

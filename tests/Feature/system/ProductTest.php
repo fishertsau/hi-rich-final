@@ -385,17 +385,6 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function can_visit_config_page_from_admin()
-    {
-
-        $response = $this->get('admin/products/config');
-
-        $response->assertSuccessful()
-            ->assertSee('前台筆數顯示設定')
-            ->assertSee('編輯資料');
-    }
-
-    /** @test */
     public function can_query_products_and_send_new_query_term_from_admin()
     {
         $publishedProductQty = random_int(5, 10);

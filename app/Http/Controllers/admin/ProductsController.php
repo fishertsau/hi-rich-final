@@ -48,11 +48,6 @@ class ProductsController extends Controller
         return view('system.product.create');
     }
 
-    public function config()
-    {
-        return view('system.product.config');
-    }
-
     public function store()
     {
         $product = Product::create($this->validateInput());
