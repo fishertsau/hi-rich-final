@@ -21,7 +21,8 @@ class ProductFilter extends Filterable
     {
         return
             Product::
-            orderByRanking()
+            with('category')
+                ->orderByRanking()
                 ->status($queryTerm['published'])
                 ->categories($queryTerm['cat_ids'])
                 ->keyword($queryTerm['keyword']);

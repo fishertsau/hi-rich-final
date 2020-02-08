@@ -3,12 +3,12 @@
 @section('content')
     <div id="container">
         <div id="site"><a href="/admin">首頁</a>>產品管理&gt;產品上架管理</div>
-        {{--@if(isset($queryTerm))--}}
-        {{--<input type="hidden"--}}
-        {{--name="queryTerm"--}}
-        {{--id="queryTermInput"--}}
-        {{--value="{{json_encode($queryTerm)}}">--}}
-        {{--@endif--}}
+        @if(isset($queryTerm))
+            <input type="hidden"
+                   name="queryTerm"
+                   id="queryTermInput"
+                   value="{{json_encode($queryTerm)}}">
+        @endif
         <form action="/admin/products/list" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="text" name="newSearch" value="1" hidden>
@@ -87,7 +87,6 @@
                 <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">品名</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
-                <td width="60" align="center" bgcolor="#DEDEDE">排序</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">修改</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">複製</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">刪除</td>
@@ -110,9 +109,10 @@
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         @if(isset($product->category))
+                            {{$product->category->parentCategory->title}} /
                             {{$product->category->title}}
                         @else
-                            '未設定'
+                            <span style="color:red;">'未設定'</span>
                         @endif
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
@@ -122,11 +122,6 @@
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         {{$product->created_at}}
-                    </td>
-                    <td align="center" bgcolor="#F5F5F1" class="border-sdown">
-                        <input name="ranking[]" type="text" class="ranking"
-                               value="{{$product->ranking}}"
-                               size="2" />
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">

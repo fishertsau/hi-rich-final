@@ -32,7 +32,6 @@ class ProductsController extends Controller
         $this->photoRepo = $photoRepository;
     }
 
-
     public function index()
     {
         return redirect('admin/products/list');
