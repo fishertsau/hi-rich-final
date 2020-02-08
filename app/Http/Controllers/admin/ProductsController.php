@@ -111,20 +111,6 @@ class ProductsController extends Controller
 
     public function action()
     {
-        if (request('action') === 'setToShowAtHome') {
-            collect(request('chosen_id'))->each(function ($id) {
-                Product::findOrFail($id)
-                    ->update(['published_in_home' => true]);
-            });
-        }
-
-        if (request('action') === 'setToNoShowAtHome') {
-            collect(request('chosen_id'))->each(function ($id) {
-                Product::findOrFail($id)
-                    ->update(['published_in_home' => false]);
-            });
-        }
-
         if (request('action') === 'setToShow') {
             collect(request('chosen_id'))->each(function ($id) {
                 Product::findOrFail($id)

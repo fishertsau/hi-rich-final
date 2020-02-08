@@ -87,6 +87,7 @@
                 <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">品名</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
+                <td width="60" align="center" bgcolor="#DEDEDE">排序</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">修改</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">複製</td>
                 <td width="60" align="center" bgcolor="#DEDEDE">刪除</td>
@@ -123,6 +124,11 @@
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         {{$product->created_at}}
                     </td>
+                    <td align="center" bgcolor="#F5F5F1" class="border-sdown">
+                        <input name="ranking[]" type="text" class="ranking"
+                               value="{{$product->ranking}}"
+                               size="2" />
+                    </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">
                             <img src="/system/images/bt-revise.gif" width="23" height="23" />
@@ -150,8 +156,6 @@
                 <td align="left">功能：
                     <select id="action">
                         <option value="noAction" selected="selected">請選擇</option>
-                        <option value="setToShowAtHome">首頁</option>
-                        <option value="setToNoShowAtHome">取消首頁</option>
                         <option value="setToShow">顯示</option>
                         <option value="setToNoShow">取消顯示</option>
                         <option value="delete">刪除資料</option>
@@ -169,7 +173,7 @@
             <tr>
                 <td align="center">
                         <span class="border-right">
-                          <input type="submit" value="確定修改" @click="updateRanking" />
+                          <input type="submit" value="確定修改排序" @click="updateRanking" />
                           <img src="/system/images/empty.gif" width="50" height="10" />
                             @include('system.partials.gobackBtn')
                         </span>
