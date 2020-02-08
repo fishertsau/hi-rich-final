@@ -3,12 +3,12 @@
 @section('content')
     <div id="container">
         <div id="site"><a href="/admin">首頁</a>>產品管理&gt;產品上架管理</div>
-        @if(isset($queryTerm))
-            <input type="hidden"
-                   name="queryTerm"
-                   id="queryTermInput"
-                   value="{{json_encode($queryTerm)}}">
-        @endif
+        {{--@if(isset($queryTerm))--}}
+            {{--<input type="hidden"--}}
+                   {{--name="queryTerm"--}}
+                   {{--id="queryTermInput"--}}
+                   {{--value="{{json_encode($queryTerm)}}">--}}
+        {{--@endif--}}
         <form action="/admin/products/list" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="text" name="newSearch" value="1" hidden>
