@@ -40,7 +40,8 @@
                         <div v-show="chosenProduct.id" v-cloak
                              class="col-md-9 col-sm-8 col-12 mobile-product-detail">
                             <div class="btn-box"
-                                 style="display:flex;">
+                                 {{--style="display:flex;"--}}
+                            >
                                 <a href="javascript:;"
                                    @click.prevent="chosenProduct={}"
                                    class="link-back">回上頁<span class="img-back"></span></a>

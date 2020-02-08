@@ -66,7 +66,7 @@
             </li>
 
             @if($webConfig->pdfPath <>'')
-                <li class="nav-menu-item">
+                <li class="nav-menu-item nav-dm">
                     <a href="/storage/{{$webConfig->pdfPath}}" download>
                         <span class="nav-title icon-download">電子型錄</span>
                     </a>

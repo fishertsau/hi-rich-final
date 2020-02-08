@@ -23,7 +23,10 @@
                 @foreach($products as $product)
                     <div class="col-sm-3 col-6">
                         <span class="img-home-product">
-                           <img src="/storage/{{$product->photoPath}}" width="100%"> 
+                           <img
+                                   style="background-image: url(/storage/{{$product->photoPath}})";
+                                   width="100%"
+                           >
                         </span>
                     </div>
                 @endforeach
