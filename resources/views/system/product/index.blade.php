@@ -4,10 +4,10 @@
     <div id="container">
         <div id="site"><a href="/admin">首頁</a>>產品管理&gt;產品上架管理</div>
         {{--@if(isset($queryTerm))--}}
-            {{--<input type="hidden"--}}
-                   {{--name="queryTerm"--}}
-                   {{--id="queryTermInput"--}}
-                   {{--value="{{json_encode($queryTerm)}}">--}}
+        {{--<input type="hidden"--}}
+        {{--name="queryTerm"--}}
+        {{--id="queryTermInput"--}}
+        {{--value="{{json_encode($queryTerm)}}">--}}
         {{--@endif--}}
         <form action="/admin/products/list" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -16,7 +16,7 @@
             <table width="99%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td width="100" rowspan="4" align="center" class="border-down">搜尋：</td>
-                    <td width="140" align="left">依分 類 搜 尋 <img src="/system/images/icon_5.jpg" width="11" height="11"/>
+                    <td width="140" align="left">依分 類 搜 尋 <img src="/system/images/icon_5.jpg" width="11" height="11" />
                     </td>
                     <td width="550" align="left">
                         <input type="text" name="cat_id" hidden v-model="catId">
@@ -42,7 +42,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">依產品關鍵字 <img src="/system/images/icon_5.jpg" width="11" height="11"/></td>
+                    <td align="left">依產品關鍵字 <img src="/system/images/icon_5.jpg" width="11" height="11" /></td>
                     <td align="left">
                         <input name="keyword"
                                type="text"
@@ -52,13 +52,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="left">依產 品 狀 態 <img src="/system/images/icon_5.jpg" width="11" height="11"/></td>
+                    <td align="left">依產 品 狀 態 <img src="/system/images/icon_5.jpg" width="11" height="11" /></td>
                     <td align="left">
-                        <input type="radio" name="published" value="" v-model="queryTerm.published"/>
+                        <input type="radio" name="published" value="" v-model="queryTerm.published" />
                         全部　
-                        <input type="radio" name="published" value="1" v-model="queryTerm.published"/>
+                        <input type="radio" name="published" value="1" v-model="queryTerm.published" />
                         上架　
-                        <input type="radio" name="published" value="0" v-model="queryTerm.published"/>
+                        <input type="radio" name="published" value="0" v-model="queryTerm.published" />
                         下架
                     </td>
                 </tr>
@@ -70,17 +70,17 @@
                 </tr>
             </table>
         </form>
-        <br/>
-        <img src="/system/images/icon_arrowdown.gif" width="15" height="19"/><a href="/admin/products/create"><img
-                    src="/system/images/new.gif" width="75" height="19"/></a><br/>
-        <img src="/system/images/empty.gif" width="10" height="10"/>
-        
+        <br />
+        <img src="/system/images/icon_arrowdown.gif" width="15" height="19" /><a href="/admin/products/create"><img
+                    src="/system/images/new.gif" width="75" height="19" /></a><br />
+        <img src="/system/images/empty.gif" width="10" height="10" />
+
         <table width="99%" border="0" cellpadding="5" cellspacing="1">
             <tr>
                 <td width="20" align="center" bgcolor="#DEDEDE">
                     <input type="checkbox"
                            @change="toggleSelectAll()"
-                           id="selectAll"/>
+                           id="selectAll" />
                 </td>
                 <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">顯示</td>
@@ -98,18 +98,22 @@
                         <input type="checkbox"
                                name="id[]"
                                class="chosenId id"
-                               value="{{$product->id}}"/></td>
+                               value="{{$product->id}}" /></td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">{{$loop->index+1}}</td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         @if($product->published)
-                            <img src="/system/images/ok.gif" width="11" height="11"/>
+                            <img src="/system/images/ok.gif" width="11" height="11" />
                         @else
                             <img src="/system/images/notok.gif" width="11"
-                                 height="11"/>
+                                 height="11" />
                         @endif
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
+                        @if(isset($product->category))
                             {{$product->category->title}}
+                        @else
+                            '未設定'
+                        @endif
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">
@@ -122,16 +126,16 @@
                     <td align="center" bgcolor="#F5F5F1" class="border-sdown">
                         <input name="ranking[]" type="text" class="ranking"
                                value="{{$product->ranking}}"
-                               size="2"/>
+                               size="2" />
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/edit">
-                            <img src="/system/images/bt-revise.gif" width="23" height="23"/>
+                            <img src="/system/images/bt-revise.gif" width="23" height="23" />
                         </a>
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
                         <a href="/admin/products/{{$product->id}}/copy">
-                            <img src="/system/images/copy.gif" width="23" height="23"/>
+                            <img src="/system/images/copy.gif" width="23" height="23" />
                         </a>
                     </td>
                     <td align="center" bgcolor="#ECECEC" class="border-sdown">
@@ -139,13 +143,13 @@
                                 style="border:none;background:transparent;cursor: pointer"
                                 @click="deleteProduct({{$product->id}})">
                             <img src="/system/images/bt-delete.png"
-                                 width="23" height="23"/>
+                                 width="23" height="23" />
                         </button>
                     </td>
                 </tr>
             @endforeach
         </table>
-        <img src="/system/images/empty.gif" width="10" height="10"/><br/>
+        <img src="/system/images/empty.gif" width="10" height="10" /><br />
         <table width="99%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="left">功能：
@@ -157,27 +161,27 @@
                         <option value="setToNoShow">取消顯示</option>
                         <option value="delete">刪除資料</option>
                     </select>
-                    <input type="submit" @click="doAction" value="確定"/>
+                    <input type="submit" @click="doAction" value="確定" />
                 </td>
                 <td align="right">
                     {{ $products->links('vendor.pagination.system') }}
                 </td>
             </tr>
         </table>
-        <br/>
+        <br />
 
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="center">
                         <span class="border-right">
-                          <input type="submit" value="確定修改" @click="updateRanking"/>
-                          <img src="/system/images/empty.gif" width="50" height="10"/>
+                          <input type="submit" value="確定修改" @click="updateRanking" />
+                          <img src="/system/images/empty.gif" width="50" height="10" />
                             @include('system.partials.gobackBtn')
                         </span>
                 </td>
             </tr>
         </table>
-        <br/>
+        <br />
     </div>
 @endsection
 
