@@ -22,12 +22,11 @@
             <div class="row no-gutters">
                 @foreach($products as $product)
                     <div class="col-sm-3 col-6">
-                        <span class="img-home-product">
-                           <img
-                                   style="background-image: url(/storage/{{$product->photoPath}})";
-                                   width="100%"
-                           >
+                        <div class="product-imgbox">
+                        <span class="img-home-product"
+                              style="background-image: url(/storage/{{$product->photoPath}})" ;> 
                         </span>
+                        </div>
                     </div>
                 @endforeach
             </div>
