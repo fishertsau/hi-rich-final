@@ -14,13 +14,13 @@ const vm = new Vue({
     isMobile: false,
     showDetail: false
   },
-  computed: {},
   beforeCreate: async function () {
     this.isMobile = await mobilecheck();
 
     Promise.all([getNewsCategory(), getPublishedNews()])
       .then(([catResult, newsResult]) => {
-        this.cats = [...catResult.data];
+        console.log('catresult',catResult);
+        this.cats = [{ id: 0, title: '全部訊息' }, ...catResult.data];
         this.newsList = [...newsResult.data];
         this.activeNewsList = [...vm.newsList];
         this.activeNews = vm.newsList[0] || {};
@@ -40,8 +40,12 @@ const vm = new Vue({
       this.showCat = false;
       this.showDetail = false;
 
+      const byCat = cat => item => cat.id === 0 
+          ? true
+          : item.cat_id === cat.id;
+      
       const localActiveNewsList = this.newsList
-        .filter(n => n.cat_id === cat.id);
+        .filter(byCat(cat));
 
       this.activeNewsList = [...localActiveNewsList];
       this.activeNews = localActiveNewsList[0];
@@ -51,8 +55,8 @@ const vm = new Vue({
       this.showDetail = true;
     },
     activeCatTitle: function (cat) {
-      if (!cat.title) {
-        return '全部連結';
+      if (cat.id === 0 || !cat.title) {
+        return '全部訊息';
       }
 
       return cat.title;

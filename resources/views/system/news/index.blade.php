@@ -16,6 +16,7 @@
                 </td>
                 <td width="80" align="center" bgcolor="#DEDEDE">編號</td>
                 <td width="50" align="center" bgcolor="#DEDEDE">顯示</td>
+                <td align="center" bgcolor="#DEDEDE">類別</td>
                 <td align="center" bgcolor="#DEDEDE">標題</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">建檔日期</td>
                 <td width="165" align="center" bgcolor="#DEDEDE">起始日期</td>
@@ -40,6 +41,9 @@
                             <img src="/system/images/notok.gif" width="11"
                                  height="11"/>
                         @endif
+                    </td>
+                    <td align="left" bgcolor="#ECECEC" class="border-sdown"> 
+                        {{$news->category->title}}
                     </td>
                     <td align="left" bgcolor="#ECECEC" class="border-sdown"><a
                                 href="/admin/news/{{$news->id}}/edit"> {{$news->title}}

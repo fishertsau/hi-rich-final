@@ -10,7 +10,10 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $newss = News::latest()->paginate(20);
+        $newss = News::latest()
+            ->with('category')
+            ->orderBy('cat_id')
+            ->paginate(20);
         return view('system.news.index', compact('newss'));
     }
 
@@ -47,8 +50,8 @@ class NewsController extends Controller
         $copyNews = true;
 
         $cats = NewsCategory::main()->get();
-        
-        return view('system.news.edit', compact('news', 'copyNews','cats'));
+
+        return view('system.news.edit', compact('news', 'copyNews', 'cats'));
     }
 
     public function ranking()
@@ -94,11 +97,11 @@ class NewsController extends Controller
 
         return response(200);
     }
-    
+
     private function validateInput()
     {
         return request()->validate([
-            'cat_id' =>  'required',
+            'cat_id' => 'required',
             'title' => 'required',
             'body' => '',
             'published' => 'required|boolean',

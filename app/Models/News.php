@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category\NewsCategory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -116,4 +117,8 @@ class News extends Model
         return $list->count() - 1;
     }
 
+    public function category()
+    {
+        return $this->belongsTo(NewsCategory::class, 'cat_id');
+    }
 }

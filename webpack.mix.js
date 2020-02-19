@@ -8,7 +8,7 @@ mix.js('resources/assets/js/system/product/productIndex.js', 'public/js/system/p
 
 mix.js('resources/assets/js/system/contact/contactShow.js', 'public/js/system/contact');
 
-mix.js('resources/assets/js/system/news/newsIndex.js', 'public/js/system/news');
+mix.js('resources/assets/js/system/news/index.js', 'public/js/system/news');
 
 mix.js('resources/assets/js/system/sites/index.js', 'public/js/system/sites');
 

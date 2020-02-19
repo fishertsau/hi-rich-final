@@ -15,7 +15,7 @@ const initPager = {
   current_page: 1,
   first_result: 0,
   max_results: 15,
-  qty_per_page: 10
+  qty_per_page: 12
 }
 
 new Vue({
@@ -43,7 +43,7 @@ new Vue({
       deep: true,
       handler: async function (newVal) {
         await this.setChosenProducts(newVal);
-        this.setPageTitle(this.activeCat, this.activeSubCat);
+        this.setPageTitle(this.activeCat);
         this.pagination = { ...initPager };
         this.setVisibleProducts({ ...initPager });
       }
@@ -89,7 +89,7 @@ new Vue({
         this.setVisibleProducts(this.pagination);
       })
       .then(()=>{
-        this.setPageTitle(this.activeCat, this.activeSubCat);
+        this.setPageTitle(this.activeCat);
       })
       .catch(console.error);
   },
@@ -141,11 +141,9 @@ new Vue({
       const fetchQty = pagination.qty_per_page;
       this.visibleProducts = localProducts.splice(first, fetchQty);
     },
-    setPageTitle: function (activeCat = {}, activeSubCat = {}) {
+    setPageTitle: function (activeCat = {}) {
       const mainCatTitle = (isEmpty(activeCat)) ? '全部產品' : activeCat.title;
-      const subCatTitle = (isEmpty(activeSubCat)) ? '' : activeSubCat.title;
-
-      this.pageTitle = `${mainCatTitle} ${subCatTitle}`;
+      this.pageTitle = `${mainCatTitle}`;
     },
     updateCurrentPage: function (newPage) {
       this.pagination.current_page = newPage;
