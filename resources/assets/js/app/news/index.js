@@ -6,7 +6,7 @@ const vm = new Vue({
   el: '#container',
   data: {
     cats: [],
-    activeCat: {},
+    activeCat: { id: 0, title: '全部訊息' },
     showCat: false,
     newsList: [],
     activeNewsList: [],
@@ -19,7 +19,6 @@ const vm = new Vue({
 
     Promise.all([getNewsCategory(), getPublishedNews()])
       .then(([catResult, newsResult]) => {
-        console.log('catresult',catResult);
         this.cats = [{ id: 0, title: '全部訊息' }, ...catResult.data];
         this.newsList = [...newsResult.data];
         this.activeNewsList = [...vm.newsList];
@@ -55,10 +54,6 @@ const vm = new Vue({
       this.showDetail = true;
     },
     activeCatTitle: function (cat) {
-      if (cat.id === 0 || !cat.title) {
-        return '全部訊息';
-      }
-
       return cat.title;
     }
   }

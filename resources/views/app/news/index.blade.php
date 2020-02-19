@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="col-lg-8 col-md-7 col-sm-7 col-12 hidden-xs">
-                            <div class="news-content" v-cloak>
+                            <div class="news-content" v-cloak v-if="activeNews">
                                 <div class="artical-title">
                                     <span class="text-main">@{{ activeNews.title }}-</span>
                                     <span class="text-sub">@{{ activeNews.published_since.substring(0,11).replace(/-/g,'/') }}</span>
@@ -58,7 +58,7 @@
                         </div>
 
                         {{--mobile device 顯示--}}
-                        <div v-show="isMobile && showDetail"
+                        <div v-if="isMobile && showDetail && activeNews"
                              class="col-12 mobile-news-detail"
                              v-cloak >
                             <div class="btn-box">
