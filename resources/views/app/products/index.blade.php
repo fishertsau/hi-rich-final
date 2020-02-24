@@ -39,17 +39,15 @@
 
                         <div v-show="chosenProduct.id" v-cloak
                              class="col-md-9 col-sm-8 col-12 mobile-product-detail">
-                            <div class="btn-box"
-                                 {{--style="display:flex;"--}}
-                            >
-                                <a href="javascript:;"
-                                   @click.prevent="chosenProduct={}"
-                                   class="link-back">回上頁<span class="img-back"></span></a>
-                            </div>
                             <div class="product-content">
                                 <div class="artical-title">
-                                    <span class="text-main">@{{ chosenProduct.title }}</span>
-                                    <span class="text-sub">@{{ chosenProduct.title_en }}</span>
+                                    <div class="product-name">
+                                        <span class="text-main">@{{ chosenProduct.title }}-</span>
+                                        <span class="text-sub">@{{ chosenProduct.title_en }}</span>
+                                    </div>
+                                    <a href="#"
+                                       @click.prevent="chosenProduct={}"
+                                       class="link-back">回上頁<span class="img-back"></span></a>
                                 </div>
                                 <div class="img-product">
                                     <img :src="'/storage/'+ chosenProduct.photoPath">

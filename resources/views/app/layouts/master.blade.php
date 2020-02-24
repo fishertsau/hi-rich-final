@@ -34,7 +34,8 @@
 @include('app.layouts.footer')
 
 <!-- 置頂按鈕 -->
-<button class="btn-go-bottom" onclick="goBottom()"><span class="iconfont icon-arrow-down"></span></button>
+{{--<button class="btn-go-bottom" onclick="goBottom()"><span class="iconfont icon-arrow-down"></span></button>--}}
+<button class="btn-go-bottom" onclick="goTop()"><span class="iconfont icon-arrow-down"></span></button>
 
 <script src="/asset/js/header.js" type="text/javascript"></script>
 <script src="/asset/js/scrollAnimation.js" type="text/javascript"></script>

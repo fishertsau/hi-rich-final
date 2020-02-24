@@ -13,9 +13,9 @@ const nativeSmoothScrollTo = function(elem, isPaddingHeader = false) {
 // polyfilled smooth scrolling for IE, Edge & Safari
 const smoothScrollTo = function(to, duration) {
     const element = document.scrollingElement || document.documentElement,
-        start = element.scrollTop,
-        change = to - start,
-        startDate = +new Date();
+      start = element.scrollTop,
+      change = to - start,
+      startDate = +new Date();
 
     // t = current time
     // b = start value
@@ -72,17 +72,17 @@ const mobileTabScrollToElem = function (elemSelector, isPaddingHeader = false) {
 }
 
 function addButtonEvent(){
-    if(!(document.body.scrollHeight > window.outerHeight)){
-        document.querySelector('.btn-go-bottom').style.display = "none"
-        return;
-    }
+    // if(!(document.body.scrollHeight > window.outerHeight)){
+    //     document.querySelector('.btn-go-bottom').style.display = "none"
+    //     return;
+    // }
     window.onscroll = function (e) {
         // 當頁面的滾動條滾動時執行
-       if(window.pageYOffset + window.outerHeight > document.querySelector('footer').offsetTop){
+        if(window.pageYOffset < 300){
             showBtn(false)
-       }else{
+        }else{
             showBtn(true)
-       }
+        }
     }
 }
 
@@ -93,7 +93,6 @@ function showBtn(isShow){
     }
     isShowBtn = isShow;
     if(isShow){
-        
         document.querySelector('.btn-go-bottom').classList.remove('ishide')
     }else {
         document.querySelector('.btn-go-bottom').classList.add('ishide')
@@ -105,9 +104,9 @@ var goBottom = function(){
 }
 
 var goTop = function(){
-    scrollToElem('body');
+    scrollToElem('html');
 }
 
-
+showBtn(false);
 addButtonEvent();
 // use scrollToElem('footer') 滑到底部
