@@ -18,12 +18,13 @@ const initPager = {
   qty_per_page: 12
 }
 
+const initProdCat = { id: 0, title: '全部產品' }
+
 new Vue({
   el: '#container',
   data: {
-    pageTitle: '',
     cats: [],
-    activeCat: {},
+    activeCat: initProdCat,
     activeSubCat: {},
     products: [],
     chosenProducts: [],
@@ -33,17 +34,11 @@ new Vue({
     showCat: false,
     isMobile: false
   },
-  computed: {
-    isAllCat: function () {
-      return { 'is-active': isEmpty(this.activeCat) }
-    }
-  },
   watch: {
     activeCat: {
       deep: true,
       handler: async function (newVal) {
         await this.setChosenProducts(newVal);
-        this.setPageTitle(this.activeCat);
         this.pagination = { ...initPager };
         this.setVisibleProducts({ ...initPager });
       }
@@ -57,10 +52,10 @@ new Vue({
   },
   beforeCreate: async function () {
     this.isMobile = await mobilecheck();
-    
+
     Promise.all([getAllProductCategories(), getPublishedProducts()])
       .then(([catResult, productsResult]) => {
-        this.cats = [...catResult.data];
+        this.cats = [{ id: 0, title: '全部產品' }, ...catResult.data];
         this.products = [...productsResult.data];
 
         const { uris, catIncluded } = ifCategoryInPathname();
@@ -88,9 +83,6 @@ new Vue({
       .then(() => {
         this.setVisibleProducts(this.pagination);
       })
-      .then(()=>{
-        this.setPageTitle(this.activeCat);
-      })
       .catch(console.error);
   },
   methods: {
@@ -101,13 +93,13 @@ new Vue({
       this.showCat = false;
     },
     isActive: function (cat) {
-      return { 'is-active': (this.activeCat.id || 0) === (cat.id || 0) }
+      return { 'is-active': this.activeCat.id === cat.id }
     },
     setActiveProduct: function (product) {
       this.chosenProduct = { ...product };
     },
     chosenCatIds: function (activeCat = {}, activeSubCat = {}) {
-      if (isEmpty(activeCat)) { return []; }
+      if (activeCat.id === 0) {return []}
 
       if (activeSubCat.id) { return [activeSubCat.id]; }
 
@@ -119,21 +111,18 @@ new Vue({
     },
     setChosenProducts: function (activeCat = {}, activeSubCat = {}) {
       // 全部產品
-      if (isEmpty(activeCat)) {
+      if (activeCat.id === 0) {
         this.chosenProducts = [...this.products];
         return;
       }
 
       const localCatIds = this.chosenCatIds(activeCat, activeSubCat);
 
-      if (localCatIds.length === 0) {
-        this.chosenProducts = [];
-        return;
-      }
+      const byCatIds = p => localCatIds.length === 0
+        ? () => false
+        : localCatIds.includes(p.cat_id);
 
-      const filterCriteria = p => localCatIds.includes(p.cat_id);
-
-      this.chosenProducts = this.products.filter(filterCriteria);
+      this.chosenProducts = this.products.filter(byCatIds);
     },
     setVisibleProducts: function (pagination) {
       const localProducts = [...this.chosenProducts];
@@ -141,19 +130,8 @@ new Vue({
       const fetchQty = pagination.qty_per_page;
       this.visibleProducts = localProducts.splice(first, fetchQty);
     },
-    setPageTitle: function (activeCat = {}) {
-      const mainCatTitle = (isEmpty(activeCat)) ? '全部產品' : activeCat.title;
-      this.pageTitle = `${mainCatTitle}`;
-    },
     updateCurrentPage: function (newPage) {
       this.pagination.current_page = newPage;
-    },
-    activeCatTitle: function (cat) {
-      if (!cat.title) {
-        return '全部產品';
-      }
-
-      return cat.title;
     },
     toggleShowCat: function () {
       this.showCat = !this.showCat;

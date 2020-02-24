@@ -6,7 +6,7 @@
     <div class="mobile-select">
         <a class="item-active"
            @click.prevent="toggleShowCat()">
-            @{{ activeCatTitle(activeCat)}}
+            @{{ activeCat.title}}
         </a>
         <div class="item-list"
              :class="isShowCat(showCat)" 
@@ -20,11 +20,11 @@
     </div>
 
     <div class="side-bar">
-        <a href="javascript:;"
-           class="item"
-           :class="isAllCat"
-           @click="setActiveCat({})"
-        >全部產品</a>
+        {{--<a href="javascript:;"--}}
+           {{--class="item"--}}
+           {{--:class="isAllCat"--}}
+           {{--@click="setActiveCat({})"--}}
+        {{-->全部產品aaa</a>--}}
         <a v-for="cat in cats"
            @click.prevent="setActiveCat(cat)"
            :class="isActive(cat)"

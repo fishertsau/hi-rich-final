@@ -13,7 +13,7 @@
                             <div class="section-title" 
                                  v-show="!isMobile" 
                                  v-cloak>
-                                @{{ pageTitle }}
+                                @{{ activeCat.title }}
                             </div>
                             <div class="links-list set-height">
                                 <div class="row">

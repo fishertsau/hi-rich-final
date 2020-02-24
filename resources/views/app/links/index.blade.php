@@ -16,7 +16,6 @@
                                 <div v-show="showCat"
                                      class="item-list"
                                      style="display:block">
-
                                     <a v-for="cat in cats"
                                        class="item"
                                        @click.prevent="setActiveCat(cat)"
@@ -26,9 +25,6 @@
                             </div>
 
                             <div class="side-bar">
-                                <a href="#" class="item"
-                                   :class="isAllCat"
-                                   @click.prevent="setAllCat()">全部連結</a>
                                 <a v-for="cat in cats"
                                    class="item"
                                    :class="isActive(cat)"
