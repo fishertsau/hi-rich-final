@@ -49,6 +49,9 @@ new Vue({
         this.setVisibleProducts(newVal);
       }
     },
+    visibleProducts: function(){
+      window.scroll(0,0);
+    }
   },
   beforeCreate: async function () {
     this.isMobile = await mobilecheck();
