@@ -36,7 +36,7 @@
                                     <span class="text-num">@{{ index +1 }}</span>
                                     <span class="text-title">@{{news.title}}</span>
                                     <span class="text-news"></span>
-                                    <span class="text-date">2019/06/15</span>
+                                    <span class="text-date">@{{ news.published_since.substring(0,11).replace(/-/g,'/') }}</span>
                                 </a>
                             </div>
                         </div>
