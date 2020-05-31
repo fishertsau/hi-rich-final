@@ -46,7 +46,7 @@
                 />
                 維持原圖：
                 @if(isset($ad->photoPath) && ($ad->photoPath<>''))
-                    <img src="/storage/{{$ad->photoPath}}" width="400" height="300"
+                    <img src="/storage/{{$ad->photoPath}}" width="400"
                          align="absmiddle" />
                 @endif
                 <br />
@@ -61,7 +61,7 @@
             上傳檔案：
             <input type="file" name="photo"
                    @change="enablePhotoCtrl" />
-            <span>（圖片尺寸：{{config('app.product_photo_size_note')}}　解析度72dpi）</span>
+            <span>（圖片尺寸：請參照網站現有圖片尺寸　解析度72dpi）</span>
             <p style="color:red"
                v-show="viewCtrl.showSelectPhotoWarning"
                v-cloak>請選擇檔案</p>

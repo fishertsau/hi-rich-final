@@ -11,13 +11,14 @@ trait PhotoHandler
      * @param Model $model
      * @param string $ctrl
      * @param string $attribute
+     * @param bool $resize
      * @return PhotoHandler
      */
-    private function storeCoverPhoto(Model $model, $ctrl = 'photoCtrl', $attribute = 'photoPath')
+    private function storeCoverPhoto(Model $model, $ctrl = 'photoCtrl', $attribute = 'photoPath', $resize = true)
     {
         if (request($ctrl) === 'newFile') {
             $model->update([
-                $attribute => $this->photoRepo->store(request()->file('photo'))
+                $attribute => $this->photoRepo->store(request()->file('photo'), $resize)
             ]);
         }
 

@@ -48,7 +48,7 @@ class AdsController extends Controller
         $input['ranking'] = Ad::count() + 1;
         $ad = Ad::create($input);
 
-        $this->storeCoverPhoto($ad);
+        $this->storeCoverPhoto($ad, 'photoCtrl', 'photoPath', false);
 
         return redirect('admin/ads');
     }
@@ -57,7 +57,7 @@ class AdsController extends Controller
     {
         $ad->update($this->validateInput());
 
-        $this->updatePhoto($ad);
+        $this->updatePhoto($ad, 'photoCtrl', 'photoPath', 'photo', false);
 
         return redirect('admin/ads');
     }
