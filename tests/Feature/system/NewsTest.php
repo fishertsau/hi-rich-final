@@ -22,7 +22,8 @@ class NewsTest extends TestCase
     /** @test */
     public function can_visit_list_page()
     {
-        $news = factory(News::class)->create();
+        $newsCat = factory(NewsCategory::class)->create();
+        $news = factory(News::class)->create(['cat_id' => $newsCat->id ]);
 
         $response = $this->get('/admin/news');
 
